@@ -1,29 +1,29 @@
-import { BsPlusLg } from "react-icons/bs";
-import { MdBlurLinear } from "react-icons/md";
-import { GiBlackHoleBolas } from "react-icons/gi";
-import { useRecoilState } from "recoil";
+import { BsPlusLg } from 'react-icons/bs'
+import { MdBlurLinear } from 'react-icons/md'
+import { GiBlackHoleBolas } from 'react-icons/gi'
+import { useRecoilState } from 'recoil'
 import {
   loadedPlanesState,
   displayedViewState,
   View,
-  IPlane,
-  displayedPlaneState,
-} from "../state";
+  type IPlane,
+  displayedPlaneState
+} from '../state'
+import React from 'react'
 
-export default function () {
-  const [loadedPlanes, setLoadedPlanes] = useRecoilState(loadedPlanesState);
-  const [_displayedView, setdisplayedView] = useRecoilState(displayedViewState);
-  const [_displayedPLane, setdisplayedPlane] =
-    useRecoilState(displayedPlaneState);
+export default function SideBar () {
+  const [loadedPlanes] = useRecoilState(loadedPlanesState)
+  const [, setdisplayedView] = useRecoilState(displayedViewState)
+  const [, setdisplayedPlane] = useRecoilState(displayedPlaneState)
 
   const newPlane = () => {
-    setdisplayedView(View.Create);
-  };
+    setdisplayedView(View.Create)
+  }
 
   const changePlane = (plane: IPlane) => {
-    setdisplayedView(View.Plane);
-    setdisplayedPlane(plane);
-  };
+    setdisplayedView(View.Plane)
+    setdisplayedPlane(plane)
+  }
 
   return (
     <div className="h-screen w-1/6 bg-[#111] border-r border-r-neutral-800 p-4 text-sm">
@@ -35,13 +35,18 @@ export default function () {
           {loadedPlanes.map((plane) => (
             <button
               className="flex items-center space-x-3  hover:bg-neutral-900 p-1 w-full  rounded-md"
-              onClick={(_) => changePlane(plane)}
+              key={plane.id}
+              onClick={(_) => {
+                changePlane(plane)
+              }}
             >
-              {plane.plane_type === "linear" ? (
+              {plane.plane_type === 'linear'
+                ? (
                 <MdBlurLinear />
-              ) : (
+                  )
+                : (
                 <GiBlackHoleBolas />
-              )}{" "}
+                  )}{' '}
               <span>{plane.title}</span>
             </button>
           ))}
@@ -55,5 +60,5 @@ export default function () {
         <BsPlusLg /> <span>New plane</span>
       </button>
     </div>
-  );
+  )
 }

@@ -1,56 +1,55 @@
-import { MdBlurLinear } from "react-icons/md";
-import { GiBlackHoleBolas } from "react-icons/gi";
-import { useRecoilState, atom } from "recoil";
-import { twMerge } from "tailwind-merge";
-import { FormEvent } from "react";
+import { MdBlurLinear } from 'react-icons/md'
+import { GiBlackHoleBolas } from 'react-icons/gi'
+import { useRecoilState, atom } from 'recoil'
+import { twMerge } from 'tailwind-merge'
 import {
   displayedPlaneState,
   displayedViewState,
   loadedPlanesState,
-  View,
-} from "../state";
+  View
+} from '../state'
+import React from 'react'
 
 const selectedState = atom({
-  key: "selectedState",
-  default: "linear",
-});
+  key: 'selectedState',
+  default: 'linear'
+})
 
 const titleState = atom({
-  key: "titleState",
-  default: "",
-});
+  key: 'titleState',
+  default: ''
+})
 
-export default function () {
-  const [selectedType, setSelectedType] = useRecoilState(selectedState);
-  const [loadedPlanes, setLoadedPlanes] = useRecoilState(loadedPlanesState);
-  const [displayedPlane, setdisplayedPlane] =
-    useRecoilState(displayedPlaneState);
-  const [displayedView, setdisplayedView] = useRecoilState(displayedViewState);
-  const [title, setTitle] = useRecoilState(titleState);
+export default function NewPlane () {
+  const [selectedType, setSelectedType] = useRecoilState(selectedState)
+  const [, setLoadedPlanes] = useRecoilState(loadedPlanesState)
+  const [, setdisplayedPlane] = useRecoilState(displayedPlaneState)
+  const [, setdisplayedView] = useRecoilState(displayedViewState)
+  const [title, setTitle] = useRecoilState(titleState)
 
   const onSelect = (e: React.MouseEvent) => {
-    setSelectedType(e.currentTarget.id);
-  };
+    setSelectedType(e.currentTarget.id)
+  }
 
   const onTitleChange = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    setTitle(e.currentTarget.value);
-  };
+    setTitle(e.currentTarget.value)
+  }
 
   const onSubmit = () => {
     const newPlane = {
       id: 3,
       title,
       last_opened: true,
-      plane_type: selectedType,
-    };
+      plane_type: selectedType
+    }
 
-    //TODO: impl database create
-    
-    setLoadedPlanes((l) => [...l, newPlane]);
+    // TODO: impl database create
 
-    setdisplayedView(View.Plane);
-    setdisplayedPlane(newPlane);
-  };
+    setLoadedPlanes((l) => [...l, newPlane])
+
+    setdisplayedView(View.Plane)
+    setdisplayedPlane(newPlane)
+  }
 
   return (
     <div className="w-10/12 flex justify-center items-center text-sm text-neutral-400">
@@ -64,8 +63,8 @@ export default function () {
         <div className="flex space-x-2 py-4 w-full">
           <button
             className={twMerge(
-              "py-6 flex rounded-md items-center justify-center flex-col border border-neutral-900 hover:bg-neutral-800 w-1/2",
-              selectedType === "linear" && "bg-neutral-900"
+              'py-6 flex rounded-md items-center justify-center flex-col border border-neutral-900 hover:bg-neutral-800 w-1/2',
+              selectedType === 'linear' && 'bg-neutral-900'
             )}
             id="linear"
             onClick={onSelect}
@@ -74,8 +73,8 @@ export default function () {
           </button>
           <button
             className={twMerge(
-              "py-6 flex rounded-md items-center justify-center flex-col border border-neutral-900 hover:bg-neutral-800 w-1/2 ",
-              selectedType === "freeflow" && "bg-neutral-900"
+              'py-6 flex rounded-md items-center justify-center flex-col border border-neutral-900 hover:bg-neutral-800 w-1/2 ',
+              selectedType === 'freeflow' && 'bg-neutral-900'
             )}
             id="freeflow"
             onClick={onSelect}
@@ -91,5 +90,5 @@ export default function () {
         </button>
       </div>
     </div>
-  );
+  )
 }
