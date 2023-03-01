@@ -4,6 +4,8 @@
 mod plane;
 mod core;
 
+use crate::core::db::establish_connection;
+
 fn main() {
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![plane::get_planes])
