@@ -1,29 +1,31 @@
-import { BsPlusLg } from 'react-icons/bs'
-import { MdBlurLinear } from 'react-icons/md'
-import { GiBlackHoleBolas } from 'react-icons/gi'
-import { useRecoilState } from 'recoil'
-import {
-  loadedPlanesState,
-  displayedViewState,
-  View,
-  type IPlane,
-  displayedPlaneState
-} from '../state'
-import React from 'react'
+import { BsPlusLg } from 'react-icons/bs';
+import { MdBlurLinear } from 'react-icons/md';
+import { GiBlackHoleBolas } from 'react-icons/gi';
+import React from 'react';
 
-export default function SideBar () {
-  const [loadedPlanes] = useRecoilState(loadedPlanesState)
-  const [, setdisplayedView] = useRecoilState(displayedViewState)
-  const [, setdisplayedPlane] = useRecoilState(displayedPlaneState)
+import {
+  useLoadedPlanesStore,
+  useDisplayedPlaneStore,
+  IPlane,
+} from '../state/plane';
+import { useViewStore } from '../state/view';
+
+export default function SideBar() {
+  const planes = useLoadedPlanesStore((l) => l.planes);
+
+  const changeToPlaneView = useViewStore((v) => v.setPlane);
+  const changeToCreateView = useViewStore((v) => v.setCreate);
+
+  const changePlane = useDisplayedPlaneStore((dp) => dp.changePlane);
 
   const newPlane = () => {
-    setdisplayedView(View.Create)
-  }
+    changeToCreateView();
+  };
 
-  const changePlane = (plane: IPlane) => {
-    setdisplayedView(View.Plane)
-    setdisplayedPlane(plane)
-  }
+  const changePlaneOnClick = (plane: IPlane) => {
+    changeToPlaneView();
+    changePlane(plane);
+  };
 
   return (
     <div className="h-screen w-1/6 bg-[#111] border-r border-r-neutral-800 p-4 text-sm">
@@ -32,21 +34,19 @@ export default function SideBar () {
           Flowplane
         </div>
         <div className="text-neutral-400">
-          {loadedPlanes.map((plane) => (
+          {planes.map((plane) => (
             <button
               className="flex items-center space-x-3  hover:bg-neutral-900 p-1 w-full  rounded-md"
               key={plane.id}
               onClick={(_) => {
-                changePlane(plane)
+                changePlaneOnClick(plane);
               }}
             >
-              {plane.plane_type === 'linear'
-                ? (
+              {plane.plane_type === 'linear' ? (
                 <MdBlurLinear />
-                  )
-                : (
+              ) : (
                 <GiBlackHoleBolas />
-                  )}{' '}
+              )}{' '}
               <span>{plane.title}</span>
             </button>
           ))}
@@ -60,5 +60,5 @@ export default function SideBar () {
         <BsPlusLg /> <span>New plane</span>
       </button>
     </div>
-  )
+  );
 }

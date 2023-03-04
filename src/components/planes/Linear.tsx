@@ -1,15 +1,15 @@
-import { BlockNoteView, useBlockNote } from '@blocknote/react'
-import '@blocknote/core/style.css'
-import { type IPlane } from '../../state'
-import { MdBlurLinear } from 'react-icons/md'
-import React from 'react'
+import { BlockNoteView, useBlockNote } from '@blocknote/react';
+import '@blocknote/core/style.css';
+import { type IPlane } from '../../state/plane';
+import { MdBlurLinear } from 'react-icons/md';
+import React from 'react';
 
 interface ILinear {
-  plane?: IPlane
+  plane?: IPlane;
 }
 
-export default function Linear ({ plane }: ILinear) {
-  const editor = useBlockNote()
+export default function Linear({ plane }: ILinear) {
+  const editor = useBlockNote();
 
   return (
     <div className="w-5/6 py-6 px-16 text-neutral-400 font-heading">
@@ -19,5 +19,5 @@ export default function Linear ({ plane }: ILinear) {
       </div>
       <BlockNoteView editor={editor} />
     </div>
-  )
+  );
 }

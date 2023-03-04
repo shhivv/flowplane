@@ -1,15 +1,22 @@
+use diesel::r2d2::{ConnectionManager, Pool};
 use diesel::sqlite::SqliteConnection;
-use diesel::prelude::*;
-use diesel_migrations::{embed_migrations, MigrationHarness, EmbeddedMigrations};
+use diesel_migrations::{embed_migrations, EmbeddedMigrations, MigrationHarness};
 
 pub const MIGRATIONS: EmbeddedMigrations = embed_migrations!("../migrations");
 
+pub type DBPool = Pool<ConnectionManager<SqliteConnection>>;
 
-pub fn establish_connection() -> SqliteConnection{
-    let database_url = "";
-    let mut conn = SqliteConnection::establish(&database_url).unwrap();
+pub fn establish_connection() -> DBPool {
+    let database_url = r"C:\Users\shivs\AppData\Roaming\flowplane\data.sqlite";
+    let manager = ConnectionManager::<SqliteConnection>::new(database_url);
+    let pool = Pool::builder()
+        .build(manager)
+        .expect("Failed to create pool");
 
-    conn.run_pending_migrations(MIGRATIONS).unwrap();
+    pool.get()
+        .unwrap()
+        .run_pending_migrations(MIGRATIONS)
+        .unwrap();
 
-    conn
+    pool
 }

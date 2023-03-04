@@ -1,55 +1,38 @@
-import { MdBlurLinear } from 'react-icons/md'
-import { GiBlackHoleBolas } from 'react-icons/gi'
-import { useRecoilState, atom } from 'recoil'
-import { twMerge } from 'tailwind-merge'
-import {
-  displayedPlaneState,
-  displayedViewState,
-  loadedPlanesState,
-  View
-} from '../state'
-import React from 'react'
+import { MdBlurLinear } from 'react-icons/md';
+import { GiBlackHoleBolas } from 'react-icons/gi';
+import { twMerge } from 'tailwind-merge';
 
-const selectedState = atom({
-  key: 'selectedState',
-  default: 'linear'
-})
+import React, { useState } from 'react';
 
-const titleState = atom({
-  key: 'titleState',
-  default: ''
-})
+import { useLoadedPlanesStore, useDisplayedPlaneStore } from '../state/plane';
+import { useViewStore } from '../state/view';
 
-export default function NewPlane () {
-  const [selectedType, setSelectedType] = useRecoilState(selectedState)
-  const [, setLoadedPlanes] = useRecoilState(loadedPlanesState)
-  const [, setdisplayedPlane] = useRecoilState(displayedPlaneState)
-  const [, setdisplayedView] = useRecoilState(displayedViewState)
-  const [title, setTitle] = useRecoilState(titleState)
+export default function NewPlane() {
+  const [selectedType, setSelectedType] = useState('linear');
+  const addLoadedPlane = useLoadedPlanesStore((lp) => lp.add);
+  const setDisplayedPlane = useDisplayedPlaneStore((dp) => dp.changePlane);
+  const changeToPlaneView = useViewStore((v) => v.setPlane);
+  const [title, setTitle] = useState('');
 
   const onSelect = (e: React.MouseEvent) => {
-    setSelectedType(e.currentTarget.id)
-  }
+    setSelectedType(e.currentTarget.id);
+  };
 
   const onTitleChange = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    setTitle(e.currentTarget.value)
-  }
+    setTitle(e.currentTarget.value);
+  };
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     const newPlane = {
-      id: 3,
       title,
-      last_opened: true,
-      plane_type: selectedType
-    }
+      plane_type: selectedType,
+    };
 
-    // TODO: impl database create
-
-    setLoadedPlanes((l) => [...l, newPlane])
-
-    setdisplayedView(View.Plane)
-    setdisplayedPlane(newPlane)
-  }
+    const addedPlane = await addLoadedPlane(newPlane);
+    console.log(addedPlane);
+    changeToPlaneView();
+    setDisplayedPlane(addedPlane);
+  };
 
   return (
     <div className="w-10/12 flex justify-center items-center text-sm text-neutral-400">
@@ -90,5 +73,5 @@ export default function NewPlane () {
         </button>
       </div>
     </div>
-  )
+  );
 }

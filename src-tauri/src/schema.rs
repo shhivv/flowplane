@@ -2,10 +2,10 @@
 
 diesel::table! {
     planes (id) {
-        id -> Nullable<Integer>,
-        title -> Nullable<Text>,
+        id -> Integer,
+        title -> Text,
         plane_type -> Text,
-        last_opened -> Bool,
+        last_accessed -> Timestamp,
         created_at -> Timestamp,
     }
 }
