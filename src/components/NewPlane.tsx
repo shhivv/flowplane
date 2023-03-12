@@ -25,7 +25,7 @@ export default function NewPlane() {
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const newPlane = {
-      title: title || "Untitled",
+      title: title || 'Untitled',
       plane_type: selectedType,
     };
 

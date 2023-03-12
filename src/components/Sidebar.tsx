@@ -49,9 +49,11 @@ export default function SideBar() {
               ) : (
                 <GiBlackHoleBolas />
               )}{' '}
-            {/* fix overflow issue */}
+              {/* fix overflow issue */}
               <span className="w-4/5 flex">
-                <h1 className="overflow-ellipsis whitespace-nowrap overflow-hidden">{plane.title}</h1>
+                <h1 className="overflow-ellipsis whitespace-nowrap overflow-hidden">
+                  {plane.title}
+                </h1>
               </span>
             </button>
           ))}

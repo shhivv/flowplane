@@ -12,7 +12,6 @@ import {
 import FreeFlow from './components/planes/FreeFlow';
 import Introduction from './components/Intro';
 
-
 function App() {
   const displayedPlane = useDisplayedPlaneStore((dp) => dp.plane);
   const changePlane = useDisplayedPlaneStore((dp) => dp.changePlane);
