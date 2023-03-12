@@ -38,7 +38,7 @@ export default function SideBar() {
         <div className="text-neutral-400">
           {planes.map((plane) => (
             <button
-              className="flex items-center space-x-3  hover:bg-neutral-900 p-1 w-full  rounded-md"
+              className="flex items-center space-x-3  hover:bg-neutral-900 p-1 w-full rounded-md"
               key={plane.id}
               onClick={(_) => {
                 changePlaneOnClick(plane);
@@ -49,7 +49,10 @@ export default function SideBar() {
               ) : (
                 <GiBlackHoleBolas />
               )}{' '}
-              <span>{plane.title}</span>
+            {/* fix overflow issue */}
+              <span className="w-4/5 flex">
+                <h1 className="overflow-ellipsis whitespace-nowrap overflow-hidden">{plane.title}</h1>
+              </span>
             </button>
           ))}
         </div>

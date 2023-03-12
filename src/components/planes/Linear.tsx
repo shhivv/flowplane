@@ -32,7 +32,6 @@ export default function Linear({ plane }: ILinear) {
         const fetched = await invoke('get_linear_data', {
           linearPlaneId: plane.id,
         });
-        console.log(JSON.parse(fetched as string));
         setData(JSON.parse(fetched as string));
         setLoaded(true);
     };
@@ -42,9 +41,9 @@ export default function Linear({ plane }: ILinear) {
   return (
     <div className="w-5/6 py-8 px-16 text-neutral-400 font-heading overflow-y-auto">
       <div className="flex text-neutral-500 justify-between">
-        <div className="flex items-center space-x-3">
+        <div className="flex items-center space-x-3 w-full">
           <MdBlurLinear />
-          <h3>{plane?.title}</h3>
+          <h3 className="w-4/5 overflow-ellipsis whitespace-nowrap overflow-hidden">{plane?.title}</h3>
         </div>
         <DeletePlane plane={plane} />
       </div>
