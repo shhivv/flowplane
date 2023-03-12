@@ -59,7 +59,7 @@ pub fn get_planes(db: State<DBPool>) -> Vec<Plane> {
 
     let mut conn = db.clone().get().unwrap();
 
-    let queried_planes = planes.load::<PlaneModel>(&mut conn).unwrap();
+    let queried_planes = planes.load(&mut conn).unwrap();
 
     queried_planes
         .iter()
@@ -80,7 +80,7 @@ pub fn new_plane(title: String, plane_type: PlaneType, db: State<DBPool>) -> Pla
 
     let inserted = diesel::insert_into(planes::table)
         .values(&new_plane)
-        .get_result::<PlaneModel>(&mut conn)
+        .get_result(&mut conn)
         .unwrap();
 
     Plane::from(&inserted)
@@ -94,6 +94,17 @@ pub fn set_last_accessed(plane_id: i32, db: State<DBPool>) {
 
     diesel::update(planes.find(plane_id))
         .set(last_accessed.eq(diesel::dsl::now))
+        .execute(&mut conn)
+        .unwrap();
+}
+
+#[tauri::command]
+pub fn delete_plane(plane_id: i32, db: State<DBPool>) {
+    use crate::schema::planes::dsl::*;
+
+    let mut conn = db.clone().get().unwrap();
+
+    diesel::delete(planes.find(plane_id))
         .execute(&mut conn)
         .unwrap();
 }

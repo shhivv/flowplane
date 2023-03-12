@@ -6,16 +6,23 @@ export interface IPlane {
   title: string;
   plane_type: string;
   last_accessed?: number;
+  created_at?: number;
 }
 
+interface FetchedPlanes {
+  planes: IPlane[];
+  lastAccessed?: IPlane;
+}
 interface LoadedPlanesState {
   planes: IPlane[];
+  lastAccessed?: IPlane;
   add: (plane: IPlane) => Promise<IPlane>;
-  fetch: () => Promise<IPlane[]>;
+  fetch: () => Promise<FetchedPlanes>;
 }
 
 export const useLoadedPlanesStore = create<LoadedPlanesState>((set) => ({
   planes: [],
+  lastAccessed: undefined,
   add: async (plane) => {
     const createdPlane: IPlane = await invoke('new_plane', {
       title: plane.title,
@@ -27,14 +34,21 @@ export const useLoadedPlanesStore = create<LoadedPlanesState>((set) => ({
   },
   fetch: async () => {
     const fetched: IPlane[] = await invoke('get_planes');
-    set({ planes: fetched });
-    return fetched;
+    const lastAccessed = fetched.sort(
+      (a, b) => b.last_accessed! - a.last_accessed!
+    )[0];
+    set({ planes: fetched, lastAccessed });
+    return {
+      planes: fetched,
+      lastAccessed,
+    };
   },
 }));
 
 interface DisplayedPlaneStore {
   plane: IPlane | undefined;
   changePlane: (plane: IPlane) => Promise<void>;
+  deletePlane: (plane: IPlane) => Promise<void>;
 }
 
 export const useDisplayedPlaneStore = create<DisplayedPlaneStore>((set) => ({
@@ -42,5 +56,8 @@ export const useDisplayedPlaneStore = create<DisplayedPlaneStore>((set) => ({
   changePlane: async (plane) => {
     await invoke('set_last_accessed', { planeId: plane.id });
     set({ plane });
+  },
+  deletePlane: async (plane) => {
+    await invoke('delete_plane', { planeId: plane.id });
   },
 }));

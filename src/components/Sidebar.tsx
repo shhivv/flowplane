@@ -11,7 +11,9 @@ import {
 import { useViewStore } from '../state/view';
 
 export default function SideBar() {
-  const planes = useLoadedPlanesStore((l) => l.planes);
+  const planes = useLoadedPlanesStore((l) => l.planes).sort(
+    (a, b) => a.created_at! - b.created_at!
+  );
 
   const changeToPlaneView = useViewStore((v) => v.setPlane);
   const changeToCreateView = useViewStore((v) => v.setCreate);

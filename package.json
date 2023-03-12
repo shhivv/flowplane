@@ -10,13 +10,17 @@
     "tauri": "tauri"
   },
   "dependencies": {
-    "@blocknote/react": "^0.3.0",
+    "@editorjs/editorjs": "^2.26.5",
+    "@editorjs/paragraph": "^2.9.0",
     "@tauri-apps/api": "^1.2.0",
     "prettier": "^2.8.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-draggable": "^4.4.5",
+    "react-editor-js": "^2.1.0",
     "react-icons": "^4.7.1",
+    "react-infinite-viewer": "^0.20.0",
+    "selecto": "^1.22.0",
     "tailwind-merge": "^1.10.0",
     "zustand": "^4.3.5"
   },

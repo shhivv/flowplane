@@ -23,3 +23,7 @@
     src: url(/src/assets/fonts/Kanit-Regular.ttf);
   }
 }
+.ce-block__content,
+.ce-toolbar__content {
+  max-width: unset;
+}

@@ -1,6 +1,14 @@
 // @generated automatically by Diesel CLI.
 
 diesel::table! {
+    linear (id) {
+        id -> Integer,
+        plane_id -> Integer,
+        data -> Text,
+    }
+}
+
+diesel::table! {
     planes (id) {
         id -> Integer,
         title -> Text,
@@ -9,3 +17,10 @@ diesel::table! {
         created_at -> Timestamp,
     }
 }
+
+diesel::joinable!(linear -> planes (plane_id));
+
+diesel::allow_tables_to_appear_in_same_query!(
+    linear,
+    planes,
+);

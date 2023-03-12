@@ -1,0 +1,6 @@
+CREATE TABLE linear(
+    id INTEGER PRIMARY KEY NOT NULL,
+    plane_id INTEGER NOT NULL UNIQUE,
+    data TEXT NOT NULL,
+    FOREIGN KEY (plane_id) REFERENCES planes(id) ON DELETE CASCADE
+)

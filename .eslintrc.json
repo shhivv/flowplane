@@ -90,7 +90,6 @@
         "offsetTernaryExpressions": true
       }
     ],
-    "init-declarations": "error",
     "jsx-quotes": "error",
     "key-spacing": ["error"],
     "keyword-spacing": "off",
@@ -156,7 +155,6 @@
     "no-native-reassign": "error",
     "no-negated-condition": "off",
     "no-negated-in-lhs": "error",
-    "no-nested-ternary": "error",
     "no-new": "error",
     "no-new-func": "error",
     "no-new-object": "error",
