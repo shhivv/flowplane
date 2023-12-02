@@ -5,14 +5,16 @@ import DeletePlane from '../DeletePlane';
 import { API } from '@editorjs/editorjs';
 import { invoke } from '@tauri-apps/api';
 import { createReactEditorJS } from 'react-editor-js';
+import { EDITOR_JS_TOOLS } from '../../tools';
 
 interface ILinear {
   plane: IPlane;
+  floating: boolean;
 }
 
 const ReactEditorJS = createReactEditorJS();
 
-export default function Linear({ plane }: ILinear) {
+export default function Linear({ plane, floating }: ILinear) {
   const [data, setData] = useState();
   const [loaded, setLoaded] = useState(false);
 
@@ -38,15 +40,15 @@ export default function Linear({ plane }: ILinear) {
   }, [plane.id]);
 
   return (
-    <div className="w-5/6 py-8 px-16 text-neutral-400 font-heading overflow-y-auto">
-      <div className="flex text-neutral-500 justify-between">
+    <div className="py-8 px-16 space-y-4 text-neutral-300 font-sans overflow-y-auto">
+      <div className="flex text-neutral-400 justify-between">
         <div className="flex items-center space-x-3 w-full">
           <MdBlurLinear />
           <h3 className="w-4/5 overflow-ellipsis whitespace-nowrap overflow-hidden">
             {plane?.title}
           </h3>
         </div>
-        <DeletePlane plane={plane} />
+        { !floating && <DeletePlane plane={plane} />}
       </div>
       {loaded && (
         <ReactEditorJS
@@ -54,6 +56,8 @@ export default function Linear({ plane }: ILinear) {
           onChange={onChange(plane.id!)}
           placeholder="Type to get started"
           defaultValue={data}
+          tools={EDITOR_JS_TOOLS}
+          key="/"
         />
       )}
     </div>

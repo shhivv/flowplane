@@ -36,7 +36,9 @@ function App() {
   const getDisplayComponent = (plane: IPlane, view: View) => {
     if (view === View.Plane && plane) {
       if (plane.plane_type === 'linear') {
-        return <Linear key={plane.id} plane={plane} />;
+        return (<div className="w-4/5">
+           <Linear key={plane.id} plane={plane} floating={false} />;
+        </div>);
       } else {
         return <FreeFlow key={plane.id} plane={plane} />;
       }

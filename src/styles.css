@@ -27,3 +27,18 @@
 .ce-toolbar__content {
   max-width: unset;
 }
+
+
+*::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  background-color: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  @apply bg-neutral-800;
+}

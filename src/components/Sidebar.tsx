@@ -30,38 +30,35 @@ export default function SideBar() {
   };
 
   return (
-    <div className="h-screen w-1/6 bg-[#111] border-r border-r-neutral-800 p-4 text-sm">
-      <div className="py-2">
-        <div className="font-heading mb-8 text-lg px-1 text-neutral-300">
-          Flowplane
-        </div>
-        <div className="text-neutral-400">
-          {planes.map((plane) => (
-            <button
-              className="flex items-center space-x-3  hover:bg-neutral-900 p-1 w-full rounded-md"
-              key={plane.id}
-              onClick={(_) => {
-                changePlaneOnClick(plane);
-              }}
-            >
-              {plane.plane_type === 'linear' ? (
-                <MdBlurLinear />
-              ) : (
-                <GiBlackHoleBolas />
-              )}{' '}
-              {/* fix overflow issue */}
-              <span className="w-4/5 flex">
-                <h1 className="overflow-ellipsis whitespace-nowrap overflow-hidden">
-                  {plane.title}
-                </h1>
-              </span>
-            </button>
-          ))}
-        </div>
+    <div className="h-screen w-1/6 bg-[#111] border-r border-r-neutral-800 text-sm flex flex-col">
+      <div className="font-heading py-6 text-lg px-4 text-neutral-300">
+        Flowplane
+      </div>
+      <div className="text-neutral-400 h-full overflow-y-auto px-4">
+        {planes.map((plane) => (
+          <button
+            className="flex items-center space-x-3  hover:bg-neutral-900 p-1 w-full rounded-md"
+            key={plane.id}
+            onClick={(_) => {
+              changePlaneOnClick(plane);
+            }}
+          >
+            {plane.plane_type === 'linear' ? (
+              <MdBlurLinear />
+            ) : (
+              <GiBlackHoleBolas />
+            )}{' '}
+            <span className="w-4/5 flex">
+              <h1 className="overflow-ellipsis whitespace-nowrap overflow-hidden">
+                {plane.title}
+              </h1>
+            </span>
+          </button>
+        ))}
       </div>
 
       <button
-        className="bottom-0 text-neutral-400 fixed py-3 px-6 flex items-center space-x-4 hover:bg-neutral-900 left-0 w-1/6"
+        className="left-0 text-neutral-400 py-4 mt-auto flex items-center space-x-4 bg-inherit hover:bg-neutral-900 w-full px-4"
         onClick={newPlane}
       >
         <BsPlusLg /> <span>New plane</span>

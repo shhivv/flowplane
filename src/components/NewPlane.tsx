@@ -61,10 +61,11 @@ export default function NewPlane() {
           </button>
           <button
             className={twMerge(
-              'py-6 flex rounded-md items-center justify-center flex-col border border-neutral-900 hover:bg-neutral-800 w-1/2 ',
+              'py-6 flex rounded-md items-center justify-center flex-col border border-neutral-900 hover:bg-neutral-800 w-1/2 pointer-events-none',
               selectedType === 'freeflow' && 'bg-neutral-900'
             )}
             id="freeflow"
+            disabled
             onClick={onSelect}
             type="button"
           >

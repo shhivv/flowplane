@@ -1,18 +1,21 @@
 import { type IPlane } from '../../state/plane';
 import { GiBlackHoleBolas } from 'react-icons/gi';
-import React from 'react';
+import React, { useRef } from 'react';
+import Movable from 'react-moveable';
 import DeletePlane from '../DeletePlane';
-import Draggable from 'react-draggable';
 import InfiniteViewer from 'react-infinite-viewer';
+import FreeFlowItem from '../FreeFlowItem';
 
 interface IFreeFlow {
   plane: IPlane;
 }
 
 export default function FreeFlow({ plane }: IFreeFlow) {
+  const target = useRef(null);
+
   return (
-    <div className="w-5/6 py-8 px-16 text-neutral-400 font-heading overflow-y-auto">
-      <div className="flex text-neutral-500 justify-between">
+    <div className="w-5/6 py-8 text-neutral-400 font-heading overflow-y-hidden overflow-x-auto h-screen">
+      <div className="flex text-neutral-500 justify-between px-16">
         <div className="flex items-center space-x-3 w-full">
           <GiBlackHoleBolas />
           <h3 className="w-4/5 overflow-ellipsis whitespace-nowrap overflow-hidden">
@@ -21,21 +24,21 @@ export default function FreeFlow({ plane }: IFreeFlow) {
         </div>
         <DeletePlane plane={plane} />
       </div>
-      <div>
+      <div className="h-full">
         <InfiniteViewer
-          className="viewer"
-          margin={0}
-          threshold={0}
-          rangeX={[0, 0]}
-          rangeY={[0, 0]}
-          onScroll={(e) => {
-            console.log(e);
-          }}
+          useMouseDrag
+          useWheelScroll
+          useAutoZoom
+          zoomRange={[0.1, 10]}
+          maxPinchWheel={10}
+          displayVerticalScroll={false}
+          displayHorizontalScroll={false}
+          className="viewer h-full w-full"
         >
           <div className="viewport">
-            <Draggable>
-              <div>a</div>
-            </Draggable>
+            <FreeFlowItem>
+              <div className="bg-red-500 w-12 h-12"></div>
+            </FreeFlowItem>
           </div>
         </InfiniteViewer>
       </div>

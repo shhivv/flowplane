@@ -16,6 +16,9 @@
       "shell": {
         "all": false,
         "open": true
+      },
+      "globalShortcut": {
+        "all": true
       }
     },
     "bundle": {
@@ -27,7 +30,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.tauri.dev",
+      "identifier": "com.flowplane.dev",
       "targets": "all"
     },
     "security": {
@@ -41,6 +44,15 @@
         "maximized": true,
         "resizable": true,
         "title": "Flowplane"
+      },
+      {
+        "hiddenTitle": true,
+        "decorations": false,
+        "visible": false,
+        "label": "portal",
+        "center": true,
+        "resizable": false,
+        "transparent": true
       }
     ]
   }
