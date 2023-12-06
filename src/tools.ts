@@ -28,3 +28,4 @@ export const EDITOR_JS_TOOLS = {
   inlineCode: InlineCode,
   simpleImage: SimpleImage,
 };
+

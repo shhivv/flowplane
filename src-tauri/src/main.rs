@@ -28,8 +28,6 @@ let tray_menu = SystemTrayMenu::new()
   .add_item(quit);
 
   let tray = SystemTray::new().with_menu(tray_menu);
-
-
     tauri::Builder::default()
         .manage(establish_connection())
         .on_window_event(|event| match event.event() {
@@ -37,16 +35,17 @@ let tray_menu = SystemTrayMenu::new()
               event.window().hide().unwrap();
               api.prevent_close();
             }
-            _ => {}
+            _ => {},
           })
         .plugin(tauri_plugin_autostart::init(
             MacosLauncher::LaunchAgent,
             None,
         ))
         
-        .plugin(tauri_plugin_single_instance::init(|app, argv, cwd| {
-            app.emit_all("single-instance", Payload { args: argv, cwd })
-                .unwrap();
+        .plugin(tauri_plugin_single_instance::init(|app, _  , _| {
+            let window = app.get_window("main").unwrap();
+            window.show().unwrap();
+            
         }))
         .invoke_handler(tauri::generate_handler![
             commands::plane::get_planes,

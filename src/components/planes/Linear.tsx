@@ -4,7 +4,8 @@ import React, { useEffect, useState } from 'react';
 import DeletePlane from '../DeletePlane';
 import { API } from '@editorjs/editorjs';
 import { invoke } from '@tauri-apps/api';
-import { createReactEditorJS } from 'react-editor-js';
+// @ts-expect-error cjs import
+import { createReactEditorJS } from 'react-editor-js/dist/react-editor-js.cjs';
 import { EDITOR_JS_TOOLS } from '../../tools';
 
 interface ILinear {
