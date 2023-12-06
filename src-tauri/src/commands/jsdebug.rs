@@ -1,5 +1,4 @@
-
 #[tauri::command]
-pub fn jsdebug(msg: String){
+pub fn jsdebug(msg: String) {
     println!("{}", msg)
 }

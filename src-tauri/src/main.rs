@@ -7,13 +7,13 @@ mod models;
 mod schema;
 
 use crate::core::db::establish_connection;
-use tauri::{GlobalShortcutManager, LogicalSize, Manager, RunEvent, SystemTrayEvent};
 use tauri::{CustomMenuItem, SystemTrayMenu};
+use tauri::{GlobalShortcutManager, LogicalSize, Manager, RunEvent, SystemTrayEvent};
 use tauri_plugin_autostart::MacosLauncher;
 
+use tauri::SystemTray;
 use window_shadows::set_shadow;
 use window_vibrancy::apply_blur;
-use tauri::SystemTray;
 
 #[derive(Clone, serde::Serialize)]
 struct Payload {
@@ -22,30 +22,26 @@ struct Payload {
 }
 
 fn main() {
-
     let quit = CustomMenuItem::new("quit".to_string(), "Quit");
-let tray_menu = SystemTrayMenu::new()
-  .add_item(quit);
+    let tray_menu = SystemTrayMenu::new().add_item(quit);
 
-  let tray = SystemTray::new().with_menu(tray_menu);
+    let tray = SystemTray::new().with_menu(tray_menu);
     tauri::Builder::default()
         .manage(establish_connection())
         .on_window_event(|event| match event.event() {
             tauri::WindowEvent::CloseRequested { api, .. } => {
-              event.window().hide().unwrap();
-              api.prevent_close();
+                event.window().hide().unwrap();
+                api.prevent_close();
             }
-            _ => {},
-          })
+            _ => {}
+        })
         .plugin(tauri_plugin_autostart::init(
             MacosLauncher::LaunchAgent,
             None,
         ))
-        
-        .plugin(tauri_plugin_single_instance::init(|app, _  , _| {
+        .plugin(tauri_plugin_single_instance::init(|app, _, _| {
             let window = app.get_window("main").unwrap();
             window.show().unwrap();
-            
         }))
         .invoke_handler(tauri::generate_handler![
             commands::plane::get_planes,
@@ -59,24 +55,21 @@ let tray_menu = SystemTrayMenu::new()
         .system_tray(tray)
         .on_system_tray_event(|app, event| match event {
             SystemTrayEvent::LeftClick {
-              position: _,
-              size: _,
-              ..
-            } => {       
-              app.get_window("main").unwrap().show().unwrap();
-            },
-            SystemTrayEvent::MenuItemClick {id, ..} => {
-                match id.as_str() {
-                    "quit" => {
-                        std::process::exit(0);
-                    },
-                    _ => ()
+                position: _,
+                size: _,
+                ..
+            } => {
+                app.get_window("main").unwrap().show().unwrap();
+            }
+            SystemTrayEvent::MenuItemClick { id, .. } => match id.as_str() {
+                "quit" => {
+                    std::process::exit(0);
                 }
+                _ => (),
             },
-            
+
             _ => {}
-          })
-      
+        })
         .build(tauri::generate_context!())
         .expect("error while building tauri application")
         .run(|app_handle, e| match e {
@@ -124,7 +117,7 @@ let tray_menu = SystemTrayMenu::new()
                         }
                     })
                     .unwrap();
-            },
+            }
             _ => (),
         });
 }

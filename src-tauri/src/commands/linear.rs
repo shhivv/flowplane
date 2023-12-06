@@ -14,7 +14,7 @@ pub fn get_linear_data(linear_plane_id: i32, db: State<DBPool>) -> Option<String
         .load::<LinearModel>(&mut conn)
         .unwrap();
 
-    if !result.is_empty(){
+    if !result.is_empty() {
         Some(result[0].data.clone())
     } else {
         None

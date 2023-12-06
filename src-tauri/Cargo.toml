@@ -25,6 +25,7 @@ tauri-plugin-autostart = { git = "https://github.com/tauri-apps/plugins-workspac
 tauri-plugin-single-instance = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
 window-shadows = "0.2.1"
 window-vibrancy = "0.4.2"
+directories = "5.0.1"
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem
