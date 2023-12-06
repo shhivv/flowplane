@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import NewPlane from './components/NewPlane';
 import Linear from './components/planes/Linear';
 import Sidebar from './components/Sidebar';
+import { invoke } from '@tauri-apps/api';
+
 
 import { useViewStore, View } from './state/view';
 import {
@@ -29,6 +31,9 @@ function App() {
         changeToPlaneView();
         await changePlane(fetched.lastAccessed!);
       }
+      await invoke('jsdebug', {
+        msg: "start rendering app",
+      });
     };
     asyncChange();
   }, [fetchPlanes, changeToPlaneView, changePlane]);

@@ -6,11 +6,13 @@
     "distDir": "../dist",
     "withGlobalTauri": false
   },
+  
   "package": {
     "productName": "flowplane",
-    "version": "0.0.0"
+    "version": "0.0.1"
   },
   "tauri": {
+   
     "allowlist": {
       "all": false,
       "shell": {
@@ -21,6 +23,7 @@
         "all": true
       }
     },
+    
     "bundle": {
       "active": true,
       "icon": [
@@ -30,7 +33,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.flowplane.dev",
+      "identifier": "com.flowplane.release",
       "targets": "all"
     },
     "security": {
@@ -54,6 +57,10 @@
         "resizable": false,
         "transparent": true
       }
-    ]
+    ],
+    "systemTray": {
+      "iconPath": "icons/128x128.png",
+      "iconAsTemplate": true
+    }
   }
 }

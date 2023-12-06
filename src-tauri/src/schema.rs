@@ -20,7 +20,4 @@ diesel::table! {
 
 diesel::joinable!(linear -> planes (plane_id));
 
-diesel::allow_tables_to_appear_in_same_query!(
-    linear,
-    planes,
-);
+diesel::allow_tables_to_appear_in_same_query!(linear, planes,);

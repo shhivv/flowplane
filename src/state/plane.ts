@@ -59,5 +59,5 @@ export const useDisplayedPlaneStore = create<DisplayedPlaneStore>((set) => ({
   },
   deletePlane: async (plane) => {
     await invoke('delete_plane', { planeId: plane.id });
-  },
+  }
 }));

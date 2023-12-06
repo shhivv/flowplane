@@ -1,4 +1,4 @@
-import { type IPlane } from '../../state/plane';
+import { useDisplayedPlaneStore, type IPlane } from '../../state/plane';
 import { MdBlurLinear } from 'react-icons/md';
 import React, { useEffect, useState } from 'react';
 import DeletePlane from '../DeletePlane';
@@ -15,12 +15,14 @@ interface ILinear {
 const ReactEditorJS = createReactEditorJS();
 
 export default function Linear({ plane, floating }: ILinear) {
-  const [data, setData] = useState();
   const [loaded, setLoaded] = useState(false);
+  const displayedPlane = useDisplayedPlaneStore((dp) => dp.plane);
+  const [data, setData] = useState<string>();
 
   const onChange = (planeId: number) => {
     return async (api: API) => {
       const newData = await api.saver.save();
+      setData(JSON.stringify(newData));
       await invoke('update_linear_data', {
         linearPlaneId: plane.id,
         newData: JSON.stringify(newData),
@@ -33,7 +35,7 @@ export default function Linear({ plane, floating }: ILinear) {
       const fetched = await invoke('get_linear_data', {
         linearPlaneId: plane.id,
       });
-      setData(JSON.parse(fetched as string));
+      setData(fetched as string);
       setLoaded(true);
     };
     fetchData();
@@ -55,7 +57,7 @@ export default function Linear({ plane, floating }: ILinear) {
           autofocus
           onChange={onChange(plane.id!)}
           placeholder="Type to get started"
-          defaultValue={data}
+          defaultValue={JSON.parse(data!)}
           tools={EDITOR_JS_TOOLS}
           key="/"
         />
