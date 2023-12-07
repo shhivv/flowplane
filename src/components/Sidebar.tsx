@@ -1,7 +1,6 @@
 import { BsPlusLg } from 'react-icons/bs';
 import { MdBlurLinear } from 'react-icons/md';
 import { GiBlackHoleBolas } from 'react-icons/gi';
-import React from 'react';
 
 import {
   useLoadedPlanesStore,
@@ -30,8 +29,9 @@ export default function SideBar() {
   };
 
   return (
-    <div className="h-screen w-1/6 bg-[#111] border-r border-r-neutral-800 text-sm flex flex-col">
-      <div className="font-heading py-6 text-lg px-4 text-neutral-300">
+    <div className="h-screen w-1/6 bg-background border-r border-r-neutral-800 text-sm flex flex-col">
+      <div className="font-heading py-4 font-bold text-lg px-4 flex items-center gap-2 text-neutral-300">
+        <img src="logo.svg"/>
         Flowplane
       </div>
       <div className="text-neutral-400 h-full overflow-y-auto px-4">

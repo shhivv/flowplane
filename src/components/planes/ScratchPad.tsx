@@ -4,13 +4,13 @@ import React, { useRef } from 'react';
 import Movable from 'react-moveable';
 import DeletePlane from '../DeletePlane';
 import InfiniteViewer from 'react-infinite-viewer';
-import FreeFlowItem from '../FreeFlowItem';
+import ScratchPadItem from '../ScratchPadItem';
 
-interface IFreeFlow {
+interface IScratchPad {
   plane: IPlane;
 }
 
-export default function FreeFlow({ plane }: IFreeFlow) {
+export default function ScratchPad({ plane }: IScratchPad) {
   const target = useRef(null);
 
   return (
@@ -36,9 +36,9 @@ export default function FreeFlow({ plane }: IFreeFlow) {
           className="viewer h-full w-full"
         >
           <div className="viewport">
-            <FreeFlowItem>
+            <ScratchPadItem>
               <div className="bg-red-500 w-12 h-12"></div>
-            </FreeFlowItem>
+            </ScratchPadItem>
           </div>
         </InfiniteViewer>
       </div>

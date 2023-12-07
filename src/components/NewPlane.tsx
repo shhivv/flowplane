@@ -35,7 +35,7 @@ export default function NewPlane() {
   };
 
   return (
-    <div className="w-10/12 flex justify-center items-center text-sm text-neutral-400">
+    <div className="w-10/12 flex justify-center items-center text-sm text-neutral-400 grid-design">
       <form
         className="flex flex-col items-center justify-center py-24 w-1/4 space-y-2"
         onSubmit={onSubmit}
@@ -62,19 +62,19 @@ export default function NewPlane() {
           <button
             className={twMerge(
               'py-6 flex rounded-md items-center justify-center flex-col border border-neutral-900 hover:bg-neutral-800 w-1/2 pointer-events-none',
-              selectedType === 'freeflow' && 'bg-neutral-900'
+              selectedType === 'scratchpad' && 'bg-neutral-900'
             )}
-            id="freeflow"
+            id="scratchpad"
             disabled
             onClick={onSelect}
             type="button"
           >
-            <GiBlackHoleBolas className="mb-4" /> FreeFlow
+            <GiBlackHoleBolas className="mb-4" /> ScratchPad
           </button>
         </div>
         <button
           type="submit"
-          className="py-2 w-1/2 px-4 rounded-md bg-neutral-900"
+          className="py-2 w-1/2 px-4 rounded-md bg-violet-700 border text-neutral-300 border-violet-800"
         >
           Create
         </button>

@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import Moveable from 'react-moveable';
 
-export default function FreeFlowItem({
+export default function ScratchPadItem({
   children,
 }: {
   children: React.ReactNode;

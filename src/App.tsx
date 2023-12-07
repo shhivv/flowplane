@@ -11,7 +11,7 @@ import {
   useDisplayedPlaneStore,
   IPlane,
 } from './state/plane';
-import FreeFlow from './components/planes/FreeFlow';
+import ScratchPad from './components/planes/ScratchPad';
 import Introduction from './components/Intro';
 
 function App() {
@@ -45,7 +45,7 @@ function App() {
            <Linear key={plane.id} plane={plane} floating={false} />;
         </div>);
       } else {
-        return <FreeFlow key={plane.id} plane={plane} />;
+        return <ScratchPad key={plane.id} plane={plane} />;
       }
     } else if (view === View.Create) {
       return <NewPlane />;
@@ -55,7 +55,7 @@ function App() {
   };
 
   return (
-    <div className="w-screen h-screen bg-[#0f0f0f] flex">
+    <div className="w-screen h-screen bg-background flex">
       <Sidebar />
       {getDisplayComponent(displayedPlane!, displayedView!)}
     </div>

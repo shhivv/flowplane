@@ -9,6 +9,9 @@ module.exports = {
         sans: ['Poppins', fontFamily.sans],
         heading: ['Kanit', fontFamily.sans],
       },
+      colors: {
+        background: "#0f0f0f"
+      }
     },
   },
   plugins: [],
