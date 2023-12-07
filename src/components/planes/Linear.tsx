@@ -43,7 +43,7 @@ export default function Linear({ plane, floating }: ILinear) {
   }, [plane.id]);
 
   return (
-    <div className="py-8 px-16 space-y-4 text-neutral-300 font-sans overflow-y-auto">
+    <div className="py-8 px-16 space-y-4 text-neutral-300 font-sans overflow-y-auto w-full">
       <div className="flex text-neutral-400 justify-between">
         <div className="flex items-center space-x-3 w-full">
           <MdBlurLinear />
@@ -55,7 +55,7 @@ export default function Linear({ plane, floating }: ILinear) {
       </div>
       {loaded && (
         <ReactEditorJS
-          autofocus
+        autofocus
           onChange={onChange(plane.id!)}
           placeholder="Type to get started"
           defaultValue={JSON.parse(data!)}
