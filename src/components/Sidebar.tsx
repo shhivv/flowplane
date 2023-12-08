@@ -32,7 +32,7 @@ export default function SideBar() {
     <div className="h-screen w-1/6 bg-background border-r border-r-neutral-800 text-sm flex flex-col">
       <div className="font-heading py-4 font-bold text-lg px-4 flex items-center gap-2 text-neutral-300">
         <img src="logo.svg"/>
-        Flowplane
+        <div className="hidden lg:flex">Flowplane</div>
       </div>
       <div className="text-neutral-400 h-full overflow-y-auto px-4">
         {planes.map((plane) => (
