@@ -2,7 +2,7 @@ use diesel::prelude::*;
 use tauri::State;
 
 use crate::core::db::DBPool;
-use crate::models::{SlateModel, NewSlate};
+use crate::models::{NewSlate, SlateModel};
 
 #[tauri::command]
 pub fn get_slate_data(slate_plane_id: i32, db: State<DBPool>) -> Option<String> {

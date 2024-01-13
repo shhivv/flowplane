@@ -33,7 +33,6 @@ pub struct NewLinear {
     pub data: String,
 }
 
-
 #[derive(Queryable)]
 #[diesel(table_name = slate)]
 pub struct SlateModel {
