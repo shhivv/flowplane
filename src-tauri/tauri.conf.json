@@ -6,13 +6,12 @@
     "distDir": "../dist",
     "withGlobalTauri": false
   },
-  
+
   "package": {
     "productName": "flowplane",
     "version": "0.0.1"
   },
   "tauri": {
-   
     "allowlist": {
       "all": false,
       "shell": {
@@ -23,7 +22,7 @@
         "all": true
       }
     },
-    
+
     "bundle": {
       "active": true,
       "icon": [

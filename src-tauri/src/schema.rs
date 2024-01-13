@@ -18,6 +18,19 @@ diesel::table! {
     }
 }
 
-diesel::joinable!(linear -> planes (plane_id));
+diesel::table! {
+    slate (id) {
+        id -> Integer,
+        plane_id -> Integer,
+        data -> Text,
+    }
+}
 
-diesel::allow_tables_to_appear_in_same_query!(linear, planes,);
+diesel::joinable!(linear -> planes (plane_id));
+diesel::joinable!(slate -> planes (plane_id));
+
+diesel::allow_tables_to_appear_in_same_query!(
+    linear,
+    planes,
+    slate,
+);

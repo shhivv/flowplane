@@ -1,29 +1,27 @@
-import { BsTrashFill } from 'react-icons/bs';
+import { BsTrashFill } from "react-icons/bs";
 import {
   IPlane,
-  useDisplayedPlaneStore,
+  useMainDisplayedPlane,
   useLoadedPlanesStore,
-} from '../state/plane';
-import { useViewStore } from '../state/view';
+} from "../state/plane";
+import { useViewStore } from "../state/view";
+import { invoke } from "@tauri-apps/api";
 
 interface IDeletePlane {
   plane: IPlane;
 }
 
 export default function DeletePlane({ plane }: IDeletePlane) {
-  const deletePlane = useDisplayedPlaneStore((dp) => dp.deletePlane);
-  const changePlane = useDisplayedPlaneStore((dp) => dp.changePlane);
-
   const changeToIntro = useViewStore((v) => v.setIntro);
 
   const fetch = useLoadedPlanesStore((lp) => lp.fetch);
-
+  const changePlane = useMainDisplayedPlane((c) => c.setPlaneId);
   const onClick = async () => {
-    await deletePlane(plane);
+    await invoke("delete_plane", { planeId: plane.id! });
     const fetched = await fetch();
 
     if (fetched.lastAccessed) {
-      changePlane(fetched.lastAccessed!);
+      changePlane(fetched.lastAccessed!.id!);
     } else {
       changeToIntro();
     }

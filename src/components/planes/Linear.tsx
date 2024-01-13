@@ -1,12 +1,12 @@
-import { useDisplayedPlaneStore, type IPlane } from '../../state/plane';
-import { MdBlurLinear } from 'react-icons/md';
-import React, { useEffect, useState } from 'react';
-import DeletePlane from '../DeletePlane';
-import { API } from '@editorjs/editorjs';
-import { invoke } from '@tauri-apps/api';
+import { type IPlane, useLoadedPlanesStore } from "../../state/plane";
+import { MdBlurLinear } from "react-icons/md";
+import React, { useEffect, useState } from "react";
+import DeletePlane from "../DeletePlane";
+import { API } from "@editorjs/editorjs";
+import { invoke } from "@tauri-apps/api";
 // @ts-expect-error cjs import
-import { createReactEditorJS } from 'react-editor-js/dist/react-editor-js.cjs';
-import { EDITOR_JS_TOOLS } from '../../tools';
+import { createReactEditorJS } from "react-editor-js/dist/react-editor-js.cjs";
+import { EDITOR_JS_TOOLS } from "../../tools";
 
 interface ILinear {
   plane: IPlane;
@@ -17,30 +17,31 @@ const ReactEditorJS = createReactEditorJS();
 
 export default function Linear({ plane, floating }: ILinear) {
   const [loaded, setLoaded] = useState(false);
-  const displayedPlane = useDisplayedPlaneStore((dp) => dp.plane);
   const [data, setData] = useState<string>();
 
-  const onChange = (planeId: number) => {
+  const onChange = () => {
     return async (api: API) => {
       const newData = await api.saver.save();
-      setData(JSON.stringify(newData));
-      await invoke('update_linear_data', {
+      await invoke("update_linear_data", {
         linearPlaneId: plane.id,
         newData: JSON.stringify(newData),
       });
+
+      setData(JSON.stringify(newData));
     };
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const fetched = await invoke('get_linear_data', {
+    async function cback() {
+      const dbData = await invoke("get_linear_data", {
         linearPlaneId: plane.id,
       });
-      setData(fetched as string);
+
+      setData(dbData as string);
       setLoaded(true);
-    };
-    fetchData();
-  }, [plane.id]);
+    }
+    cback();
+  }, [setLoaded, plane]);
 
   return (
     <div className="py-8 px-16 space-y-4 text-neutral-300 font-sans overflow-y-auto w-full">
@@ -51,12 +52,12 @@ export default function Linear({ plane, floating }: ILinear) {
             {plane?.title}
           </h3>
         </div>
-        { !floating && <DeletePlane plane={plane} />}
+        {!floating && <DeletePlane plane={plane!} />}
       </div>
       {loaded && (
         <ReactEditorJS
-        autofocus
-          onChange={onChange(plane.id!)}
+          autofocus
+          onChange={onChange()}
           placeholder="Type to get started"
           defaultValue={JSON.parse(data!)}
           tools={EDITOR_JS_TOOLS}

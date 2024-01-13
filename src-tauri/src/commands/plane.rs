@@ -9,8 +9,8 @@ use tauri::State;
 pub enum PlaneType {
     #[serde(rename = "linear")]
     Linear,
-    #[serde(rename = "scratchpad")]
-    ScratchPad,
+    #[serde(rename = "slate")]
+    Slate,
 }
 
 #[derive(Serialize, Deserialize)]
@@ -26,7 +26,7 @@ impl PlaneType {
     pub fn to_string(&self) -> String {
         match self {
             Self::Linear => "linear",
-            Self::ScratchPad => "scratchpad",
+            Self::Slate => "slate",
         }
         .to_string()
     }
@@ -36,7 +36,7 @@ impl From<String> for PlaneType {
     fn from(name: String) -> Self {
         match name.as_str() {
             "linear" => Self::Linear,
-            _ => Self::ScratchPad,
+            _ => Self::Slate,
         }
     }
 }

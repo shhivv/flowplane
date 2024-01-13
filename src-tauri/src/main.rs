@@ -50,7 +50,9 @@ fn main() {
             commands::plane::delete_plane,
             commands::linear::get_linear_data,
             commands::linear::update_linear_data,
-            commands::jsdebug::jsdebug
+            commands::jsdebug::jsdebug,
+            commands::slate::get_slate_data,
+            commands::slate::update_slate_data
         ])
         .system_tray(tray)
         .on_system_tray_event(|app, event| match event {

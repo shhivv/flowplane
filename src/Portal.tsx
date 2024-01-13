@@ -1,24 +1,21 @@
 import { useEffect, useState } from "react";
 import Linear from "./components/planes/Linear";
-import { IPlane, useDisplayedPlaneStore, useLoadedPlanesStore } from "./state/plane";
+import { IPlane, useLoadedPlanesStore } from "./state/plane";
+import PortalInfo from "./components/PortalInfo";
 
 export default function Portal() {
   const [plane, setPlane] = useState<IPlane>();
-  const fetchPlanes = useLoadedPlanesStore((lp) => lp.fetch);
-  const [i, setI] = useState(0);
+  const [loaded, setLoaded] = useState(false);
 
-  useEffect(() => {
-    const asyncChange = async () => {
-      const fetched = await fetchPlanes();
-      console.log(fetched.planes);
-      setPlane(fetched.lastAccessed!);
-    };
-    asyncChange();
-    setI(p => p + 1);
-  }, [fetchPlanes]);
-
-  return <div className="w-screen h-screen flex bg-gradient-to-r from-violet-500/20 to-violet-500/10 ">
-    { plane && <Linear plane={plane!} key={plane!.id} floating/>}
-  </div>;
+  return (
+    <div className="w-screen h-screen overflow-hidden relative card flex items-center justify-center p-[2px] rounded-lg">
+      <div className="bg" />
+      <div className="relative flex flex-col w-full h-full bg-background rounded-lg">
+        <div className="overflow-y-auto flex-1"></div>
+        <div className="bg-fuchsia-900/10 border-t border-neutral-800 border-dashed rounded-b-lg h-10">
+          <PortalInfo />
+        </div>
+      </div>
+    </div>
+  );
 }
-

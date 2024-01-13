@@ -27,8 +27,9 @@
     "@editorjs/simple-image": "^1.6.0",
     "@editorjs/table": "^2.3.0",
     "@editorjs/warning": "^1.4.0",
+    "@mdxeditor/editor": "^1.13.3",
     "@tauri-apps/api": "^1.2.0",
-    "prettier": "^2.8.4",
+    "prettier": "3.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-editor-js": "^2.1.0",
@@ -43,11 +44,13 @@
   },
   "devDependencies": {
     "@originjs/vite-plugin-commonjs": "^1.0.3",
+    "@tailwindcss/typography": "^0.5.10",
     "@tauri-apps/cli": "^1.2.2",
     "@types/node": "^18.7.10",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
-    "@typescript-eslint/eslint-plugin": "^5.54.0",
+    "@typescript-eslint/eslint-plugin": "^6.18.0",
+    "@typescript-eslint/parser": "^6.18.1",
     "@vitejs/plugin-react": "^3.0.0",
     "autoprefixer": "^10.4.13",
     "eslint": "^8.0.1",
@@ -59,7 +62,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "postcss": "^8.4.21",
     "tailwindcss": "^3.2.7",
-    "typescript": "*",
+    "typescript": "^5.3.3",
     "vite": "^4.0.0"
   }
 }

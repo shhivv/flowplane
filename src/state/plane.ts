@@ -1,10 +1,23 @@
-import { invoke } from '@tauri-apps/api';
-import { create } from 'zustand';
+import { invoke } from "@tauri-apps/api";
+import { create } from "zustand";
+
+enum PlaneType {
+  Linear = "linear",
+  Slate = "slate",
+}
+
+export function convertEnum(type: string) {
+  if (type === "linear") {
+    return PlaneType.Linear;
+  } else {
+    return PlaneType.Slate;
+  }
+}
 
 export interface IPlane {
   id?: number;
   title: string;
-  plane_type: string;
+  plane_type: PlaneType;
   last_accessed?: number;
   created_at?: number;
 }
@@ -13,6 +26,7 @@ interface FetchedPlanes {
   planes: IPlane[];
   lastAccessed?: IPlane;
 }
+
 interface LoadedPlanesState {
   planes: IPlane[];
   lastAccessed?: IPlane;
@@ -20,11 +34,21 @@ interface LoadedPlanesState {
   fetch: () => Promise<FetchedPlanes>;
 }
 
+interface MainDisplayedPlaneState {
+  planeId: number;
+  setPlaneId: (planeId: number) => void;
+}
+
+export const useMainDisplayedPlane = create<MainDisplayedPlaneState>((set) => ({
+  planeId: 0,
+  setPlaneId: (planeId: number) => set({ planeId }),
+}));
+
 export const useLoadedPlanesStore = create<LoadedPlanesState>((set) => ({
   planes: [],
   lastAccessed: undefined,
   add: async (plane) => {
-    const createdPlane: IPlane = await invoke('new_plane', {
+    const createdPlane: IPlane = await invoke("new_plane", {
       title: plane.title,
       planeType: plane.plane_type,
     });
@@ -33,9 +57,9 @@ export const useLoadedPlanesStore = create<LoadedPlanesState>((set) => ({
     return createdPlane;
   },
   fetch: async () => {
-    const fetched: IPlane[] = await invoke('get_planes');
+    const fetched: IPlane[] = await invoke("get_planes");
     const lastAccessed = fetched.sort(
-      (a, b) => b.last_accessed! - a.last_accessed!
+      (a, b) => b.last_accessed! - a.last_accessed!,
     )[0];
     set({ planes: fetched, lastAccessed });
     return {
@@ -43,21 +67,4 @@ export const useLoadedPlanesStore = create<LoadedPlanesState>((set) => ({
       lastAccessed,
     };
   },
-}));
-
-interface DisplayedPlaneStore {
-  plane: IPlane | undefined;
-  changePlane: (plane: IPlane) => Promise<void>;
-  deletePlane: (plane: IPlane) => Promise<void>;
-}
-
-export const useDisplayedPlaneStore = create<DisplayedPlaneStore>((set) => ({
-  plane: undefined,
-  changePlane: async (plane) => {
-    await invoke('set_last_accessed', { planeId: plane.id });
-    set({ plane });
-  },
-  deletePlane: async (plane) => {
-    await invoke('delete_plane', { planeId: plane.id });
-  }
 }));
