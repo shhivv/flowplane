@@ -8,10 +8,14 @@ import { useViewStore, View } from "./state/view";
 import { useLoadedPlanesStore, useMainDisplayedPlane } from "./state/plane";
 import Slate from "./components/planes/Slate";
 import Introduction from "./components/Intro";
+import { listen } from '@tauri-apps/api/event';
+import ClosePortalAlert from "./components/ClosePortal";
+
 
 function App() {
   const fetchPlanes = useLoadedPlanesStore((lp) => lp.fetch);
   const planes = useLoadedPlanesStore((lp) => lp.planes);
+  const [portalOpen, setPortalOpen] = useState(false);
 
   const displayedView = useViewStore((v) => v.view);
   const changeToPlaneView = useViewStore((v) => v.setPlane);
@@ -34,6 +38,18 @@ function App() {
     };
     asyncChange();
   }, [fetchPlanes, changeToPlaneView, setPlaneId]);
+
+
+  useEffect(() => {
+    const asyncWrapper = async () => {
+      await listen<string>('portalSwitch', (event) => {
+        console.log(!portalOpen);
+        setPortalOpen(false);
+      });
+    };
+
+    asyncWrapper();
+  }, [portalOpen]);
 
   const getDisplayComponent = (_planeId: number, view: View) => {
     const plane = planes.find((obj) => obj.id === _planeId);
@@ -62,7 +78,7 @@ function App() {
   return (
     <div className="w-screen h-screen bg-background flex">
       <Sidebar />
-      {getDisplayComponent(planeId, displayedView!)}
+      {portalOpen ? <ClosePortalAlert/> : getDisplayComponent(planeId, displayedView!)}
     </div>
   );
 }

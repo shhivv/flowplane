@@ -64,6 +64,6 @@ export default function Linear({ plane, floating }: ILinear) {
           key="/"
         />
       )}
-    </div>
+      </div>
   );
 }

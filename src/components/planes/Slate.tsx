@@ -44,7 +44,7 @@ export default function Slate({ plane }: ISlate) {
         slatePlaneId: plane.id,
       });
 
-      setData((dbData as string) || "");
+      setData((dbData as string) || "# Get started with Flowplane");
       setLoaded(true);
     }
     cback();
@@ -61,7 +61,7 @@ export default function Slate({ plane }: ISlate) {
         </div>
         {true && <DeletePlane plane={plane} />}
       </div>
-      <div className="h-full ">
+      <div className="h-full">
         {loaded && (
           <MDXEditor
             className="dark-theme dark-editor"

@@ -15,6 +15,10 @@ use tauri::SystemTray;
 use window_shadows::set_shadow;
 use window_vibrancy::apply_blur;
 
+// the payload type must implement `Serialize` and `Clone`.
+#[derive(Clone, serde::Serialize)]
+struct EmptyPayload {}
+
 #[derive(Clone, serde::Serialize)]
 struct Payload {
     args: Vec<String>,
@@ -101,8 +105,12 @@ fn main() {
                         let app_handle = ah.clone();
                         let window = app_handle.get_window("portal").unwrap();
                         if window.is_visible().unwrap() {
+                            println!("closed");
+                            ah.emit_all("portalSwitch", EmptyPayload{}).unwrap();
                             window.hide().unwrap();
                         } else {
+                            println!("opened");
+                            ah.emit_all("portalSwitch", EmptyPayload{}).unwrap();
                             window.show().unwrap();
                             window.set_focus().unwrap();
                         }
@@ -115,6 +123,7 @@ fn main() {
                         let app_handle = ah.clone();
                         let window = app_handle.get_window("portal").unwrap();
                         if window.is_visible().unwrap() {
+                            ah.emit_all("portalSwitch", EmptyPayload{}).unwrap();
                             window.hide().unwrap();
                         }
                     })
