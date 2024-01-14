@@ -8,6 +8,7 @@ import {
   useMainDisplayedPlane,
 } from "../state/plane";
 import { useViewStore } from "../state/view";
+import { invoke } from "@tauri-apps/api";
 
 export default function SideBar() {
   const planes = useLoadedPlanesStore((l) => l.planes).sort(
@@ -23,8 +24,9 @@ export default function SideBar() {
     changeToCreateView();
   };
 
-  const changePlaneOnClick = (plane: IPlane) => {
+  const changePlaneOnClick = async (plane: IPlane) => {
     changeToPlaneView();
+    await invoke("set_last_accessed", { planeId: plane.id });
     changePlane(plane.id!);
   };
 

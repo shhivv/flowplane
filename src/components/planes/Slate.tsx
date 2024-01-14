@@ -74,8 +74,6 @@ export default function Slate({ plane, floating }: ISlate) {
               listsPlugin(),
               quotePlugin(),
               thematicBreakPlugin(),
-              linkPlugin(),
-              linkDialogPlugin(),
               tablePlugin(),
             ]}
             onChange={onChange()}

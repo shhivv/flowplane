@@ -12,6 +12,8 @@ export default function Introduction() {
       </p>
       <a
         href="https://flowplane.shivs.me"
+        target="_blank"
+        rel="noreferrer"
         className="text-muted-foreground/80 text-sm"
       >
         flowplane.shivs.me
