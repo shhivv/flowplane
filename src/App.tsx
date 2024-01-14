@@ -39,14 +39,13 @@ function App() {
   }, [fetchPlanes, changeToPlaneView, setPlaneId]);
 
   useEffect(() => {
-    const asyncWrapper = async () => {
-      await listen<string>("portalSwitch", () => {
+      const listener = listen<string>("portalSwitch", () => {
         console.log(!portalOpen);
-        setPortalOpen(false);
+        setPortalOpen(!portalOpen);
       });
-    };
-
-    asyncWrapper();
+      return () => {
+        listener.then(f => f());
+      };
   }, [portalOpen]);
 
   const getDisplayComponent = (_planeId: number, view: View) => {
