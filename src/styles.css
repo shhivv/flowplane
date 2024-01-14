@@ -59,11 +59,6 @@ body {
   overflow: hidden;
 }
 
-.uwu {
-  filter: blur(8px);
-  transition: filter 0.3s;
-}
-
 .bg::before {
   content: "";
   position: absolute;
