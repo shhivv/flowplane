@@ -21,9 +21,10 @@ import { useEffect, useState } from "react";
 
 interface ISlate {
   plane: IPlane;
+  floating: boolean
 }
 
-export default function Slate({ plane }: ISlate) {
+export default function Slate({ plane, floating }: ISlate) {
   const [loaded, setLoaded] = useState(false);
   const [data, setData] = useState<string>();
 
@@ -51,17 +52,17 @@ export default function Slate({ plane }: ISlate) {
   }, [setLoaded, plane]);
 
   return (
-    <div className="py-8 px-16 space-y-4 text-neutral-300 font-sans overflow-y-auto w-full">
-      <div className="flex text-neutral-400 justify-between">
+    <div className="py-8 px-16 space-y-4 text-foreground font-sans overflow-y-auto w-full h-full">
+      <div className="flex text-muted-foreground justify-between">
         <div className="flex items-center space-x-3 w-full">
           <GiBlackHoleBolas />
           <h3 className="w-4/5 overflow-ellipsis whitespace-nowrap overflow-hidden">
             {plane?.title}
           </h3>
         </div>
-        {true && <DeletePlane plane={plane} />}
+        {!floating && <DeletePlane plane={plane!} />}
       </div>
-      <div className="h-full">
+      <div className="">
         {loaded && (
           <MDXEditor
             className="dark-theme dark-editor"

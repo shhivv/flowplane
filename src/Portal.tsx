@@ -1,18 +1,71 @@
 import { useEffect, useState } from "react";
-import Linear from "./components/planes/Linear";
-import { IPlane, useLoadedPlanesStore } from "./state/plane";
 import PortalInfo from "./components/PortalInfo";
 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { IPlane, useLoadedPlanesStore } from "./state/plane";
+import Linear from "./components/planes/Linear";
+import Slate from "./components/planes/Slate";
+import Introduction from "./components/Intro";
+
 export default function Portal() {
-  const [plane, setPlane] = useState<IPlane>();
-  const [loaded, setLoaded] = useState(false);
+  const fetchPlanes = useLoadedPlanesStore((lp) => lp.fetch);
+  const [planeId, setPlaneId] = useState(Number(localStorage.getItem("portalPlane")) || 0);
+  const planes = useLoadedPlanesStore((lp) => lp.planes);
+
+  useEffect(() => {
+    async function cback() {
+      await fetchPlanes();
+    }
+
+    cback();
+  });
+    const getDisplayComponent = (_planeId: number) => {
+    const plane = planes.find((obj) => obj.id === _planeId);
+
+    if (plane) {
+      if (plane.plane_type === "linear") {
+        return (
+            <Linear key={plane.id} plane={plane} floating />
+        );
+      } else if (plane.plane_type === "slate") {
+        return (
+            <Slate key={plane.id} plane={plane} floating />
+        );
+      }
+    } else {
+      return <div className="flex h-full justify-center w-full">
+        <Introduction/>
+      </div>;
+    }
+  };
+
+  const onChange = (id: string) => {
+    setPlaneId(Number(id));
+    localStorage.setItem("portalPlane", id);
+  };
 
   return (
-    <div className="w-screen h-screen overflow-hidden relative card flex items-center justify-center p-[2px] rounded-lg">
+    <div className="w-screen h-screen overflow-hidden relative card flex dark items-center justify-center p-[2px] rounded-lg">
       <div className="bg" />
       <div className="relative flex flex-col w-full h-full bg-background rounded-lg">
-        <div className="overflow-y-auto flex-1"></div>
-        <div className="bg-fuchsia-900/10 border-t border-neutral-800 border-dashed rounded-b-lg h-10">
+        <div className="overflow-y-hidden flex-1">
+          {getDisplayComponent(planeId)}
+        </div>
+        <div className="bg-primary/10 border-t border-border border-dashed rounded-b-lg h-14 flex items-center justify-between">
+        <Select onValueChange={onChange} >
+  <SelectTrigger className="w-40 mx-12 bg-primary/20 text-primary-foreground h-8 border-primary/40 ">
+    <SelectValue placeholder="Plane" />
+  </SelectTrigger>
+  <SelectContent>
+    {planes.map(i => <SelectItem value={String(i.id)} key={i.id}>{i.title}</SelectItem>)}
+  </SelectContent>
+</Select>;
           <PortalInfo />
         </div>
       </div>

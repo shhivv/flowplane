@@ -1,11 +1,11 @@
 import React from "react";
 
-export default function Introduction() {
+export default function PortalIntro() {
   return (
-    <div className="w-5/6 py-6 px-16 flex justify-center items-center flex-col space-y-2 grid-design">
+    <div className="w-full py-6 px-16 flex justify-center items-center flex-col space-y-2 grid-design">
       <h1 className="font-heading  text-5xl text-foreground">Flowplane</h1>
       <p className="text-muted-foreground text-lg">
-        Create a new Plane to get started
+        Select or create a new Plane to get started
       </p>
       <p className="text-muted-foreground/80 text-sm">
         Built with Rust & Tauri

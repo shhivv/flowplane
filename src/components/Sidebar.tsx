@@ -29,16 +29,16 @@ export default function SideBar() {
   };
 
   return (
-    <div className="h-screen w-1/6 bg-background border-r border-r-neutral-800 text-sm flex flex-col">
-      <div className="font-heading py-6 font-bold text-lg px-5 flex items-center gap-2 text-neutral-300">
+    <div className="h-screen w-1/6 bg-background border-r border-r-border text-sm flex flex-col">
+      <div className="font-heading py-6 font-bold text-lg px-5 flex items-center gap-2 text-foreground">
         <div className="hidden lg:flex">Flowplane</div>
       </div>
-      <div className="text-neutral-400 h-full overflow-y-auto px-4">
+      <div className="text-muted-foreground h-full overflow-y-auto px-4">
         {planes.map((plane) => (
           <button
-            className="flex items-center space-x-3  hover:bg-neutral-800 px-1 py-2 w-full rounded-md"
+            className="flex items-center space-x-3  hover:bg-accent px-1 py-2 w-full rounded-md"
             key={plane.id}
-            onClick={(_) => {
+            onClick={() => {
               changePlaneOnClick(plane);
             }}
           >
@@ -57,7 +57,7 @@ export default function SideBar() {
       </div>
 
       <button
-        className="left-0 text-neutral-400 py-4 mt-auto flex items-center space-x-4 bg-inherit hover:bg-neutral-800 w-full px-4"
+        className="left-0 text-muted-foreground py-4 mt-auto flex items-center space-x-4 bg-inherit hover:bg-accent w-full px-4"
         onClick={newPlane}
       >
         <BsPlusLg /> <span>New plane</span>

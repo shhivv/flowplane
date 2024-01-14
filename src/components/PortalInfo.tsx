@@ -15,7 +15,7 @@ export default function PortalInfo() {
     setTime(new Date());
   }, 500);
   return (
-    <div className="flex text-neutral-200 items-center justify-end px-4 h-full text-xs">
+    <div className="flex text-primary-foreground items-center justify-end px-4 h-full text-xs">
       {readableTime(time.getHours())}:{readableTime(time.getMinutes())}
     </div>
   );
