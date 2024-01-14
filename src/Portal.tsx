@@ -58,14 +58,14 @@ export default function Portal() {
           {getDisplayComponent(planeId)}
         </div>
         <div className="bg-primary/10 border-t border-border border-dashed rounded-b-lg h-14 flex items-center justify-between">
-        <Select onValueChange={onChange} >
+        <Select onValueChange={onChange} defaultValue={String(planeId)} >
   <SelectTrigger className="w-40 mx-12 bg-primary/20 text-primary-foreground h-8 border-primary/40 ">
     <SelectValue placeholder="Plane" />
   </SelectTrigger>
   <SelectContent>
     {planes.map(i => <SelectItem value={String(i.id)} key={i.id}>{i.title}</SelectItem>)}
   </SelectContent>
-</Select>;
+</Select>
           <PortalInfo />
         </div>
       </div>

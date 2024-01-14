@@ -81,7 +81,7 @@ export default function NewPlane() {
           </div>
           <button
             type="submit"
-            className="py-2 w-1/2 px-4 rounded-md bg-primary/70 border transition ease-in-out delay-[25ms] hover:scale-105 hover:bg-primary/80 duration-300 text-foreground border-primary/80 shadow-xl"
+            className="py-2 w-1/2 px-4 rounded-md bg-primary/70 border transition ease-in-out hover:scale-105 hover:bg-primary/80 duration-300 text-foreground border-primary/80 shadow-xl"
           >
             Create
           </button>
