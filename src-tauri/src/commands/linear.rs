@@ -24,7 +24,6 @@ pub fn get_linear_data(linear_plane_id: i32, db: State<DBPool>) -> Option<String
 #[tauri::command]
 pub fn update_linear_data(linear_plane_id: i32, new_data: String, db: State<DBPool>) {
     use crate::schema::{linear, linear::dsl::*};
-
     let mut conn = db.clone().get().unwrap();
 
     let new_linear = NewLinear {

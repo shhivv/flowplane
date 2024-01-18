@@ -31,9 +31,6 @@ function App() {
         await invoke("set_last_accessed", { planeId: last });
         setPlaneId(last);
       }
-      await invoke("jsdebug", {
-        msg: "start rendering app",
-      });
     };
     asyncChange();
   }, [fetchPlanes, changeToPlaneView, setPlaneId]);
@@ -73,7 +70,7 @@ function App() {
   };
 
   return (
-    <div className="w-screen h-screen  bg-background flex dark">
+    <div className="w-screen h-screen  bg-background flex dark font-sans">
       <Sidebar />
       {portalOpen ? (
         <ClosePortalAlert />

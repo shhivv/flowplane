@@ -27,6 +27,16 @@ body {
     font-weight: 400;
     src: url(/src/assets/fonts/Kanit-Regular.ttf);
   }
+  
+  @font-face {
+    font-family: "Inter";
+    src: url(/src/assets/fonts/InterVariable.ttf);
+  }
+
+  @font-face {
+    font-family: "InterItalic";
+    src: url(/src/assets/fonts/InterVariable-Italic.ttf);
+  }
 }
 .ce-block__content,
 .ce-toolbar__content {
@@ -92,7 +102,11 @@ body {
 }
 
 .twindprose {
-  @apply prose prose-neutral dark:prose-invert font-sans text-foreground;
+  @apply prose prose-neutral dark:prose-invert font-editor text-foreground;
+}
+
+.twindprose em{
+  @apply font-editorItalic
 }
 
 @layer base {

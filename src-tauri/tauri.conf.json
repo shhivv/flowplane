@@ -52,6 +52,7 @@
         "decorations": false,
         "visible": false,
         "label": "portal",
+        "title" : "Portal",
         "center": true,
         "resizable": false,
         "transparent": true

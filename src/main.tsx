@@ -7,7 +7,7 @@ import Portal from "./Portal";
 
 import { enable } from "tauri-plugin-autostart-api";
 
-enable().then(console.log).catch(console.error);
+enable().then().catch(console.error);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   // Re add strict mode

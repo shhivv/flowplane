@@ -45,6 +45,7 @@ fn main() {
         ))
         .plugin(tauri_plugin_single_instance::init(|app, _, _| {
             let window = app.get_window("main").unwrap();
+            // window.eval("window.location.reload();").unwrap();
             window.show().unwrap();
         }))
         .invoke_handler(tauri::generate_handler![
@@ -105,12 +106,11 @@ fn main() {
                         let app_handle = ah.clone();
                         let window = app_handle.get_window("portal").unwrap();
                         if window.is_visible().unwrap() {
-                            println!("closed");
                             ah.emit_all("portalSwitch", EmptyPayload{}).unwrap();
                             window.hide().unwrap();
                         } else {
-                            println!("opened");
                             ah.emit_all("portalSwitch", EmptyPayload{}).unwrap();
+                            // window.eval("window.location.reload();").unwrap();
                             window.show().unwrap();
                             window.set_focus().unwrap();
                         }

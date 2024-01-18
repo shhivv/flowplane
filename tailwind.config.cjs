@@ -20,6 +20,8 @@ module.exports = {
       fontFamily: {
         sans: ["Poppins", fontFamily.sans],
         heading: ["Kanit", fontFamily.sans],
+        editor: ["Inter", fontFamily.sans],
+        editorItalic: ["InterItalic", fontFamily.sans]
       },
       colors: {
         border: "hsl(var(--border))",

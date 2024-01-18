@@ -24,7 +24,8 @@ export default function Portal() {
     }
 
     cback();
-  });
+  }, [fetchPlanes]);
+
     const getDisplayComponent = (_planeId: number) => {
     const plane = planes.find((obj) => obj.id === _planeId);
 
@@ -51,7 +52,7 @@ export default function Portal() {
   };
 
   return (
-    <div className="w-screen h-screen overflow-hidden relative card flex dark items-center justify-center p-[2px] rounded-lg">
+    <div className="w-screen h-screen overflow-hidden relative card flex dark items-center justify-center p-[2px] rounded-lg font-sans">
       <div className="bg" />
       <div className="relative flex flex-col w-full h-full bg-background rounded-lg">
         <div className="overflow-y-hidden flex-1">

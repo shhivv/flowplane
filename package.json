@@ -10,6 +10,8 @@
     "tauri": "tauri"
   },
   "dependencies": {
+    "@blocknote/core": "^0.11.0",
+    "@blocknote/react": "^0.11.0",
     "@editorjs/checklist": "^1.6.0",
     "@editorjs/code": "^2.9.0",
     "@editorjs/delimiter": "^1.4.0",

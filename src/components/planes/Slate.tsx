@@ -2,7 +2,6 @@ import { type IPlane } from "../../state/plane";
 import { GiBlackHoleBolas } from "react-icons/gi";
 import DeletePlane from "../DeletePlane";
 import "@mdxeditor/editor/style.css";
-
 // importing the editor and the plugin from their full paths
 import { MDXEditor } from "@mdxeditor/editor/MDXEditor";
 import {
@@ -44,8 +43,8 @@ export default function Slate({ plane, floating }: ISlate) {
       const dbData = await invoke("get_slate_data", {
         slatePlaneId: plane.id,
       });
-
-      setData((dbData as string) || "# Get started with Flowplane");
+      console.log(dbData);
+      setData((dbData as string) || "Enter markdown to get started");
       setLoaded(true);
     }
     cback();

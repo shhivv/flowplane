@@ -8,40 +8,46 @@ import { invoke } from "@tauri-apps/api";
 import { createReactEditorJS } from "react-editor-js/dist/react-editor-js.cjs";
 import { EDITOR_JS_TOOLS } from "../../tools";
 
+import { BlockNoteEditor } from "@blocknote/core";
+import { BlockNoteView, useBlockNote } from "@blocknote/react";
+
+import "@blocknote/react/style.css";
 interface ILinear {
   plane: IPlane;
   floating: boolean;
 }
 
-const ReactEditorJS = createReactEditorJS();
-
 export default function Linear({ plane, floating }: ILinear) {
   const [loaded, setLoaded] = useState(false);
-  const [data, setData] = useState<string>();
+  const [data, setData] = useState([]);
 
-  const onChange = () => {
-    return async (api: API) => {
-      const newData = await api.saver.save();
+  const editor: BlockNoteEditor = useBlockNote({
+    initialContent: data
+  }, [data]);
+
+
+  editor.onEditorContentChange(() => {
+    const action = async () => {
+      const newData = editor.topLevelBlocks;
       await invoke("update_linear_data", {
         linearPlaneId: plane.id,
         newData: JSON.stringify(newData),
       });
-
-      setData(JSON.stringify(newData));
     };
-  };
+    action();
+  });
 
   useEffect(() => {
     async function cback() {
       const dbData = await invoke("get_linear_data", {
         linearPlaneId: plane.id,
       });
-
-      setData(dbData as string);
+      setData(JSON.parse(dbData as string || "[]"));
       setLoaded(true);
     }
     cback();
   }, [setLoaded, plane]);
+
 
   return (
     <div className="py-8 px-16 space-y-4 text-foreground font-sans overflow-y-auto w-full h-full">
@@ -56,15 +62,8 @@ export default function Linear({ plane, floating }: ILinear) {
       </div>
       <div className="">
       {loaded && (
-        <ReactEditorJS
-          autofocus
-          onChange={onChange()}
-          placeholder="Type to get started"
-          defaultValue={JSON.parse(data!)}
-          tools={EDITOR_JS_TOOLS}
-          key="/"
-        />
-      )}
+      <BlockNoteView editor={editor}/>)
+    }
 
       </div>
 
