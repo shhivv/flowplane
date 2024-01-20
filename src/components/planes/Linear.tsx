@@ -2,11 +2,7 @@ import { type IPlane } from "../../state/plane";
 import { MdBlurLinear } from "react-icons/md";
 import React, { useEffect, useState } from "react";
 import DeletePlane from "../DeletePlane";
-import { API } from "@editorjs/editorjs";
 import { invoke } from "@tauri-apps/api";
-// @ts-expect-error cjs import
-import { createReactEditorJS } from "react-editor-js/dist/react-editor-js.cjs";
-import { EDITOR_JS_TOOLS } from "../../tools";
 
 import { BlockNoteEditor } from "@blocknote/core";
 import { BlockNoteView, useBlockNote } from "@blocknote/react";
@@ -34,7 +30,9 @@ export default function Linear({ plane, floating }: ILinear) {
         newData: JSON.stringify(newData),
       });
     };
-    action();
+    if(loaded) {
+      action();
+    }
   });
 
   useEffect(() => {
@@ -62,7 +60,7 @@ export default function Linear({ plane, floating }: ILinear) {
       </div>
       <div className="">
       {loaded && (
-      <BlockNoteView editor={editor}/>)
+      <BlockNoteView className="bg-background" editor={editor}/>)
     }
 
       </div>

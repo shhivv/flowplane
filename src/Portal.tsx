@@ -12,11 +12,22 @@ import { IPlane, useLoadedPlanesStore } from "./state/plane";
 import Linear from "./components/planes/Linear";
 import Slate from "./components/planes/Slate";
 import Introduction from "./components/Intro";
+import { listen } from "@tauri-apps/api/event";
+import { appWindow } from '@tauri-apps/api/window';
 
 export default function Portal() {
   const fetchPlanes = useLoadedPlanesStore((lp) => lp.fetch);
   const [planeId, setPlaneId] = useState(Number(localStorage.getItem("portalPlane")) || 0);
   const planes = useLoadedPlanesStore((lp) => lp.planes);
+  const [portalOpen, setPortalOpen] = useState(localStorage.getItem("portalOpen") || false);
+  useEffect(() => {
+    const listener = listen<string>("portalSwitch", () => {
+      setPortalOpen(!portalOpen);
+    });
+    return () => {
+      listener.then(f => f());
+    };
+}, [portalOpen]);
 
   useEffect(() => {
     async function cback() {
@@ -29,7 +40,7 @@ export default function Portal() {
     const getDisplayComponent = (_planeId: number) => {
     const plane = planes.find((obj) => obj.id === _planeId);
 
-    if (plane) {
+    if (plane && portalOpen) {
       if (plane.plane_type === "linear") {
         return (
             <Linear key={plane.id} plane={plane} floating />

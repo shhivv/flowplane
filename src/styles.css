@@ -175,6 +175,7 @@ body {
 
 @layer base {
   * {
+    --bn-colors-editor-background: 0 0% 9%
     @apply border-border;
   }
   body {

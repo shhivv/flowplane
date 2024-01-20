@@ -14,7 +14,7 @@ import ClosePortalAlert from "./components/ClosePortal";
 function App() {
   const fetchPlanes = useLoadedPlanesStore((lp) => lp.fetch);
   const planes = useLoadedPlanesStore((lp) => lp.planes);
-  const [portalOpen, setPortalOpen] = useState(false);
+  const [portalOpen, setPortalOpen] = useState(Boolean(localStorage.getItem("portalOpen")) || false);
 
   const displayedView = useViewStore((v) => v.view);
   const changeToPlaneView = useViewStore((v) => v.setPlane);
@@ -39,6 +39,7 @@ function App() {
       const listener = listen<string>("portalSwitch", () => {
         console.log(!portalOpen);
         setPortalOpen(!portalOpen);
+        localStorage.setItem("portalOpen", !portalOpen ? "true" : "");
       });
       return () => {
         listener.then(f => f());

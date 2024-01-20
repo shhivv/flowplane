@@ -43,7 +43,6 @@ export default function Slate({ plane, floating }: ISlate) {
       const dbData = await invoke("get_slate_data", {
         slatePlaneId: plane.id,
       });
-      console.log(dbData);
       setData((dbData as string) || "Enter markdown to get started");
       setLoaded(true);
     }

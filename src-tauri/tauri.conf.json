@@ -9,7 +9,7 @@
 
   "package": {
     "productName": "flowplane",
-    "version": "0.0.1"
+    "version": "0.1.0"
   },
   "tauri": {
     "allowlist": {
@@ -39,7 +39,16 @@
       "csp": null
     },
     "updater": {
-      "active": false
+      "active": true,
+      "endpoints": [
+        "https://github.com/shhivv/flowplane/releases/download/app-v0.1.0/latest.json"
+      ],
+      "dialog": true,
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDIzQjFGMEYwODEwN0IzQzgKUldUSXN3ZUI4UEN4STZzTHBnUXczVExjTklCNU5EWFJBVTFmTVk1Z3ZNa0laRWRIRGpGa1pHZTUK",
+      "windows": {
+        "installMode": "passive"
+      }
+
     },
     "windows": [
       {
