@@ -32,12 +32,11 @@ fn main() {
     let tray = SystemTray::new().with_menu(tray_menu);
     tauri::Builder::default()
         .manage(establish_connection())
-        .on_window_event(|event| match event.event() {
-            tauri::WindowEvent::CloseRequested { api, .. } => {
+        .on_window_event(|event| {
+            if let tauri::WindowEvent::CloseRequested { api, .. } = event.event() {
                 event.window().hide().unwrap();
                 api.prevent_close();
             }
-            _ => {}
         })
         .plugin(tauri_plugin_autostart::init(
             MacosLauncher::LaunchAgent,
@@ -68,19 +67,18 @@ fn main() {
             } => {
                 app.get_window("main").unwrap().show().unwrap();
             }
-            SystemTrayEvent::MenuItemClick { id, .. } => match id.as_str() {
-                "quit" => {
+            SystemTrayEvent::MenuItemClick { id, .. } => {
+                if id.as_str() == "quit" {
                     std::process::exit(0);
                 }
-                _ => (),
-            },
+            }
 
             _ => {}
         })
         .build(tauri::generate_context!())
         .expect("error while building tauri application")
-        .run(|app_handle, e| match e {
-            RunEvent::Ready => {
+        .run(|app_handle, e| {
+            if let RunEvent::Ready = e {
                 let ah = app_handle.clone();
                 let window = app_handle.get_window("portal").unwrap();
 
@@ -91,12 +89,12 @@ fn main() {
                 apply_blur(&window, Some((255, 255, 255, 255)))
                     .expect("Unsupported platform! 'apply_blur' is only supported on Windows");
 
-                let size = window.current_monitor().unwrap().unwrap().size().clone();
+                let size = *window.current_monitor().unwrap().unwrap().size();
 
                 window
                     .set_size(LogicalSize {
-                        width: size.width * 1 / 2,
-                        height: size.height * 1 / 2,
+                        width: size.width / 2,
+                        height: size.height / 2,
                     })
                     .unwrap();
 
@@ -106,10 +104,10 @@ fn main() {
                         let app_handle = ah.clone();
                         let window = app_handle.get_window("portal").unwrap();
                         if window.is_visible().unwrap() {
-                            ah.emit_all("portalSwitch", EmptyPayload{}).unwrap();
+                            ah.emit_all("portalSwitch", EmptyPayload {}).unwrap();
                             window.hide().unwrap();
                         } else {
-                            ah.emit_all("portalSwitch", EmptyPayload{}).unwrap();
+                            ah.emit_all("portalSwitch", EmptyPayload {}).unwrap();
                             // window.eval("window.location.reload();").unwrap();
                             window.show().unwrap();
                             window.set_focus().unwrap();
@@ -123,12 +121,11 @@ fn main() {
                         let app_handle = ah.clone();
                         let window = app_handle.get_window("portal").unwrap();
                         if window.is_visible().unwrap() {
-                            ah.emit_all("portalSwitch", EmptyPayload{}).unwrap();
+                            ah.emit_all("portalSwitch", EmptyPayload {}).unwrap();
                             window.hide().unwrap();
                         }
                     })
                     .unwrap();
             }
-            _ => (),
         });
 }
