@@ -8,7 +8,7 @@
   },
 
   "package": {
-    "productName": "flowplane",
+    "productName": "Flowplane",
     "version": "0.1.0"
   },
   "tauri": {
@@ -48,7 +48,6 @@
       "windows": {
         "installMode": "passive"
       }
-
     },
     "windows": [
       {
@@ -61,7 +60,7 @@
         "decorations": false,
         "visible": false,
         "label": "portal",
-        "title" : "Portal",
+        "title": "Portal",
         "center": true,
         "resizable": false,
         "transparent": true

@@ -1,13 +1,13 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import { viteCommonjs, esbuildCommonjs } from "@originjs/vite-plugin-commonjs";
-import path from "path";
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import { viteCommonjs, esbuildCommonjs } from '@originjs/vite-plugin-commonjs';
+import path from 'path';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), viteCommonjs()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
+      '@': path.resolve(__dirname, './src'),
     },
   },
   // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`
@@ -20,12 +20,12 @@ export default defineConfig({
   },
   // to make use of `TAURI_DEBUG` and other env variables
   // https://tauri.studio/v1/api/config#buildconfig.beforedevcommand
-  envPrefix: ["VITE_", "TAURI_"],
+  envPrefix: ['VITE_', 'TAURI_'],
   build: {
     // Tauri supports es2021
-    target: process.env.TAURI_PLATFORM == "windows" ? "chrome105" : "safari13",
+    target: process.env.TAURI_PLATFORM == 'windows' ? 'chrome105' : 'safari13',
     // don't minify for debug builds
-    minify: !process.env.TAURI_DEBUG ? "esbuild" : false,
+    minify: !process.env.TAURI_DEBUG ? 'esbuild' : false,
     // produce sourcemaps for debug builds
     sourcemap: !!process.env.TAURI_DEBUG,
   },
@@ -33,9 +33,9 @@ export default defineConfig({
     esbuildOptions: {
       plugins: [
         esbuildCommonjs([
-          "react-editor-js",
-          "@react-editor-js/client",
-          "@react-editor-js/server",
+          'react-editor-js',
+          '@react-editor-js/client',
+          '@react-editor-js/server',
         ]),
       ],
     },

@@ -1,20 +1,20 @@
-import React from "react";
+import React from 'react';
 
 export default function Introduction() {
   return (
-    <div className="w-5/6 py-6 px-16 flex justify-center items-center flex-col space-y-2 grid-design">
+    <div className="grid-design flex w-5/6 flex-col items-center justify-center space-y-2 py-6 px-16">
       <h1 className="font-heading  text-5xl text-foreground">Flowplane</h1>
-      <p className="text-muted-foreground text-lg">
+      <p className="text-lg text-muted-foreground">
         Create a new Plane to get started
       </p>
-      <p className="text-muted-foreground/80 text-sm">
+      <p className="text-sm text-muted-foreground/80">
         Built with Rust & Tauri
       </p>
       <a
         href="https://flowplane.shivs.me"
         target="_blank"
         rel="noreferrer"
-        className="text-muted-foreground/80 text-sm"
+        className="text-sm text-muted-foreground/80"
       >
         flowplane.shivs.me
       </a>
