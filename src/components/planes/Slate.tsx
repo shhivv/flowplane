@@ -10,8 +10,6 @@ import {
   listsPlugin,
   quotePlugin,
   thematicBreakPlugin,
-  linkPlugin,
-  linkDialogPlugin,
   tablePlugin,
 } from '@mdxeditor/editor';
 

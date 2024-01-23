@@ -13,19 +13,20 @@ import Linear from './components/planes/Linear';
 import Slate from './components/planes/Slate';
 import Introduction from './components/Intro';
 import { listen } from '@tauri-apps/api/event';
-import { appWindow } from '@tauri-apps/api/window';
 
 export default function Portal() {
-  const fetchPlanes = useLoadedPlanesStore((lp) => lp.fetch);
+  const { fetch: fetchPlanes, planes } = useLoadedPlanesStore();
   const [planeId, setPlaneId] = useState(
     Number(localStorage.getItem('portalPlane')) || 0
   );
-  const planes = useLoadedPlanesStore((lp) => lp.planes);
+  const [loaded, setLoaded] = useState(false);
   const [portalOpen, setPortalOpen] = useState(
     localStorage.getItem('portalOpen') || false
   );
   useEffect(() => {
     const listener = listen<string>('portalSwitch', () => {
+      // to ensure that component doesn't load because if it does, a db call is triggered which causes a panic
+      setLoaded(false);
       setPortalOpen(!portalOpen);
     });
     return () => {
@@ -36,10 +37,11 @@ export default function Portal() {
   useEffect(() => {
     async function cback() {
       await fetchPlanes();
+      setLoaded(true);
     }
 
     cback();
-  }, [fetchPlanes]);
+  }, [fetchPlanes, portalOpen]);
 
   const getDisplayComponent = (_planeId: number) => {
     const plane = planes.find((obj) => obj.id === _planeId);
@@ -69,7 +71,7 @@ export default function Portal() {
       <div className="fancy" />
       <div className="relative flex h-full w-full flex-col rounded-lg bg-background">
         <div className="flex-1 overflow-y-hidden">
-          {getDisplayComponent(planeId)}
+          {loaded && getDisplayComponent(planeId)}
         </div>
         <div className="flex h-14 items-center justify-between rounded-b-lg border-t border-dashed border-border bg-primary/10">
           <Select onValueChange={onChange} defaultValue={String(planeId)}>

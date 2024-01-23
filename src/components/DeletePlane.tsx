@@ -64,11 +64,11 @@ export default function DeletePlane({ plane }: IDeletePlane) {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel className="text-muted-foreground">
+          <AlertDialogCancel className="text-muted-foreground focus:outline-none">
             Cancel
           </AlertDialogCancel>
-          <AlertDialogAction asChild onClick={onClick}>
-            <Button variant="destructive">Delete</Button>
+          <AlertDialogAction asChild >
+            <Button onClick={onClick} variant="destructive">Delete</Button>
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
