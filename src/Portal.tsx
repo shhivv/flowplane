@@ -70,7 +70,7 @@ export default function Portal() {
     <div className="card dark relative flex h-screen w-screen items-center justify-center overflow-hidden rounded-lg p-[2px] font-sans">
       <div className="fancy" />
       <div className="relative flex h-full w-full flex-col rounded-lg bg-background">
-        <div className="flex-1 overflow-y-hidden">
+        <div className="flex-1 overflow-y-hidden rounded-lg">
           {loaded && getDisplayComponent(planeId)}
         </div>
         <div className="flex h-14 items-center justify-between rounded-b-lg border-t border-dashed border-border bg-primary/10">

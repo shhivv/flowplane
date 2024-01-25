@@ -53,7 +53,8 @@
       {
         "maximized": true,
         "resizable": true,
-        "title": "Flowplane"
+        "title": "Flowplane",
+        "visible": false
       },
       {
         "hiddenTitle": true,

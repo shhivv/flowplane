@@ -29,6 +29,7 @@ module.exports = {
         ring: 'hsl(var(--ring))',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
+        subtle: 'hsl(var(--subtle))',
         editor: 'hsl(var(--editor))',
         primary: {
           DEFAULT: 'hsl(var(--primary))',

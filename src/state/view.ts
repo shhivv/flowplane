@@ -3,6 +3,7 @@ import { create } from 'zustand';
 export enum View {
   Create,
   Plane,
+  Settings
 }
 
 interface ViewState {
@@ -10,6 +11,7 @@ interface ViewState {
   setCreate: () => void;
   setPlane: () => void;
   setIntro: () => void;
+  setSettings: () => void;
 }
 
 export const useViewStore = create<ViewState>((set) => ({
@@ -17,4 +19,5 @@ export const useViewStore = create<ViewState>((set) => ({
   setCreate: () => set({ view: View.Create }),
   setPlane: () => set({ view: View.Plane }),
   setIntro: () => set({ view: undefined }),
+  setSettings: () => set({ view: View.Settings }),
 }));

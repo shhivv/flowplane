@@ -48,7 +48,7 @@ export default function Slate({ plane, floating }: ISlate) {
   }, [setLoaded, plane]);
 
   return (
-    <div className="h-full w-full space-y-4 overflow-y-auto py-8 font-sans text-foreground">
+    <div className="h-full bg-accent w-full space-y-4 overflow-y-auto py-8 font-sans text-foreground">
       <div className="flex justify-between px-16 text-muted-foreground">
         <div className="flex w-full items-center space-x-3">
           <GiBlackHoleBolas />

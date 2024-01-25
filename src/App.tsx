@@ -11,6 +11,7 @@ import Introduction from './components/Intro';
 import { listen } from '@tauri-apps/api/event';
 import ClosePortalAlert from './components/ClosePortal';
 import { Toaster } from './components/ui/toaster';
+import Settings from './Settings';
 
 function App() {
   const fetchPlanes = useLoadedPlanesStore((lp) => lp.fetch);
@@ -55,19 +56,21 @@ function App() {
     if (view === View.Plane && plane) {
       if (plane.plane_type === 'linear') {
         return (
-          <div className="w-4/5">
+          <div className="w-5/6">
             <Linear key={plane.id} plane={plane} floating={false} />;
           </div>
         );
       } else if (plane.plane_type === 'slate') {
         return (
-          <div className="w-4/5">
+          <div className="w-5/6">
             <Slate key={plane.id} plane={plane} floating={false} />;
           </div>
         );
       }
     } else if (view === View.Create) {
       return <NewPlane />;
+    } else if (view === View.Settings) {
+      return <Settings/>;
     } else {
       return <Introduction />;
     }
