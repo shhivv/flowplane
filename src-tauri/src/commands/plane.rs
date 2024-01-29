@@ -23,6 +23,8 @@ pub struct Plane {
 }
 
 impl PlaneType {
+    //TODO: fix this
+    #[allow(clippy::inherent_to_string)]
     pub fn to_string(&self) -> String {
         match self {
             Self::Linear => "linear",
@@ -63,7 +65,7 @@ pub fn get_planes(db: State<DBPool>) -> Vec<Plane> {
 
     queried_planes
         .iter()
-        .map(|i| Plane::from(i))
+        .map(Plane::from)
         .collect::<Vec<_>>()
 }
 
