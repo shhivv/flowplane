@@ -3,7 +3,7 @@ import { create } from 'zustand';
 export enum View {
   Create,
   Plane,
-  Settings
+  Settings,
 }
 
 interface ViewState {

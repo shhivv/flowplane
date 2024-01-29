@@ -39,7 +39,7 @@ export default function NewPlane() {
   };
 
   return (
-    <div className="grid-design flex w-10/12 items-center justify-center text-sm text-muted-foreground bg-accent">
+    <div className="grid-design flex w-10/12 items-center justify-center bg-bgshade text-sm text-muted-foreground">
       <div className=" flex h-1/2 w-2/5 flex-col  items-center justify-center rounded-lg bg-gradient-to-b from-primary/40 to-primary/0 drop-shadow-xl">
         <div className="flex w-3/4 py-3">
           <h1 className="font-heading text-foreground">Create new Plane</h1>
@@ -51,14 +51,14 @@ export default function NewPlane() {
           <input
             type="text"
             placeholder="Title"
-            className="w-full rounded-md border border-border bg-accent py-3 px-4 outline-none focus:border-primary/50"
+            className="w-full rounded-md border border-border bg-bgshade py-3 px-4 outline-none focus:border-primary/50"
             onKeyUp={onTitleChange}
             autoFocus
           ></input>
           <div className="flex w-full space-x-2 py-4">
             <button
               className={twMerge(
-                'flex w-1/2 flex-col items-center justify-center rounded-md border border-border bg-accent py-6 hover:bg-accent',
+                'flex w-1/2 flex-col items-center justify-center rounded-md border border-border bg-bgshade py-6 hover:bg-muted',
                 selectedType === 'linear' && 'border-primary/50 bg-transparent'
               )}
               id="linear"
@@ -69,7 +69,7 @@ export default function NewPlane() {
             </button>
             <button
               className={twMerge(
-                'flex w-1/2 flex-col items-center justify-center rounded-md border border-border bg-accent py-6 hover:bg-accent',
+                'flex w-1/2 flex-col items-center justify-center rounded-md border border-border bg-bgshade py-6 hover:bg-muted',
                 selectedType === 'slate' && 'border-primary/50 bg-transparent'
               )}
               id="slate"

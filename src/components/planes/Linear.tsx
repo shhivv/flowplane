@@ -52,7 +52,7 @@ export default function Linear({ plane, floating }: ILinear) {
   }, [setLoaded, plane]);
 
   return (
-    <div className="h-full bg-accent w-full space-y-4 overflow-y-auto py-8 font-sans text-foreground">
+    <div className="h-full w-full space-y-4 overflow-y-auto bg-bgshade py-8 font-sans text-foreground">
       <div className="flex justify-between px-16 text-muted-foreground">
         <div className="flex w-full items-center space-x-3">
           <MdBlurLinear />
@@ -63,7 +63,7 @@ export default function Linear({ plane, floating }: ILinear) {
         {!floating && <DeletePlane plane={plane!} />}
       </div>
       <div className="px-7">
-        {loaded && <BlockNoteView className="bg-accent" editor={editor} />}
+        {loaded && <BlockNoteView className="bg-bgshade" editor={editor} />}
       </div>
     </div>
   );

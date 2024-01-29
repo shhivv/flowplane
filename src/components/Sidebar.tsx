@@ -42,10 +42,14 @@ export default function SideBar() {
     <div className="flex h-screen w-1/6 flex-col border-r border-r-border bg-[#111] text-sm">
       <div className="flex flex-col space-y-4 py-6 px-5 font-heading text-lg font-bold text-foreground">
         <div className="flex items-center justify-between">
-        <div className="hidden lg:flex">Flowplane</div>
-        <Button variant="ghost" onClick={settings} className="text-muted-foreground text-xl">
-          <CiSettings />
-        </Button>
+          <div className="hidden lg:flex">Flowplane</div>
+          <Button
+            variant="ghost"
+            onClick={settings}
+            className="text-xl text-muted-foreground"
+          >
+            <CiSettings />
+          </Button>
         </div>
         <hr className="w-1/5 border-muted-foreground/30"></hr>
       </div>
@@ -71,27 +75,33 @@ export default function SideBar() {
           </button>
         ))}
       </div>
-      <div className="w-full flex flex-col justify-center p-3 space-y-2">
-        <div className="w-full border-dashed border-primary/60 border rounded-md text-sm text-muted-foreground p-4 space-y-2 tracking-wide">
+      <div className="flex w-full flex-col justify-center space-y-2 p-3">
+        <div className="w-full space-y-2 rounded-md border border-dashed border-primary/60 p-4 text-sm tracking-wide text-muted-foreground">
           <div>
-          Flowplane is currently in beta. If you have any feedback or wish to report a bug, please join our Discord community.
+            Flowplane is currently in beta. If you have any feedback or wish to
+            report a bug, please join our Discord community.
           </div>
 
-              <Button variant="secondary" size="sm" className="space-x-2" asChild>
-              <a
-        href="https://discord.gg/sZEaH6gB2Q"
-        target="_blank"
-        rel="noreferrer"
-      >
-           <FaDiscord/>
-                <span>Join our Discord</span>
-      </a>
-      </Button>
+          <Button variant="secondary" size="sm" className="space-x-2" asChild>
+            <a
+              href="https://discord.gg/sZEaH6gB2Q"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <FaDiscord />
+              <span>Join our Discord</span>
+            </a>
+          </Button>
         </div>
-      <Button className="w-full space-x-2" onClick={newPlane} size="lg" variant="secondary">
-      <BsPlusLg/>
-        <span>New Plane</span></Button>
-
+        <Button
+          className="w-full space-x-2"
+          onClick={newPlane}
+          size="lg"
+          variant="secondary"
+        >
+          <BsPlusLg />
+          <span>New Plane</span>
+        </Button>
       </div>
     </div>
   );

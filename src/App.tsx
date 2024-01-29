@@ -10,7 +10,6 @@ import Slate from './components/planes/Slate';
 import Introduction from './components/Intro';
 import { listen } from '@tauri-apps/api/event';
 import ClosePortalAlert from './components/ClosePortal';
-import { Toaster } from './components/ui/toaster';
 import Settings from './Settings';
 
 function App() {
@@ -70,7 +69,7 @@ function App() {
     } else if (view === View.Create) {
       return <NewPlane />;
     } else if (view === View.Settings) {
-      return <Settings/>;
+      return <Settings />;
     } else {
       return <Introduction />;
     }
