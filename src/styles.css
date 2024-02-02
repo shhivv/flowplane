@@ -145,7 +145,7 @@ body {
     --popover-foreground: 60 9.1% 97.8%;
     --primary: 20.5 90.2% 48.2%;
     --primary-foreground: 60 9.1% 97.8%;
-    --secondary: 12 6.5% 15.1%;
+    --secondary: 12 6.5% 11.1%;
     --secondary-foreground: 60 9.1% 97.8%;
     --muted: 12 6.5% 15.1%;
     --muted-foreground: 24 5.4% 63.9%;
@@ -153,19 +153,44 @@ body {
     --accent-foreground: 60 9.1% 97.8%;
     --destructive: 0 74% 42%;
     --destructive-foreground: 60 9.1% 97.8%;
-    --border: 0 0% 25%;
+    --border: 0 0% 20%;
     --input: 12 6.5% 30.1%;
     --ring: 20.5 90.2% 48.2%;
-    --editor: 0 0% 81%;
+    --editor: 0 0% 71%;
     --subtle: 7 5% 45%;
   }
 }
 
 @layer base {
   * {
-    --bn-colors-editor-background: 0 0% 9% @apply border-border;
+    --bn-colors-editor-background: 0 0% 9%;
+    --bn-colors-editor-text: hsl(0 0% 71%);
   }
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.titlebar {
+  height: 30px;
+  @apply bg-transparent;
+  user-select: none;
+  display: flex;
+  justify-content: flex-end;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+.titlebar-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  @apply text-muted-foreground hover:bg-accent;
+}
+
+#titlebar-close {
+  @apply hover:bg-destructive;
 }

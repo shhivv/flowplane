@@ -28,6 +28,11 @@ struct Payload {
 }
 
 fn main() {
+    let _guard = sentry::init(("https://fdca118f39b5ea0bbd47e967a021dcec@o4506677404762112.ingest.sentry.io/4506677439692800", sentry::ClientOptions {
+        release: sentry::release_name!(),
+        ..Default::default()
+      }));
+
     let quit = CustomMenuItem::new("quit".to_string(), "Quit");
     let tray_menu = SystemTrayMenu::new().add_item(quit);
     let settings = get_settings();
@@ -93,9 +98,11 @@ fn main() {
             if let RunEvent::Ready = e {
                 let ah = app_handle.clone();
                 let portal = app_handle.get_window("portal").unwrap();
+                let main = app_handle.get_window("main").unwrap();
 
                 #[cfg(any(windows, target_os = "macos"))]
                 set_shadow(&portal, true).unwrap();
+                set_shadow(&main, true).unwrap();
 
                 #[cfg(target_os = "windows")]
                 apply_blur(&portal, Some((255, 255, 255, 255)))
@@ -115,7 +122,7 @@ fn main() {
                     .register(
                         &settings
                             .get_string("portalOpen")
-                            .unwrap_or("CmdorCtrl+l".to_string()),
+                            .unwrap_or("Alt+W".to_string()),
                         move || {
                             let app_handle = ah.clone();
                             let window = app_handle.get_window("portal").unwrap();
@@ -124,7 +131,6 @@ fn main() {
                                 window.hide().unwrap();
                             } else {
                                 ah.emit_all("portalSwitch", EmptyPayload {}).unwrap();
-                                // window.eval("window.location.reload();").unwrap();
                                 window.show().unwrap();
                                 window.set_focus().unwrap();
                             }

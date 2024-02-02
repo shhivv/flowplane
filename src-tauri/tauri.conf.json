@@ -18,6 +18,17 @@
         "all": false,
         "open": true
       },
+      "window": {
+        "all": false,
+        "close": true,
+        "hide": true,
+        "show": true,
+        "maximize": true,
+        "minimize": true,
+        "unmaximize": true,
+        "unminimize": true,
+        "startDragging": true
+      },
       "globalShortcut": {
         "all": true
       }
@@ -55,7 +66,8 @@
         "resizable": true,
         "title": "Flowplane",
         "label": "main",
-        "visible": false
+        "visible": false,
+        "decorations": false
       },
       {
         "hiddenTitle": true,

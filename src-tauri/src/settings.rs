@@ -4,7 +4,7 @@ use config::Config;
 use directories::BaseDirs;
 
 const BASE: &str = r#"{
-  "portalOpen": "CmdorCtrl+q"
+  "portalOpen": "Alt+W"
 }"#;
 
 pub fn get_settings() -> Config {

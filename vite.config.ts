@@ -1,10 +1,18 @@
+import { sentryVitePlugin } from '@sentry/vite-plugin';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { viteCommonjs, esbuildCommonjs } from '@originjs/vite-plugin-commonjs';
 import path from 'path';
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), viteCommonjs()],
+  plugins: [
+    react(),
+    viteCommonjs(),
+    sentryVitePlugin({
+      org: 'shiv-gm',
+      project: 'javascript-react',
+    }),
+  ],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -27,7 +35,7 @@ export default defineConfig({
     // don't minify for debug builds
     minify: !process.env.TAURI_DEBUG ? 'esbuild' : false,
     // produce sourcemaps for debug builds
-    sourcemap: !!process.env.TAURI_DEBUG,
+    sourcemap: true,
   },
   optimizeDeps: {
     esbuildOptions: {

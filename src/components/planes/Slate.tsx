@@ -52,7 +52,7 @@ export default function Slate({ plane, floating }: ISlate) {
       <div className="flex justify-between px-16 text-muted-foreground">
         <div className="flex w-full items-center space-x-3">
           <GiBlackHoleBolas />
-          <h3 className="w-4/5 overflow-hidden overflow-ellipsis whitespace-nowrap">
+          <h3 className="w-16 overflow-hidden overflow-ellipsis whitespace-nowrap lg:w-64">
             {plane?.title}
           </h3>
         </div>

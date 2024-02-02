@@ -39,10 +39,10 @@ export default function SideBar() {
   };
 
   return (
-    <div className="flex h-screen w-1/6 flex-col border-r border-r-border bg-[#111] text-sm">
+    <div className="flex h-screen w-1/6 min-w-min flex-col border-r border-r-border bg-[#111] text-sm">
       <div className="flex flex-col space-y-4 py-6 px-5 font-heading text-lg font-bold text-foreground">
         <div className="flex items-center justify-between">
-          <div className="hidden lg:flex">Flowplane</div>
+          <div>Flowplane</div>
           <Button
             variant="ghost"
             onClick={settings}
@@ -53,10 +53,10 @@ export default function SideBar() {
         </div>
         <hr className="w-1/5 border-muted-foreground/30"></hr>
       </div>
-      <div className="h-full overflow-y-auto px-3 text-muted-foreground">
+      <div className="h-full w-64 overflow-y-auto px-3 text-muted-foreground">
         {planes.map((plane) => (
           <button
-            className="flex w-full items-center  space-x-3 rounded-md px-2 py-2 hover:bg-accent"
+            className="flex w-full items-center space-x-3 rounded-md px-2 py-2 hover:bg-accent"
             key={plane.id}
             onClick={() => {
               changePlaneOnClick(plane);
@@ -68,7 +68,7 @@ export default function SideBar() {
               <GiBlackHoleBolas />
             )}{' '}
             <span className="flex w-4/5">
-              <h1 className="overflow-hidden overflow-ellipsis whitespace-nowrap">
+              <h1 className="overflow-hidden  overflow-ellipsis whitespace-nowrap">
                 {plane.title}
               </h1>
             </span>
@@ -76,7 +76,7 @@ export default function SideBar() {
         ))}
       </div>
       <div className="flex w-full flex-col justify-center space-y-2 p-3">
-        <div className="w-full space-y-2 rounded-md border border-dashed border-primary/60 p-4 text-sm tracking-wide text-muted-foreground">
+        <div className="hidden w-full space-y-2 rounded-md border border-dashed border-primary/60 p-4 text-sm tracking-wide text-muted-foreground xl:block">
           <div>
             Flowplane is currently in beta. If you have any feedback or wish to
             report a bug, please join our Discord community.
@@ -94,13 +94,12 @@ export default function SideBar() {
           </Button>
         </div>
         <Button
-          className="w-full space-x-2"
+          className="w-full space-x-2 "
           onClick={newPlane}
-          size="lg"
           variant="secondary"
         >
           <BsPlusLg />
-          <span>New Plane</span>
+          <span className="lg:inline">New Plane</span>
         </Button>
       </div>
     </div>

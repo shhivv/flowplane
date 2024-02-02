@@ -56,14 +56,14 @@ export default function Linear({ plane, floating }: ILinear) {
       <div className="flex justify-between px-16 text-muted-foreground">
         <div className="flex w-full items-center space-x-3">
           <MdBlurLinear />
-          <h3 className="w-4/5 overflow-hidden overflow-ellipsis whitespace-nowrap">
+          <h3 className="w-16 overflow-hidden overflow-ellipsis whitespace-nowrap lg:w-64">
             {plane?.title}
           </h3>
         </div>
         {!floating && <DeletePlane plane={plane!} />}
       </div>
       <div className="px-7">
-        {loaded && <BlockNoteView className="bg-bgshade" editor={editor} />}
+        {loaded && <BlockNoteView className="bg-bgshade " editor={editor} />}
       </div>
     </div>
   );

@@ -12,6 +12,18 @@ import { listen } from '@tauri-apps/api/event';
 import ClosePortalAlert from './components/ClosePortal';
 import Settings from './Settings';
 
+import { appWindow } from '@tauri-apps/api/window';
+
+document!
+  .getElementById('titlebar-minimize')!
+  .addEventListener('click', () => appWindow.minimize());
+document!
+  .getElementById('titlebar-maximize')!
+  .addEventListener('click', () => appWindow.toggleMaximize());
+document!
+  .getElementById('titlebar-close')!
+  .addEventListener('click', () => appWindow.close());
+
 function App() {
   const fetchPlanes = useLoadedPlanesStore((lp) => lp.fetch);
   const planes = useLoadedPlanesStore((lp) => lp.planes);

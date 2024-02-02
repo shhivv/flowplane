@@ -63,10 +63,7 @@ pub fn get_planes(db: State<DBPool>) -> Vec<Plane> {
 
     let queried_planes = planes.load(&mut conn).unwrap();
 
-    queried_planes
-        .iter()
-        .map(Plane::from)
-        .collect::<Vec<_>>()
+    queried_planes.iter().map(Plane::from).collect::<Vec<_>>()
 }
 
 #[tauri::command]
