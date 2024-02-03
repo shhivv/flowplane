@@ -1,5 +1,7 @@
 import { type IPlane } from '../../state/plane';
 import { GiBlackHoleBolas } from 'react-icons/gi';
+import { CiExport } from 'react-icons/ci';
+import { BsThreeDots } from 'react-icons/bs';
 import DeletePlane from '../DeletePlane';
 import '@mdxeditor/editor/style.css';
 // importing the editor and the plugin from their full paths
@@ -15,6 +17,16 @@ import {
 
 import { invoke } from '@tauri-apps/api';
 import { useEffect, useState } from 'react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { Button } from '../ui/button';
+import PlaneOptions from '../PlaneOptions';
 
 interface ISlate {
   plane: IPlane;
@@ -24,6 +36,7 @@ interface ISlate {
 export default function Slate({ plane, floating }: ISlate) {
   const [loaded, setLoaded] = useState(false);
   const [data, setData] = useState<string>();
+
 
   const onChange = () => {
     return async (newData: string) => {
@@ -56,7 +69,17 @@ export default function Slate({ plane, floating }: ISlate) {
             {plane?.title}
           </h3>
         </div>
-        {!floating && <DeletePlane plane={plane!} />}
+        {/* I hate myself for writing this */}
+        {!floating && (
+          <PlaneOptions
+            plane={plane}
+            data={
+              new Promise((r) => {
+                r(data!);
+              })
+            }
+          />
+        )}
       </div>
       <div className="px-20">
         {loaded && (

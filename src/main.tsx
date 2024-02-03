@@ -13,11 +13,7 @@ import * as Sentry from '@sentry/react';
 
 Sentry.init({
   dsn: 'https://9a684ca4a62dd4dfcf35b89a93c9d831@o4506677404762112.ingest.sentry.io/4506677407776768',
-  integrations: [
-    new Sentry.BrowserTracing({
-    }),
-    new Sentry.Replay({}),
-  ],
+  integrations: [new Sentry.BrowserTracing({}), new Sentry.Replay({})],
   tracesSampleRate: 1.0, //  Capture 100% of the transactions
   // Session Replay
   replaysSessionSampleRate: 0.1, // This sets the sample rate at 10%. You may want to change it to 100% while in development and then sample at a lower rate in production.
@@ -35,6 +31,7 @@ function AppRoot() {
   );
 }
 
+document.addEventListener('contextmenu', (event) => event.preventDefault());
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   appWindow.label === 'main' ? <AppRoot /> : <Portal />
 );

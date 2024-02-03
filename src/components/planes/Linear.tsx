@@ -8,6 +8,7 @@ import { BlockNoteEditor } from '@blocknote/core';
 import { BlockNoteView, useBlockNote } from '@blocknote/react';
 
 import '@blocknote/react/style.css';
+import PlaneOptions from '../PlaneOptions';
 interface ILinear {
   plane: IPlane;
   floating: boolean;
@@ -60,10 +61,15 @@ export default function Linear({ plane, floating }: ILinear) {
             {plane?.title}
           </h3>
         </div>
-        {!floating && <DeletePlane plane={plane!} />}
+        {!floating && (
+          <PlaneOptions
+            plane={plane}
+            data={editor.blocksToMarkdownLossy(data)}
+          />
+        )}
       </div>
       <div className="px-7">
-        {loaded && <BlockNoteView className="bg-bgshade " editor={editor} />}
+        {loaded && <BlockNoteView spellCheck="false" className="bg-bgshade" editor={editor} />}
       </div>
     </div>
   );

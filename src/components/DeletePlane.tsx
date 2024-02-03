@@ -49,9 +49,12 @@ export default function DeletePlane({ plane }: IDeletePlane) {
   };
   return (
     <AlertDialog>
-      <AlertDialogTrigger asChild>
-        <Button className="hover:text-red-500" variant="ghost">
-          <BsTrashFill />
+      <AlertDialogTrigger asChild className="p-0">
+        <Button
+          className="w-full justify-start space-x-2 p-2 hover:bg-red-400/20 hover:text-red-500"
+          variant="ghost"
+        >
+          <BsTrashFill /> <span>Delete</span>
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent className="dark border-border font-sans outline-none">
