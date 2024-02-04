@@ -15,8 +15,6 @@ use tauri_plugin_autostart::MacosLauncher;
 
 use tauri::SystemTray;
 use window_shadows::set_shadow;
-use window_vibrancy::apply_blur;
-
 // the payload type must implement `Serialize` and `Clone`.
 #[derive(Clone, serde::Serialize)]
 struct EmptyPayload {}
@@ -103,10 +101,6 @@ fn main() {
                 #[cfg(any(windows, target_os = "macos"))]
                 set_shadow(&portal, true).unwrap();
                 set_shadow(&main, true).unwrap();
-
-                #[cfg(target_os = "windows")]
-                apply_blur(&portal, Some((255, 255, 255, 255)))
-                    .expect("Unsupported platform! 'apply_blur' is only supported on Windows");
 
                 let size = *portal.current_monitor().unwrap().unwrap().size();
 

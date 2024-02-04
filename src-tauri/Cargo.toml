@@ -24,7 +24,6 @@ anyhow = "1.0.69"
 tauri-plugin-autostart = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "dev" }
 tauri-plugin-single-instance = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
 window-shadows = "0.2.1"
-window-vibrancy = "0.4.2"
 directories = "5.0.1"
 config = "0.13.4"
 sentry = "0.32.2"
