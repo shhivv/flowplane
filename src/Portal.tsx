@@ -75,7 +75,7 @@ export default function Portal() {
         </div>
         <div className="flex h-14 items-center justify-between rounded-b-lg border-t border-dashed border-border bg-primary/10">
           <Select onValueChange={onChange} defaultValue={String(planeId)}>
-            <SelectTrigger className="mx-12 h-8 w-40 border-primary/40 bg-primary/20 text-primary-foreground ">
+            <SelectTrigger className="mx-12 h-8 w-40 overflow-hidden  overflow-ellipsis whitespace-nowrap border-primary/40 bg-primary/20 text-primary-foreground ">
               <SelectValue placeholder="Plane" />
             </SelectTrigger>
             <SelectContent className="dark border-border font-sans">

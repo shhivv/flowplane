@@ -26,6 +26,8 @@ struct Payload {
 }
 
 fn main() {
+
+    #[cfg(not(debug_assertions))]
     let _guard = sentry::init(("https://fdca118f39b5ea0bbd47e967a021dcec@o4506677404762112.ingest.sentry.io/4506677439692800", sentry::ClientOptions {
         release: sentry::release_name!(),
         ..Default::default()

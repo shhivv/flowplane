@@ -1,8 +1,5 @@
 import { type IPlane } from '../../state/plane';
 import { GiBlackHoleBolas } from 'react-icons/gi';
-import { CiExport } from 'react-icons/ci';
-import { BsThreeDots } from 'react-icons/bs';
-import DeletePlane from '../DeletePlane';
 import '@mdxeditor/editor/style.css';
 // importing the editor and the plugin from their full paths
 import { MDXEditor } from '@mdxeditor/editor/MDXEditor';
@@ -17,15 +14,6 @@ import {
 
 import { invoke } from '@tauri-apps/api';
 import { useEffect, useState } from 'react';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Button } from '../ui/button';
 import PlaneOptions from '../PlaneOptions';
 
 interface ISlate {
