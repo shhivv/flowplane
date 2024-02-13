@@ -10,7 +10,7 @@ export default defineConfig({
     viteCommonjs(),
     sentryVitePlugin({
       org: 'shiv-gm',
-      project: 'javascript-react',
+      project: 'flowplane-frontend',
     }),
   ],
   resolve: {
