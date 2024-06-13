@@ -1,4 +1,4 @@
-import { MdBlurLinear } from 'react-icons/md';
+import { MdBlurLinear, MdOutlineDraw } from 'react-icons/md';
 import { GiBlackHoleBolas } from 'react-icons/gi';
 import { twMerge } from 'tailwind-merge';
 
@@ -32,6 +32,7 @@ export default function NewPlane() {
       title: title || 'Untitled',
       plane_type: convertEnum(selectedType),
     };
+    console.log(newPlane);
 
     const addedPlane = await addLoadedPlane(newPlane);
     changeToPlaneView();
@@ -77,6 +78,18 @@ export default function NewPlane() {
               type="button"
             >
               <GiBlackHoleBolas className="mb-4" /> Slate
+            </button>
+            <button
+              className={twMerge(
+                'flex w-1/2 flex-col items-center justify-center rounded-md border border-border bg-bgshade py-6 hover:bg-muted',
+                selectedType === 'whiteboard' &&
+                  'border-primary/50 bg-transparent'
+              )}
+              id="whiteboard"
+              onClick={onSelect}
+              type="button"
+            >
+              <MdOutlineDraw className="mb-4" /> Whiteboard
             </button>
           </div>
           <button

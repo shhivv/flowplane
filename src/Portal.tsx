@@ -8,11 +8,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { IPlane, useLoadedPlanesStore } from './state/plane';
+import { useLoadedPlanesStore } from './state/plane';
 import Linear from './components/planes/Linear';
 import Slate from './components/planes/Slate';
 import Introduction from './components/Intro';
 import { listen } from '@tauri-apps/api/event';
+import Whiteboard from './components/planes/Whiteboard';
 
 export default function Portal() {
   const { fetch: fetchPlanes, planes } = useLoadedPlanesStore();
@@ -51,6 +52,8 @@ export default function Portal() {
         return <Linear key={plane.id} plane={plane} floating />;
       } else if (plane.plane_type === 'slate') {
         return <Slate key={plane.id} plane={plane} floating />;
+      } else if (plane.plane_type === 'whiteboard') {
+        return <Whiteboard key={plane.id} plane={plane} floating />;
       }
     } else {
       return (

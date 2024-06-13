@@ -26,7 +26,6 @@ struct Payload {
 }
 
 fn main() {
-
     #[cfg(not(debug_assertions))]
     let _guard = sentry::init(("https://fdca118f39b5ea0bbd47e967a021dcec@o4506677404762112.ingest.sentry.io/4506677439692800", sentry::ClientOptions {
         release: sentry::release_name!(),
@@ -73,7 +72,9 @@ fn main() {
             commands::slate::get_slate_data,
             commands::slate::update_slate_data,
             commands::settings::get_config,
-            commands::settings::set_key
+            commands::settings::set_key,
+            commands::whiteboard::get_whiteboard_data,
+            commands::whiteboard::update_whiteboard_data
         ])
         .system_tray(tray)
         .on_system_tray_event(|app, event| match event {

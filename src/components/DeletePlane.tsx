@@ -7,7 +7,6 @@ import {
 import { useViewStore } from '../state/view';
 import { invoke } from '@tauri-apps/api';
 import { Button } from '@/components/ui/button';
-import { TrashIcon } from '@radix-ui/react-icons';
 
 import {
   AlertDialog,
@@ -57,7 +56,7 @@ export default function DeletePlane({ plane }: IDeletePlane) {
           <BsTrashFill /> <span>Delete</span>
         </Button>
       </AlertDialogTrigger>
-      <AlertDialogContent className="dark border-border font-sans outline-none">
+      <AlertDialogContent className="dark z-[1000] border-border font-sans outline-none">
         <AlertDialogHeader>
           <AlertDialogTitle className="text-foreground">
             Delete Plane?

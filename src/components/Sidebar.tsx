@@ -1,7 +1,7 @@
 import { BsPlusLg } from 'react-icons/bs';
 import { FaDiscord } from 'react-icons/fa';
 import { CiSettings } from 'react-icons/ci';
-import { MdBlurLinear } from 'react-icons/md';
+import { MdBlurLinear, MdOutlineDraw } from 'react-icons/md';
 import { GiBlackHoleBolas } from 'react-icons/gi';
 
 import {
@@ -12,6 +12,7 @@ import {
 import { useViewStore } from '../state/view';
 import { invoke } from '@tauri-apps/api';
 import { Button } from '@/components/ui/button';
+import { CreateFromWebpage } from './CreateFromWebpage';
 
 export default function SideBar() {
   const planes = useLoadedPlanesStore((l) => l.planes).sort(
@@ -39,7 +40,7 @@ export default function SideBar() {
   };
 
   return (
-    <div className="flex h-screen w-1/6 min-w-min flex-col border-r border-r-border bg-[#111] text-sm">
+    <div className="flex h-screen w-1/6 min-w-min flex-col border-r border-r-border text-sm">
       <div className="flex flex-col space-y-4 py-6 px-5 font-heading text-lg font-bold text-foreground">
         <div className="flex items-center justify-between">
           <div>Flowplane</div>
@@ -64,8 +65,10 @@ export default function SideBar() {
           >
             {plane.plane_type === 'linear' ? (
               <MdBlurLinear />
-            ) : (
+            ) : plane.plane_type === 'slate' ? (
               <GiBlackHoleBolas />
+            ) : (
+              <MdOutlineDraw />
             )}{' '}
             <span className="flex w-4/5">
               <h1 className="overflow-hidden  overflow-ellipsis whitespace-nowrap">
@@ -75,6 +78,7 @@ export default function SideBar() {
           </button>
         ))}
       </div>
+      <CreateFromWebpage />
       <div className="flex w-full flex-col justify-center space-y-2 p-3">
         <div className="hidden w-full space-y-2 rounded-md border border-dashed border-primary/60 p-4 text-sm tracking-wide text-muted-foreground xl:block">
           <div>

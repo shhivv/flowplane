@@ -11,6 +11,8 @@ pub enum PlaneType {
     Linear,
     #[serde(rename = "slate")]
     Slate,
+    #[serde(rename = "whiteboard")]
+    Whiteboard,
 }
 
 #[derive(Serialize, Deserialize)]
@@ -29,6 +31,7 @@ impl PlaneType {
         match self {
             Self::Linear => "linear",
             Self::Slate => "slate",
+            Self::Whiteboard => "whiteboard",
         }
         .to_string()
     }
@@ -38,7 +41,8 @@ impl From<String> for PlaneType {
     fn from(name: String) -> Self {
         match name.as_str() {
             "linear" => Self::Linear,
-            _ => Self::Slate,
+            "slate" => Self::Slate,
+            _ => Self::Whiteboard,
         }
     }
 }

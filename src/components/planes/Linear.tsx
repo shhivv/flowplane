@@ -1,7 +1,6 @@
 import { type IPlane } from '../../state/plane';
 import { MdBlurLinear } from 'react-icons/md';
 import React, { useEffect, useState } from 'react';
-import DeletePlane from '../DeletePlane';
 import { invoke } from '@tauri-apps/api';
 
 import { BlockNoteEditor } from '@blocknote/core';
@@ -9,6 +8,7 @@ import { BlockNoteView, useBlockNote } from '@blocknote/react';
 
 import '@blocknote/react/style.css';
 import PlaneOptions from '../PlaneOptions';
+
 interface ILinear {
   plane: IPlane;
   floating: boolean;
@@ -17,6 +17,7 @@ interface ILinear {
 export default function Linear({ plane, floating }: ILinear) {
   const [loaded, setLoaded] = useState(false);
   const [data, setData] = useState([]);
+  const [highlights, setHighlights] = useState(false);
 
   const editor: BlockNoteEditor = useBlockNote(
     {
@@ -65,11 +66,18 @@ export default function Linear({ plane, floating }: ILinear) {
           <PlaneOptions
             plane={plane}
             data={editor.blocksToMarkdownLossy(data)}
+            toggleHighlight={() => setHighlights(!highlights)}
           />
         )}
       </div>
       <div className="px-7">
-        {loaded && <BlockNoteView spellCheck="false" className="bg-bgshade" editor={editor} />}
+        {loaded && (
+          <BlockNoteView
+            spellCheck="false"
+            className={`bg-bgshade ${highlights ? 'onlyHighlights' : ''}`}
+            editor={editor}
+          />
+        )}
       </div>
     </div>
   );

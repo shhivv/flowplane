@@ -13,6 +13,7 @@ import ClosePortalAlert from './components/ClosePortal';
 import Settings from './Settings';
 
 import { appWindow } from '@tauri-apps/api/window';
+import Whiteboard from './components/planes/Whiteboard';
 
 document!
   .getElementById('titlebar-minimize')!
@@ -77,6 +78,12 @@ function App() {
             <Slate key={plane.id} plane={plane} floating={false} />;
           </div>
         );
+      } else if (plane.plane_type === 'whiteboard') {
+        return (
+          <div className="w-5/6">
+            <Whiteboard key={plane.id} plane={plane} floating={false} />;
+          </div>
+        );
       }
     } else if (view === View.Create) {
       return <NewPlane />;
@@ -88,7 +95,7 @@ function App() {
   };
 
   return (
-    <div className="flex h-screen  w-screen bg-background">
+    <div className="flex h-screen w-screen bg-background">
       <Sidebar />
       {portalOpen ? (
         <ClosePortalAlert />

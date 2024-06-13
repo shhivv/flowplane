@@ -10,6 +10,8 @@ import {
   quotePlugin,
   thematicBreakPlugin,
   tablePlugin,
+  linkPlugin,
+  imagePlugin
 } from '@mdxeditor/editor';
 
 import { invoke } from '@tauri-apps/api';
@@ -24,7 +26,6 @@ interface ISlate {
 export default function Slate({ plane, floating }: ISlate) {
   const [loaded, setLoaded] = useState(false);
   const [data, setData] = useState<string>();
-
 
   const onChange = () => {
     return async (newData: string) => {
@@ -83,6 +84,8 @@ export default function Slate({ plane, floating }: ISlate) {
               quotePlugin(),
               thematicBreakPlugin(),
               tablePlugin(),
+              linkPlugin(),
+              imagePlugin()
             ]}
             onChange={onChange()}
           />

@@ -1,4 +1,4 @@
-use crate::schema::{linear, planes, slate};
+use crate::schema::{linear, planes, slate, whiteboard};
 use diesel::prelude::*;
 
 #[derive(Queryable)]
@@ -46,4 +46,21 @@ pub struct SlateModel {
 pub struct NewSlate {
     pub plane_id: i32,
     pub data: String,
+}
+
+#[derive(Queryable)]
+#[diesel(table_name = whiteboard)]
+pub struct WhiteboardModel {
+    pub id: i32,
+    pub plane_id: i32,
+    pub document_state: String,
+    pub session_state: String,
+}
+
+#[derive(Insertable)]
+#[diesel(table_name = whiteboard)]
+pub struct NewWhiteboard {
+    pub plane_id: i32,
+    pub document_state: String,
+    pub session_state: String,
 }

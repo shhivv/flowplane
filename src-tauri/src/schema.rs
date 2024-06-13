@@ -26,7 +26,17 @@ diesel::table! {
     }
 }
 
+diesel::table! {
+    whiteboard (id) {
+        id -> Integer,
+        plane_id -> Integer,
+        document_state -> Text,
+        session_state -> Text,
+    }
+}
+
 diesel::joinable!(linear -> planes (plane_id));
 diesel::joinable!(slate -> planes (plane_id));
+diesel::joinable!(whiteboard -> planes (plane_id));
 
-diesel::allow_tables_to_appear_in_same_query!(linear, planes, slate,);
+diesel::allow_tables_to_appear_in_same_query!(linear, planes, slate, whiteboard,);

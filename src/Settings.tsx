@@ -8,12 +8,10 @@ import { tauri } from '@tauri-apps/api';
 export default function Settings() {
   const { toast } = useToast();
   const [loaded, setLoaded] = useState(false);
-  const [config, setConfig] = useState();
   const [portalOpenShortcut, setPortalShortcut] = useState('');
   useEffect(() => {
     (async () => {
       const dbconfig = JSON.parse(await tauri.invoke('get_config'));
-      setConfig(dbconfig);
       setPortalShortcut(dbconfig.portalOpen || 'CmdorCtrl+q');
       setLoaded(true);
     })();

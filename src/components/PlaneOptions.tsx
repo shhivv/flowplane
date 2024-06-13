@@ -9,21 +9,30 @@ import { BsThreeDots } from 'react-icons/bs';
 import { CiExport } from 'react-icons/ci';
 import DeletePlane from './DeletePlane';
 import { Button } from './ui/button';
+import { FaHighlighter } from 'react-icons/fa';
 
 interface IPlaneOptions {
   plane: IPlane;
-  data: Promise<string>;
+  data?: Promise<string>;
+  toggleHighlight?: () => void;
 }
-export default function PlaneOptions({ plane, data }: IPlaneOptions) {
+
+export default function PlaneOptions({
+  plane,
+  data,
+  toggleHighlight,
+}: IPlaneOptions) {
   async function exportMarkdown() {
-    const blob = new Blob([await data], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const download = document.createElement('a');
-    download.download = plane.title + '.md';
-    download.href = url;
-    document.body.appendChild(download);
-    download.click();
-    document.body.removeChild(download);
+    if (data) {
+      const blob = new Blob([await data], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const download = document.createElement('a');
+      download.download = plane.title + '.md';
+      download.href = url;
+      document.body.appendChild(download);
+      download.click();
+      document.body.removeChild(download);
+    }
   }
   return (
     <DropdownMenu>
@@ -32,17 +41,31 @@ export default function PlaneOptions({ plane, data }: IPlaneOptions) {
           <BsThreeDots />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="dark border-border bg-background font-sans">
-        <DropdownMenuItem asChild>
-          <Button
-            onClick={exportMarkdown}
-            variant="ghost"
-            className="w-full justify-start space-x-2"
-          >
-            <CiExport />
-            <span>Export</span>
-          </Button>
-        </DropdownMenuItem>
+      <DropdownMenuContent className="dark z-[1000] border-border bg-background font-sans">
+        {data ? (
+          <DropdownMenuItem asChild>
+            <Button
+              onClick={exportMarkdown}
+              variant="ghost"
+              className="w-full justify-start space-x-2"
+            >
+              <CiExport />
+              <span>Export</span>
+            </Button>
+          </DropdownMenuItem>
+        ) : null}
+        {toggleHighlight ? (
+          <DropdownMenuItem asChild>
+            <Button
+              variant="ghost"
+              className="w-full justify-start space-x-2"
+              onClick={toggleHighlight}
+            >
+              <FaHighlighter />
+              <span>Toggle Highlights</span>
+            </Button>
+          </DropdownMenuItem>
+        ) : null}
         <DropdownMenuItem asChild>
           <DeletePlane plane={plane} />
         </DropdownMenuItem>
