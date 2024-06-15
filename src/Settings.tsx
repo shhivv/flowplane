@@ -4,18 +4,21 @@ import { useToast } from './components/ui/use-toast';
 import { Input } from './components/ui/input';
 import { FaCheck } from 'react-icons/fa';
 import { tauri } from '@tauri-apps/api';
+import { DEFAULT_PORTAL_SHORTCUT } from './constants';
 
 export default function Settings() {
   const { toast } = useToast();
   const [loaded, setLoaded] = useState(false);
   const [portalOpenShortcut, setPortalShortcut] = useState('');
+
   useEffect(() => {
     (async () => {
       const dbconfig = JSON.parse(await tauri.invoke('get_config'));
-      setPortalShortcut(dbconfig.portalOpen || 'CmdorCtrl+q');
+      setPortalShortcut(dbconfig.portalOpen || DEFAULT_PORTAL_SHORTCUT);
       setLoaded(true);
     })();
   }, []);
+
   async function changeShortcut() {
     await tauri.invoke('set_key', {
       key: 'portalOpen',

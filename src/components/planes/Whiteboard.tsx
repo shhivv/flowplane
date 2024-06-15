@@ -9,8 +9,8 @@ import {
   Editor,
   TLEditorSnapshot,
   TLOnMountHandler,
-  Tldraw,
   getSnapshot,
+  Tldraw,
 } from 'tldraw';
 
 interface IWhiteboard {
@@ -22,8 +22,17 @@ export default function Whiteboard({ plane, floating }: IWhiteboard) {
   const [snapshot, setSnapshot] = useState<TLEditorSnapshot | null>(null);
   const [loaded, setLoaded] = useState(false);
 
+  const floatingComponents = floating
+    ? {
+        ZoomMenu: null,
+        ActionsMenu: null,
+        NavigationPanel: null,
+        MainMenu: null,
+      }
+    : {};
+
   useEffect(() => {
-    async function cback() {
+    (async () => {
       const dbData = await invoke('get_whiteboard_data', {
         whiteboardPlaneId: plane.id,
       });
@@ -34,8 +43,7 @@ export default function Whiteboard({ plane, floating }: IWhiteboard) {
         setSnapshot({ document, session });
       }
       setLoaded(true);
-    }
-    cback();
+    })();
   }, [plane.id]);
 
   const editorOnMount = (editor: Editor) => {
@@ -54,7 +62,7 @@ export default function Whiteboard({ plane, floating }: IWhiteboard) {
   };
 
   return (
-    <div className="h-full w-full space-y-4 overflow-y-auto bg-bgshade py-8 font-sans text-foreground">
+    <div className="h-full w-full space-y-4 overflow-y-hidden bg-bgshade py-8 font-sans text-foreground">
       <div className="flex justify-between px-16 text-muted-foreground">
         <div className="flex w-full items-center space-x-3">
           <MdOutlineDraw />
@@ -64,7 +72,7 @@ export default function Whiteboard({ plane, floating }: IWhiteboard) {
         </div>
         {!floating && <PlaneOptions plane={plane} />}
       </div>
-      <div className="h-[95%] w-full">
+      <div className="sticky h-[95%] w-full">
         {loaded ? (
           <Tldraw
             snapshot={snapshot ? snapshot : undefined}
@@ -75,6 +83,8 @@ export default function Whiteboard({ plane, floating }: IWhiteboard) {
               PageMenu: null,
               DebugMenu: null,
               DebugPanel: null,
+              MenuPanel: null,
+              ...floatingComponents,
             }}
           />
         ) : null}

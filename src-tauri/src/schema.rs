@@ -1,6 +1,15 @@
 // @generated automatically by Diesel CLI.
 
 diesel::table! {
+    clipboard (id) {
+        id -> Integer,
+        data -> Text,
+        created_at -> Timestamp,
+        deleted -> Nullable<Bool>,
+    }
+}
+
+diesel::table! {
     linear (id) {
         id -> Integer,
         plane_id -> Integer,
@@ -39,4 +48,4 @@ diesel::joinable!(linear -> planes (plane_id));
 diesel::joinable!(slate -> planes (plane_id));
 diesel::joinable!(whiteboard -> planes (plane_id));
 
-diesel::allow_tables_to_appear_in_same_query!(linear, planes, slate, whiteboard,);
+diesel::allow_tables_to_appear_in_same_query!(clipboard, linear, planes, slate, whiteboard,);

@@ -32,7 +32,6 @@ export default function NewPlane() {
       title: title || 'Untitled',
       plane_type: convertEnum(selectedType),
     };
-    console.log(newPlane);
 
     const addedPlane = await addLoadedPlane(newPlane);
     changeToPlaneView();
@@ -41,7 +40,7 @@ export default function NewPlane() {
 
   return (
     <div className="grid-design flex w-10/12 items-center justify-center bg-bgshade text-sm text-muted-foreground">
-      <div className=" flex h-1/2 w-2/5 flex-col  items-center justify-center rounded-lg bg-gradient-to-b from-primary/40 to-primary/0 drop-shadow-xl">
+      <div className=" flex w-2/5 flex-col items-center  justify-center rounded-lg bg-gradient-to-b from-primary/40 to-primary/0 pt-14 drop-shadow-xl">
         <div className="flex w-3/4 py-3">
           <h1 className="font-heading text-foreground">Create new Plane</h1>
         </div>
@@ -56,10 +55,10 @@ export default function NewPlane() {
             onKeyUp={onTitleChange}
             autoFocus
           ></input>
-          <div className="flex w-full space-x-2 py-4">
+          <div className="grid w-full grid-cols-2 gap-2 py-4">
             <button
               className={twMerge(
-                'flex w-1/2 flex-col items-center justify-center rounded-md border border-border bg-bgshade py-6 hover:bg-muted',
+                'flex flex-col items-center justify-center rounded-md border border-border bg-bgshade py-6 hover:bg-muted',
                 selectedType === 'linear' && 'border-primary/50 bg-transparent'
               )}
               id="linear"
@@ -70,7 +69,7 @@ export default function NewPlane() {
             </button>
             <button
               className={twMerge(
-                'flex w-1/2 flex-col items-center justify-center rounded-md border border-border bg-bgshade py-6 hover:bg-muted',
+                'flex flex-col items-center justify-center rounded-md border border-border bg-bgshade py-6 hover:bg-muted',
                 selectedType === 'slate' && 'border-primary/50 bg-transparent'
               )}
               id="slate"
@@ -81,7 +80,7 @@ export default function NewPlane() {
             </button>
             <button
               className={twMerge(
-                'flex w-1/2 flex-col items-center justify-center rounded-md border border-border bg-bgshade py-6 hover:bg-muted',
+                'flex flex-col items-center justify-center rounded-md border border-border bg-bgshade py-6 hover:bg-muted',
                 selectedType === 'whiteboard' &&
                   'border-primary/50 bg-transparent'
               )}

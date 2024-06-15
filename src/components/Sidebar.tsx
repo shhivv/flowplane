@@ -40,7 +40,7 @@ export default function SideBar() {
   };
 
   return (
-    <div className="flex h-screen w-1/6 min-w-min flex-col border-r border-r-border text-sm">
+    <div className="flex h-screen w-1/6 min-w-min flex-col border-r border-r-muted text-sm">
       <div className="flex flex-col space-y-4 py-6 px-5 font-heading text-lg font-bold text-foreground">
         <div className="flex items-center justify-between">
           <div>Flowplane</div>

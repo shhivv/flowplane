@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from './ui/button';
 
 export default function ClosePortalAlert() {
   return (
@@ -7,6 +8,16 @@ export default function ClosePortalAlert() {
       <p className="text-lg text-muted-foreground">
         Close your Portal window to use the editor
       </p>
+      <Button
+        variant="link"
+        className="text-muted-foreground"
+        onClick={() => {
+          localStorage.setItem('portalOpen', '');
+          window.location.reload();
+        }}
+      >
+        Portal already closed?
+      </Button>
     </div>
   );
 }

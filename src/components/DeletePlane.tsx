@@ -56,19 +56,15 @@ export default function DeletePlane({ plane }: IDeletePlane) {
           <BsTrashFill /> <span>Delete</span>
         </Button>
       </AlertDialogTrigger>
-      <AlertDialogContent className="dark z-[1000] border-border font-sans outline-none">
+      <AlertDialogContent className="outline-none">
         <AlertDialogHeader>
-          <AlertDialogTitle className="text-foreground">
-            Delete Plane?
-          </AlertDialogTitle>
+          <AlertDialogTitle>Delete Plane?</AlertDialogTitle>
           <AlertDialogDescription>
             This action cannot be undone.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel className="text-muted-foreground focus:outline-none">
-            Cancel
-          </AlertDialogCancel>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction asChild>
             <Button onClick={onClick} variant="destructive">
               Delete

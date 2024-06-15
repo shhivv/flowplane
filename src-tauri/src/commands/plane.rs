@@ -53,8 +53,8 @@ impl From<&PlaneModel> for Plane {
             id: planemodel.id,
             title: planemodel.title.clone(),
             plane_type: PlaneType::from(planemodel.plane_type.clone()),
-            last_accessed: planemodel.last_accessed.timestamp(),
-            created_at: planemodel.created_at.timestamp(),
+            last_accessed: planemodel.last_accessed.and_utc().timestamp(),
+            created_at: planemodel.created_at.and_utc().timestamp(),
         }
     }
 }

@@ -41,7 +41,7 @@ export default function PlaneOptions({
           <BsThreeDots />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="dark z-[1000] border-border bg-background font-sans">
+      <DropdownMenuContent className="border-border">
         {data ? (
           <DropdownMenuItem asChild>
             <Button

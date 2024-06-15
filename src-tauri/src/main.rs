@@ -1,5 +1,6 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
+#![allow(dead_code)]
 
 mod commands;
 mod core;
@@ -9,8 +10,8 @@ mod settings;
 
 use crate::core::db::establish_connection;
 use settings::get_settings;
-use tauri::{CustomMenuItem, SystemTrayMenu};
-use tauri::{GlobalShortcutManager, LogicalSize, Manager, RunEvent, SystemTrayEvent};
+use tauri::{CustomMenuItem, PhysicalSize, SystemTrayMenu};
+use tauri::{GlobalShortcutManager, Manager, RunEvent, SystemTrayEvent};
 use tauri_plugin_autostart::MacosLauncher;
 
 use tauri::SystemTray;
@@ -31,14 +32,14 @@ fn main() {
         release: sentry::release_name!(),
         ..Default::default()
       }));
-
+    let db = establish_connection();
     let quit = CustomMenuItem::new("quit".to_string(), "Quit");
     let tray_menu = SystemTrayMenu::new().add_item(quit);
     let settings = get_settings();
 
     let tray = SystemTray::new().with_menu(tray_menu);
     tauri::Builder::default()
-        .manage(establish_connection())
+        .manage(db)
         .on_window_event(|event| {
             if let tauri::WindowEvent::CloseRequested { api, .. } = event.event() {
                 event.window().hide().unwrap();
@@ -56,6 +57,7 @@ fn main() {
             MacosLauncher::LaunchAgent,
             None,
         ))
+        .plugin(tauri_plugin_clipboard::init())
         .plugin(tauri_plugin_single_instance::init(|app, _, _| {
             let window = app.get_window("main").unwrap();
             // window.eval("window.location.reload();").unwrap();
@@ -74,7 +76,9 @@ fn main() {
             commands::settings::get_config,
             commands::settings::set_key,
             commands::whiteboard::get_whiteboard_data,
-            commands::whiteboard::update_whiteboard_data
+            commands::whiteboard::update_whiteboard_data,
+            commands::clipboard::get_clipboard_data,
+            commands::page_markdown::get_markdown
         ])
         .system_tray(tray)
         .on_system_tray_event(|app, event| match event {
@@ -108,12 +112,11 @@ fn main() {
                 let size = *portal.current_monitor().unwrap().unwrap().size();
 
                 portal
-                    .set_size(LogicalSize {
-                        width: size.width / 2,
-                        height: size.height / 2,
+                    .set_size(PhysicalSize {
+                        width: (size.width as f32 * 0.8) as u32,
+                        height: (size.height as f32 * 0.8) as u32,
                     })
                     .unwrap();
-
                 portal.center().unwrap();
                 ah.global_shortcut_manager()
                     .register(

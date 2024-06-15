@@ -1,4 +1,5 @@
-use crate::schema::{linear, planes, slate, whiteboard};
+#[allow(dead_code)]
+use crate::schema::{clipboard, linear, planes, slate, whiteboard};
 use diesel::prelude::*;
 
 #[derive(Queryable)]
@@ -63,4 +64,19 @@ pub struct NewWhiteboard {
     pub plane_id: i32,
     pub document_state: String,
     pub session_state: String,
+}
+
+#[derive(Queryable)]
+#[diesel(table_name = clipboard)]
+pub struct ClipboardModel {
+    pub id: i32,
+    pub data: String,
+    pub created_at: chrono::NaiveDateTime,
+    pub deleted: Option<bool>,
+}
+
+#[derive(Insertable)]
+#[diesel(table_name = clipboard)]
+pub struct NewClipboard {
+    pub data: String,
 }

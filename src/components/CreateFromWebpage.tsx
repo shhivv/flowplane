@@ -1,5 +1,6 @@
 import {
   AlertDialog,
+  AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogHeader,
@@ -43,15 +44,17 @@ export function CreateFromWebpage() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      url: 'https://blog.shivs.me/how-random-numbers-work',
+      url: '',
     },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const url = values.url;
-    const res = await fetch(`https://r.jina.ai/${url}`, {});
+    const res = await invoke('get_markdown', {
+      url,
+    });
     console.log(res);
-    const md = await res.text();
+    const md = (await res) as string;
     const newPlane = {
       title: url,
       plane_type: convertEnum('slate'),
@@ -68,46 +71,40 @@ export function CreateFromWebpage() {
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger className="dark flex space-x-2 px-3 text-muted-foreground">
+      <AlertDialogTrigger className="flex space-x-2 px-3">
         <span className="rounded bg-primary/30 px-2">AI</span>
         <span className="flex w-full justify-start hover:underline">
           Create from Webpage
         </span>
       </AlertDialogTrigger>
-      <AlertDialogContent className="dark z-[1000] border-border font-sans outline-none">
+      <AlertDialogContent className="border-border outline-none">
         <AlertDialogHeader>
-          <AlertDialogTitle className="text-foreground">
-            Create Slate from URL
-          </AlertDialogTitle>
+          <AlertDialogTitle>Create Slate from URL</AlertDialogTitle>
           <AlertDialogDescription>
             Enter the URL of the website you want to convert to Slate.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="dark space-y-8"
-          >
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField
               control={form.control}
               name="url"
               render={({ field }) => (
-                <FormItem className="dark">
-                  <FormLabel className="text-foreground">URL</FormLabel>
+                <FormItem>
+                  <FormLabel>URL</FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder="shadcn"
-                      className="dark text-muted-foreground"
-                      {...field}
-                    />
+                    <Input placeholder="Enter URL" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <AlertDialogAction asChild>
-              <Button type="submit">Submit</Button>
-            </AlertDialogAction>
+            <div className="space-x-2">
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction asChild>
+                <Button type="submit">Submit</Button>
+              </AlertDialogAction>
+            </div>
           </form>
         </Form>
       </AlertDialogContent>

@@ -11,7 +11,7 @@ import {
   thematicBreakPlugin,
   tablePlugin,
   linkPlugin,
-  imagePlugin
+  imagePlugin,
 } from '@mdxeditor/editor';
 
 import { invoke } from '@tauri-apps/api';
@@ -39,14 +39,13 @@ export default function Slate({ plane, floating }: ISlate) {
   };
 
   useEffect(() => {
-    async function cback() {
+    (async () => {
       const dbData = await invoke('get_slate_data', {
         slatePlaneId: plane.id,
       });
       setData((dbData as string) || '**You** *can* write _markdown_ `here`');
       setLoaded(true);
-    }
-    cback();
+    })();
   }, [setLoaded, plane]);
 
   return (
@@ -85,7 +84,7 @@ export default function Slate({ plane, floating }: ISlate) {
               thematicBreakPlugin(),
               tablePlugin(),
               linkPlugin(),
-              imagePlugin()
+              imagePlugin(),
             ]}
             onChange={onChange()}
           />

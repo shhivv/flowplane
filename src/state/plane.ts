@@ -51,14 +51,12 @@ export const useLoadedPlanesStore = create<LoadedPlanesState>((set) => ({
   planes: [],
   lastAccessed: undefined,
   add: async (plane) => {
-    console.log(plane);
     const createdPlane: IPlane = await invoke('new_plane', {
       title: plane.title,
       planeType: plane.plane_type,
     });
 
     set((state) => ({ planes: [...state.planes, createdPlane] }));
-    console.log(createdPlane);
     return createdPlane;
   },
   fetch: async () => {
