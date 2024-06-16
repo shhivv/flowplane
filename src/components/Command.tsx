@@ -20,6 +20,8 @@ import { MdBlurLinear, MdOutlineDraw } from 'react-icons/md';
 import { FiPlus } from 'react-icons/fi';
 import { FaRegClipboard, FaMarkdown } from 'react-icons/fa';
 import { CiSettings } from 'react-icons/ci';
+import { IoChatbox } from "react-icons/io5";
+
 // a lot of the code is as is from sidebar.
 export function CommandMenu() {
   const planes = useLoadedPlanesStore((l) => l.planes).sort(
@@ -32,6 +34,7 @@ export function CommandMenu() {
   const changeToCreateView = useViewStore((v) => v.setCreate);
   const changeToSettingsView = useViewStore((v) => v.setSettings);
   const changeToClipboardView = useViewStore((v) => v.setClipboard);
+  const changeToChatView = useViewStore((v) => v.setChat);
   const [open, setOpen] = useState(false);
 
   const newPlane = () => {
@@ -46,6 +49,11 @@ export function CommandMenu() {
 
   const clipboard = () => {
     changeToClipboardView();
+    setOpen(false);
+  };
+
+  const chat = () => {
+    changeToChatView();
     setOpen(false);
   };
 
@@ -108,6 +116,13 @@ export function CommandMenu() {
           >
             <FaRegClipboard className="mr-2" />
             Clipboard
+          </CommandItem>
+          <CommandItem
+            onSelect={chat}
+            className="text-muted-foreground/80"
+          >
+            <IoChatbox className="mr-2" />
+            AI Chat
           </CommandItem>
         </CommandGroup>
       </CommandList>

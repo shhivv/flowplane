@@ -27,16 +27,21 @@ export default function Slate({ plane, floating }: ISlate) {
   const [loaded, setLoaded] = useState(false);
   const [data, setData] = useState<string>();
 
-  const onChange = () => {
-    return async (newData: string) => {
-      await invoke('update_slate_data', {
-        slatePlaneId: plane.id,
-        newData,
-      });
+  useEffect(() => {
+    const update = async () => {
+      console.log('updated');
+        await invoke('update_slate_data', {
+          slatePlaneId: plane.id,
+          newData: data,
+        });
+      };
 
-      setData(data);
-    };
-  };
+    const timeout = setTimeout(() => {
+        update();
+    }, 2000);
+
+    return () => clearTimeout(timeout);
+  }, [data, plane.id]);
 
   useEffect(() => {
     (async () => {
@@ -86,7 +91,7 @@ export default function Slate({ plane, floating }: ISlate) {
               linkPlugin(),
               imagePlugin(),
             ]}
-            onChange={onChange()}
+            onChange={(d) => setData(d)}
           />
         )}
       </div>

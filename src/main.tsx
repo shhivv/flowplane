@@ -22,6 +22,8 @@ if (location.href !== 'http://localhost:1420/') {
     tracesSampleRate: 1.0,
     replaysSessionSampleRate: 0.1,
     replaysOnErrorSampleRate: 1.0,
+    // TODO: remove and check why it triggers sometimes
+    denyUrls: ['http://localhost:1420/'],
   });
 }
 

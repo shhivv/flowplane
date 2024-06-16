@@ -28,6 +28,7 @@ config = "0.13.4"
 sentry = "0.32.2"
 reqwest = "0.12.4"
 is-url = "1.0.4"
+ollama-rs = "0.2.0"
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem

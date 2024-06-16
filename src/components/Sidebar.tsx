@@ -2,6 +2,7 @@ import { FiPlus } from 'react-icons/fi';
 import { FaDiscord, FaRegClipboard, FaMarkdown } from 'react-icons/fa';
 import { CiSettings } from 'react-icons/ci';
 import { MdBlurLinear, MdOutlineDraw } from 'react-icons/md';
+import { IoChatbox } from "react-icons/io5";
 
 import {
   useLoadedPlanesStore,
@@ -24,6 +25,7 @@ export default function SideBar() {
   const changeToCreateView = useViewStore((v) => v.setCreate);
   const changeToSettingsView = useViewStore((v) => v.setSettings);
   const changeToClipboardView = useViewStore((v) => v.setClipboard);
+  const changeToChatView = useViewStore((v) => v.setChat);
 
   const newPlane = () => {
     changeToCreateView();
@@ -35,6 +37,10 @@ export default function SideBar() {
 
   const clipboard = () => {
     changeToClipboardView();
+  };
+
+  const chat = () => {
+    changeToChatView();
   };
 
   const changePlaneOnClick = async (plane: IPlane) => {
@@ -110,6 +116,15 @@ export default function SideBar() {
             </a>
           </Button>
         </div>
+        <Button
+          className="w-full space-x-2 "
+          onClick={chat}
+          variant="secondary"
+        >
+        <span className="rounded bg-primary/30 px-2">AI</span>
+        <IoChatbox/>
+          <span className="lg:inline">Chat</span>
+        </Button>
         <Button
           className="w-full space-x-2 "
           onClick={newPlane}
