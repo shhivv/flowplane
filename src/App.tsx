@@ -15,6 +15,7 @@ import { useViewStore, View } from './state/view';
 import { appWindow } from '@tauri-apps/api/window';
 import Whiteboard from './components/planes/Whiteboard';
 import { CommandMenu } from './components/Command';
+import Clipboard from './components/Clipboard';
 
 // custom titlebar action handlers
 document!
@@ -88,6 +89,8 @@ function App() {
       comp = <NewPlane />;
     } else if (view === View.Settings) {
       comp = <Settings />;
+    } else if (view === View.Clipboard) {
+      comp = <Clipboard />;
     } else {
       comp = <Introduction />;
     }

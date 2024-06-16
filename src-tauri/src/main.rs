@@ -57,7 +57,6 @@ fn main() {
             MacosLauncher::LaunchAgent,
             None,
         ))
-        .plugin(tauri_plugin_clipboard::init())
         .plugin(tauri_plugin_single_instance::init(|app, _, _| {
             let window = app.get_window("main").unwrap();
             // window.eval("window.location.reload();").unwrap();
@@ -78,6 +77,7 @@ fn main() {
             commands::whiteboard::get_whiteboard_data,
             commands::whiteboard::update_whiteboard_data,
             commands::clipboard::get_clipboard_data,
+            commands::clipboard::push_to_clipboard,
             commands::page_markdown::get_markdown
         ])
         .system_tray(tray)

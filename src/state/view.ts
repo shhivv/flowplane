@@ -4,6 +4,7 @@ export enum View {
   Create,
   Plane,
   Settings,
+  Clipboard,
 }
 
 interface ViewState {
@@ -12,6 +13,7 @@ interface ViewState {
   setPlane: () => void;
   setIntro: () => void;
   setSettings: () => void;
+  setClipboard: () => void;
 }
 
 export const useViewStore = create<ViewState>((set) => ({
@@ -20,4 +22,5 @@ export const useViewStore = create<ViewState>((set) => ({
   setPlane: () => set({ view: View.Plane }),
   setIntro: () => set({ view: undefined }),
   setSettings: () => set({ view: View.Settings }),
+  setClipboard: () => set({ view: View.Clipboard }),
 }));

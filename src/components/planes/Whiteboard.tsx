@@ -47,6 +47,9 @@ export default function Whiteboard({ plane, floating }: IWhiteboard) {
   }, [plane.id]);
 
   const editorOnMount = (editor: Editor) => {
+    editor.user.updateUserPreferences({
+      isDarkMode: true,
+    });
     editor.store!.listen(
       () => {
         const { document, session } = getSnapshot(editor.store!);
@@ -78,7 +81,6 @@ export default function Whiteboard({ plane, floating }: IWhiteboard) {
             snapshot={snapshot ? snapshot : undefined}
             onMount={editorOnMount as unknown as TLOnMountHandler}
             autoFocus
-            inferDarkMode
             components={{
               PageMenu: null,
               DebugMenu: null,

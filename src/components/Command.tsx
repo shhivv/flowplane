@@ -17,8 +17,9 @@ import { useViewStore } from '../state/view';
 import { invoke } from '@tauri-apps/api';
 import { CommandSeparator } from 'cmdk';
 import { MdBlurLinear, MdOutlineDraw } from 'react-icons/md';
-import { GiBlackHoleBolas } from 'react-icons/gi';
-
+import { FiPlus } from 'react-icons/fi';
+import { FaRegClipboard, FaMarkdown } from 'react-icons/fa';
+import { CiSettings } from 'react-icons/ci';
 // a lot of the code is as is from sidebar.
 export function CommandMenu() {
   const planes = useLoadedPlanesStore((l) => l.planes).sort(
@@ -30,6 +31,7 @@ export function CommandMenu() {
   const changeToPlaneView = useViewStore((v) => v.setPlane);
   const changeToCreateView = useViewStore((v) => v.setCreate);
   const changeToSettingsView = useViewStore((v) => v.setSettings);
+  const changeToClipboardView = useViewStore((v) => v.setClipboard);
   const [open, setOpen] = useState(false);
 
   const newPlane = () => {
@@ -42,6 +44,11 @@ export function CommandMenu() {
     setOpen(false);
   };
 
+  const clipboard = () => {
+    changeToClipboardView();
+    setOpen(false);
+  };
+
   const changePlaneOnClick = async (plane: IPlane) => {
     changeToPlaneView();
     await invoke('set_last_accessed', { planeId: plane.id });
@@ -51,7 +58,7 @@ export function CommandMenu() {
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
-      if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
+      if ((e.key === 'k' || e.key === 'K') && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
         setOpen((opened) => !opened);
       }
@@ -63,31 +70,45 @@ export function CommandMenu() {
 
   return (
     <CommandDialog open={open} onOpenChange={setOpen}>
-      <CommandInput placeholder="Search for planes or action" />
+      <CommandInput placeholder="Where would you like to go?" />
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
         <CommandGroup heading="Planes">
           {planes.map((plane) => (
             <CommandItem
+              className="text-muted-foreground"
               key={plane.id}
               value={plane.title + String(plane.id)}
               onSelect={() => changePlaneOnClick(plane)}
             >
               {plane.plane_type === 'linear' ? (
-                <MdBlurLinear className="mr-2 h-4 w-4" />
+                <MdBlurLinear className="mr-2" />
               ) : plane.plane_type === 'slate' ? (
-                <GiBlackHoleBolas className="mr-2 h-4 w-4" />
+                <FaMarkdown className="mr-2" />
               ) : (
-                <MdOutlineDraw className="mr-2 h-4 w-4" />
+                <MdOutlineDraw className="mr-2" />
               )}
               <span>{plane.title}</span>
             </CommandItem>
           ))}
         </CommandGroup>
         <CommandSeparator />
-        <CommandGroup heading="Actions">
-          <CommandItem onSelect={newPlane}>New Plane</CommandItem>
-          <CommandItem onSelect={settings}>Settings</CommandItem>
+        <CommandGroup heading="Actions" className="text-muted-foreground">
+          <CommandItem onSelect={newPlane}>
+            <FiPlus className="mr-2" />
+            New Plane
+          </CommandItem>
+          <CommandItem onSelect={settings}>
+            <CiSettings className="mr-2" />
+            Settings
+          </CommandItem>
+          <CommandItem
+            onSelect={clipboard}
+            className="text-muted-foreground/80"
+          >
+            <FaRegClipboard className="mr-2" />
+            Clipboard
+          </CommandItem>
         </CommandGroup>
       </CommandList>
     </CommandDialog>

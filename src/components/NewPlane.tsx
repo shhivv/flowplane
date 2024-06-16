@@ -1,5 +1,5 @@
 import { MdBlurLinear, MdOutlineDraw } from 'react-icons/md';
-import { GiBlackHoleBolas } from 'react-icons/gi';
+import { FaMarkdown } from 'react-icons/fa';
 import { twMerge } from 'tailwind-merge';
 
 import React, { FormEvent, useState } from 'react';
@@ -76,7 +76,7 @@ export default function NewPlane() {
               onClick={onSelect}
               type="button"
             >
-              <GiBlackHoleBolas className="mb-4" /> Slate
+              <FaMarkdown className="mb-4" /> Slate
             </button>
             <button
               className={twMerge(

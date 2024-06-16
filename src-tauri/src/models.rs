@@ -66,7 +66,7 @@ pub struct NewWhiteboard {
     pub session_state: String,
 }
 
-#[derive(Queryable)]
+#[derive(Queryable, Debug)]
 #[diesel(table_name = clipboard)]
 pub struct ClipboardModel {
     pub id: i32,
@@ -75,7 +75,7 @@ pub struct ClipboardModel {
     pub deleted: Option<bool>,
 }
 
-#[derive(Insertable)]
+#[derive(Insertable, Debug)]
 #[diesel(table_name = clipboard)]
 pub struct NewClipboard {
     pub data: String,

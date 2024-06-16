@@ -1,8 +1,7 @@
-import { BsPlusLg } from 'react-icons/bs';
-import { FaDiscord } from 'react-icons/fa';
+import { FiPlus } from 'react-icons/fi';
+import { FaDiscord, FaRegClipboard, FaMarkdown } from 'react-icons/fa';
 import { CiSettings } from 'react-icons/ci';
 import { MdBlurLinear, MdOutlineDraw } from 'react-icons/md';
-import { GiBlackHoleBolas } from 'react-icons/gi';
 
 import {
   useLoadedPlanesStore,
@@ -24,6 +23,7 @@ export default function SideBar() {
   const changeToPlaneView = useViewStore((v) => v.setPlane);
   const changeToCreateView = useViewStore((v) => v.setCreate);
   const changeToSettingsView = useViewStore((v) => v.setSettings);
+  const changeToClipboardView = useViewStore((v) => v.setClipboard);
 
   const newPlane = () => {
     changeToCreateView();
@@ -31,6 +31,10 @@ export default function SideBar() {
 
   const settings = () => {
     changeToSettingsView();
+  };
+
+  const clipboard = () => {
+    changeToClipboardView();
   };
 
   const changePlaneOnClick = async (plane: IPlane) => {
@@ -44,13 +48,22 @@ export default function SideBar() {
       <div className="flex flex-col space-y-4 py-6 px-5 font-heading text-lg font-bold text-foreground">
         <div className="flex items-center justify-between">
           <div>Flowplane</div>
-          <Button
-            variant="ghost"
-            onClick={settings}
-            className="text-xl text-muted-foreground"
-          >
-            <CiSettings />
-          </Button>
+          <div>
+            <Button
+              variant="ghost"
+              onClick={clipboard}
+              className="text-base text-muted-foreground/80 shadow-none"
+            >
+              <FaRegClipboard />
+            </Button>
+            <Button
+              variant="ghost"
+              onClick={settings}
+              className="text-xl text-muted-foreground shadow-none"
+            >
+              <CiSettings />
+            </Button>
+          </div>
         </div>
         <hr className="w-1/5 border-muted-foreground/30"></hr>
       </div>
@@ -66,7 +79,7 @@ export default function SideBar() {
             {plane.plane_type === 'linear' ? (
               <MdBlurLinear />
             ) : plane.plane_type === 'slate' ? (
-              <GiBlackHoleBolas />
+              <FaMarkdown />
             ) : (
               <MdOutlineDraw />
             )}{' '}
@@ -102,7 +115,7 @@ export default function SideBar() {
           onClick={newPlane}
           variant="secondary"
         >
-          <BsPlusLg />
+          <FiPlus />
           <span className="lg:inline">New Plane</span>
         </Button>
       </div>

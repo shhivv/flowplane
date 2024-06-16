@@ -1,5 +1,5 @@
 import { type IPlane } from '../../state/plane';
-import { GiBlackHoleBolas } from 'react-icons/gi';
+import { FaMarkdown } from 'react-icons/fa';
 import '@mdxeditor/editor/style.css';
 // importing the editor and the plugin from their full paths
 import { MDXEditor } from '@mdxeditor/editor/MDXEditor';
@@ -52,7 +52,7 @@ export default function Slate({ plane, floating }: ISlate) {
     <div className="h-full w-full space-y-4 overflow-y-auto bg-bgshade py-8 font-sans text-foreground">
       <div className="flex justify-between px-16 text-muted-foreground">
         <div className="flex w-full items-center space-x-3">
-          <GiBlackHoleBolas />
+          <FaMarkdown />
           <h3 className="w-16 overflow-hidden overflow-ellipsis whitespace-nowrap lg:w-64">
             {plane?.title}
           </h3>

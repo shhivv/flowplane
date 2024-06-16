@@ -4,7 +4,8 @@ use config::Config;
 use directories::BaseDirs;
 
 const BASE: &str = r#"{
-  "portalOpen": "Alt+W"
+  "portalOpen": "Alt+W",
+  "enableClipboard": "true"
 }"#;
 
 pub fn get_settings() -> Config {

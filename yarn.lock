@@ -1356,6 +1356,21 @@
     "@babel/runtime" "^7.13.10"
     "@radix-ui/react-primitive" "1.0.3"
 
+"@radix-ui/react-checkbox@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@radix-ui/react-checkbox/-/react-checkbox-1.0.4.tgz#98f22c38d5010dd6df4c5744cac74087e3275f4b"
+  integrity sha512-CBuGQa52aAYnADZVt/KBQzXrwx6TqnlwtcIPGtVt5JkkzQwMOLJjPukimhfKEr4GQNd43C+djUh5Ikopj8pSLg==
+  dependencies:
+    "@babel/runtime" "^7.13.10"
+    "@radix-ui/primitive" "1.0.1"
+    "@radix-ui/react-compose-refs" "1.0.1"
+    "@radix-ui/react-context" "1.0.1"
+    "@radix-ui/react-presence" "1.0.1"
+    "@radix-ui/react-primitive" "1.0.3"
+    "@radix-ui/react-use-controllable-state" "1.0.1"
+    "@radix-ui/react-use-previous" "1.0.1"
+    "@radix-ui/react-use-size" "1.0.1"
+
 "@radix-ui/react-collection@1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@radix-ui/react-collection/-/react-collection-1.0.3.tgz#9595a66e09026187524a36c6e7e9c7d286469159"
@@ -2135,11 +2150,6 @@
     lodash.isplainobject "^4.0.6"
     lodash.merge "^4.6.2"
     postcss-selector-parser "6.0.10"
-
-"@tauri-apps/api@^1.0.0":
-  version "1.5.6"
-  resolved "https://registry.yarnpkg.com/@tauri-apps/api/-/api-1.5.6.tgz#7496d79f6586659a59bc6e9d6666eed8d24dc6da"
-  integrity sha512-LH5ToovAHnDVe5Qa9f/+jW28I6DeMhos8bNDtBOmmnaDpPmJmYLyHdeDblAWWWYc7KKRDg9/66vMuKyq0WIeFA==
 
 "@tauri-apps/api@^1.2.0":
   version "1.2.0"
@@ -7064,15 +7074,6 @@ tailwindcss@^3.4.3:
   resolved "https://github.com/tauri-apps/tauri-plugin-autostart#50054d953afbe78315142a98b810a429eaa9836a"
   dependencies:
     "@tauri-apps/api" "^1.2.0"
-
-tauri-plugin-clipboard-api@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/tauri-plugin-clipboard-api/-/tauri-plugin-clipboard-api-1.0.1.tgz#61052a584312fa35ed91cd75a6f903e76ab20dcd"
-  integrity sha512-n7ttdZr7Y3fMPtM/SbgyZ/ImCHJFQA+hTw/+L5L+tSB2573c8RWLiH150N4QJqQQGDiadoojUyki8uGJhm9w2w==
-  dependencies:
-    "@tauri-apps/api" "^1.0.0"
-    tslib "^2.1.0"
-    zod "^3.22.4"
 
 text-table@^0.2.0:
   version "0.2.0"
