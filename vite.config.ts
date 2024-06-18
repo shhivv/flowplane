@@ -3,7 +3,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { viteCommonjs, esbuildCommonjs } from '@originjs/vite-plugin-commonjs';
 import path from 'path';
-import MillionLint from "@million/lint";
+import MillionLint from '@million/lint';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [

@@ -23,7 +23,12 @@ pub fn get_slate_data(slate_plane_id: i32, db: State<DBPool>) -> Option<String> 
 }
 
 #[tauri::command]
-pub async fn update_slate_data(slate_plane_id: i32, new_data: String, db: State<'_, DBPool>,  ollama: State<'_, Ollama>) -> Result<(),()> {
+pub async fn update_slate_data(
+    slate_plane_id: i32,
+    new_data: String,
+    db: State<'_, DBPool>,
+    ollama: State<'_, Ollama>,
+) -> Result<(), ()> {
     use crate::schema::{slate, slate::dsl::*};
 
     let mut conn = db.clone().get().unwrap();
@@ -40,6 +45,8 @@ pub async fn update_slate_data(slate_plane_id: i32, new_data: String, db: State<
         .execute(&mut conn)
         .unwrap();
 
-    let _res = ollama.generate_embeddings("mxbai-embed-large".to_string(), new_data, None).await;
+    let _res = ollama
+        .generate_embeddings("mxbai-embed-large".to_string(), new_data, None)
+        .await;
     Ok(())
 }

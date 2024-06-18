@@ -5,7 +5,7 @@ export enum View {
   Plane,
   Settings,
   Clipboard,
-  Chat
+  Chat,
 }
 
 interface ViewState {

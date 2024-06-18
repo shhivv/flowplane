@@ -20,7 +20,7 @@ import { MdBlurLinear, MdOutlineDraw } from 'react-icons/md';
 import { FiPlus } from 'react-icons/fi';
 import { FaRegClipboard, FaMarkdown } from 'react-icons/fa';
 import { CiSettings } from 'react-icons/ci';
-import { IoChatbox } from "react-icons/io5";
+import { IoChatbox } from 'react-icons/io5';
 
 // a lot of the code is as is from sidebar.
 export function CommandMenu() {
@@ -117,10 +117,7 @@ export function CommandMenu() {
             <FaRegClipboard className="mr-2" />
             Clipboard
           </CommandItem>
-          <CommandItem
-            onSelect={chat}
-            className="text-muted-foreground/80"
-          >
+          <CommandItem onSelect={chat} className="text-muted-foreground/80">
             <IoChatbox className="mr-2" />
             AI Chat
           </CommandItem>

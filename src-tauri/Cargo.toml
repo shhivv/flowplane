@@ -20,7 +20,7 @@ diesel = { version = "2.0.0", features = ["sqlite", "r2d2", "chrono", "returning
 libsqlite3-sys = { version = "0.25.2", features = ["bundled"] }
 chrono = "0.4.23"
 diesel_migrations = "2.0.0"
-tauri-plugin-autostart = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "dev" }
+tauri-plugin-autostart = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
 tauri-plugin-single-instance = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
 window-shadows = "0.2.1"
 directories = "5.0.1"
@@ -29,6 +29,7 @@ sentry = "0.32.2"
 reqwest = "0.12.4"
 is-url = "1.0.4"
 ollama-rs = "0.2.0"
+lancedb = "0.5.2"
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem

@@ -92,7 +92,7 @@ function App() {
       comp = <Settings />;
     } else if (view === View.Clipboard) {
       comp = <Clipboard />;
-    }else if (view === View.Chat) {
+    } else if (view === View.Chat) {
       comp = <Chat />;
     } else {
       comp = <Introduction />;

@@ -2,7 +2,7 @@ import { FiPlus } from 'react-icons/fi';
 import { FaDiscord, FaRegClipboard, FaMarkdown } from 'react-icons/fa';
 import { CiSettings } from 'react-icons/ci';
 import { MdBlurLinear, MdOutlineDraw } from 'react-icons/md';
-import { IoChatbox } from "react-icons/io5";
+import { IoChatbox } from 'react-icons/io5';
 
 import {
   useLoadedPlanesStore,
@@ -121,8 +121,8 @@ export default function SideBar() {
           onClick={chat}
           variant="secondary"
         >
-        <span className="rounded bg-primary/30 px-2">AI</span>
-        <IoChatbox/>
+          <span className="rounded bg-primary/30 px-2">AI</span>
+          <IoChatbox />
           <span className="lg:inline">Chat</span>
         </Button>
         <Button

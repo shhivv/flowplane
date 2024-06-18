@@ -1,14 +1,15 @@
+use ollama_rs::{generation::completion::request::GenerationRequest, Ollama};
 use tauri::State;
-use ollama_rs::{Ollama,generation::completion::request::GenerationRequest};
-
 
 #[tauri::command]
 pub async fn prompt_ollama(prompt: String, ollama: State<'_, Ollama>) -> Result<String, ()> {
-  let res = ollama.generate(GenerationRequest::new("phi3".to_string(), prompt)).await;
- 
- if let Ok(res) = res{
-  return Ok(res.response);
- }
+    let res = ollama
+        .generate(GenerationRequest::new("phi3".to_string(), prompt))
+        .await;
 
-  Err(())
+    if let Ok(res) = res {
+        return Ok(res.response);
+    }
+
+    Err(())
 }

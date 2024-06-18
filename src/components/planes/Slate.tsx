@@ -30,14 +30,14 @@ export default function Slate({ plane, floating }: ISlate) {
   useEffect(() => {
     const update = async () => {
       console.log('updated');
-        await invoke('update_slate_data', {
-          slatePlaneId: plane.id,
-          newData: data,
-        });
-      };
+      await invoke('update_slate_data', {
+        slatePlaneId: plane.id,
+        newData: data,
+      });
+    };
 
     const timeout = setTimeout(() => {
-        update();
+      update();
     }, 2000);
 
     return () => clearTimeout(timeout);
