@@ -29,7 +29,6 @@ sentry = "0.32.2"
 reqwest = "0.12.4"
 is-url = "1.0.4"
 ollama-rs = "0.2.0"
-lancedb = "0.5.2"
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem

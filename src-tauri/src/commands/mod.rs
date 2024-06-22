@@ -7,4 +7,3 @@ pub mod plane;
 pub mod settings;
 pub mod slate;
 pub mod whiteboard;
-pub mod vector;

@@ -10,7 +10,7 @@ interface LoadedClipboardState {
 export const useClipboardStore = create<LoadedClipboardState>((set) => ({
   clips: [],
   add: async (newData) => {
-    await invoke('add_to_clipboard', {
+    await invoke('push_to_clipboard', {
       newData,
     });
 

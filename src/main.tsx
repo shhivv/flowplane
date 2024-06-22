@@ -12,8 +12,8 @@ import * as Sentry from '@sentry/react';
 import { SENTRY_URL } from './constants';
 import { ThemeProvider } from '@/components/theme-provider';
 import { readText } from '@tauri-apps/api/clipboard';
-import { invoke } from '@tauri-apps/api';
 import { useEffect, useRef } from 'react';
+import { useClipboardStore } from './state/clipboard';
 
 if (location.href !== 'http://localhost:1420/') {
   Sentry.init({
@@ -34,6 +34,7 @@ enableAutoStart().then().catch(console.error);
 
 export default function AppRoot() {
   const intervalRef = useRef(null);
+  const pushClipboard = useClipboardStore(c => c.add);
   useEffect(() => {
     const checkClipboard = async () => {
       let initial = await readText();
@@ -42,10 +43,9 @@ export default function AppRoot() {
       intervalRef.current = setInterval(async () => {
         const clipboardText = await readText();
         if (clipboardText !== initial) {
+          console.log('updated');
           initial = clipboardText;
-          await invoke('push_to_clipboard', {
-            newData: clipboardText,
-          });
+         await pushClipboard(clipboardText as string);
         }
       }, 1000);
     };
@@ -57,7 +57,7 @@ export default function AppRoot() {
         clearInterval(intervalRef.current);
       }
     };
-  }, []);
+  }, [pushClipboard]);
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <div className={cn('min-h-screen font-sans antialiased')}>

@@ -17,6 +17,7 @@ import {
 import { invoke } from '@tauri-apps/api';
 import { useEffect, useState } from 'react';
 import PlaneOptions from '../PlaneOptions';
+import { useTheme } from '../theme-provider';
 
 interface ISlate {
   plane: IPlane;
@@ -26,6 +27,7 @@ interface ISlate {
 export default function Slate({ plane, floating }: ISlate) {
   const [loaded, setLoaded] = useState(false);
   const [data, setData] = useState<string>();
+  const theme = useTheme();
 
   useEffect(() => {
     const update = async () => {
@@ -38,7 +40,7 @@ export default function Slate({ plane, floating }: ISlate) {
 
     const timeout = setTimeout(() => {
       update();
-    }, 2000);
+    }, 200);
 
     return () => clearTimeout(timeout);
   }, [data, plane.id]);
@@ -78,7 +80,7 @@ export default function Slate({ plane, floating }: ISlate) {
         {loaded && (
           <MDXEditor
             autoFocus={{ defaultSelection: 'rootEnd' }}
-            className="dark-theme dark-editor"
+            className={theme.theme === 'dark' ? 'dark-theme' : ''}
             contentEditableClassName="twindprose"
             markdown={data as string}
             plugins={[

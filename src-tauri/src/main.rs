@@ -9,7 +9,6 @@ mod schema;
 mod settings;
 
 use crate::core::db::establish_connection;
-use commands::vector;
 use ollama_rs::Ollama;
 use settings::get_settings;
 use tauri::{CustomMenuItem, PhysicalSize, SystemTrayMenu};
@@ -39,13 +38,11 @@ fn main() {
     let tray_menu = SystemTrayMenu::new().add_item(quit);
     let settings = get_settings();
     let ollama = Ollama::default();
-    let vdb = tauri::async_runtime::spawn(vector::connect_vdb);
 
     let tray = SystemTray::new().with_menu(tray_menu);
     tauri::Builder::default()
         .manage(db)
         .manage(ollama)
-        .manage(vdb)
         .on_window_event(|event| {
             if let tauri::WindowEvent::CloseRequested { api, .. } = event.event() {
                 event.window().hide().unwrap();
@@ -113,8 +110,10 @@ fn main() {
                 let main = app_handle.get_window("main").unwrap();
 
                 #[cfg(any(windows, target_os = "macos"))]
-                set_shadow(&portal, true).unwrap();
-                set_shadow(&main, true).unwrap();
+                {
+                    set_shadow(&portal, true).unwrap();
+                    set_shadow(&main, true).unwrap();
+                }
 
                 let size = *portal.current_monitor().unwrap().unwrap().size();
 

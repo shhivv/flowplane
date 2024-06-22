@@ -12,6 +12,7 @@ import {
   getSnapshot,
   Tldraw,
 } from 'tldraw';
+import { useTheme } from '../theme-provider';
 
 interface IWhiteboard {
   plane: IPlane;
@@ -21,6 +22,7 @@ interface IWhiteboard {
 export default function Whiteboard({ plane, floating }: IWhiteboard) {
   const [snapshot, setSnapshot] = useState<TLEditorSnapshot | null>(null);
   const [loaded, setLoaded] = useState(false);
+  const theme = useTheme();
 
   const floatingComponents = floating
     ? {
@@ -48,7 +50,7 @@ export default function Whiteboard({ plane, floating }: IWhiteboard) {
 
   const editorOnMount = (editor: Editor) => {
     editor.user.updateUserPreferences({
-      isDarkMode: true,
+      isDarkMode: theme.theme === 'dark',
     });
     editor.store!.listen(
       () => {

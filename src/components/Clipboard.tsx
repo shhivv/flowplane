@@ -29,7 +29,7 @@ export default function Clipboard() {
             settings.
           </CommandEmpty>
           <CommandGroup heading="Suggestions">
-            {[...new Set(clips)].map((v, k) => (
+            {clips.map((v, k) => (
               <CommandItem
                 className="whitespace-pre-wrap border border-bgshade py-6 font-mono text-muted-foreground hover:cursor-pointer"
                 key={k}

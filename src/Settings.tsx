@@ -6,6 +6,7 @@ import { FaCheck } from 'react-icons/fa';
 import { tauri } from '@tauri-apps/api';
 import { DEFAULT_ENABLE_CLIPBOARD, DEFAULT_PORTAL_SHORTCUT } from './constants';
 import { Checkbox } from '@/components/ui/checkbox';
+import { ModeToggle } from './components/ui/mode-toggle';
 
 export default function Settings() {
   const { toast } = useToast();
@@ -84,6 +85,20 @@ export default function Settings() {
                   checked={enableClipboard === 'true'}
                   onCheckedChange={changeClipboard}
                 />
+              </div>
+            </div>
+            <hr className="mt-4 border-muted-foreground/30"></hr>
+          </div>
+          <div>
+            <div className="flex items-center justify-between">
+              <div>
+                <h1 className="font-heading tracking-wide">Theme</h1>
+                <p className="text-sm text-muted-foreground">
+                  Change Flowplane theme
+                </p>
+              </div>
+              <div className="flex space-x-2">
+                <ModeToggle />
               </div>
             </div>
             <hr className="mt-4 border-muted-foreground/30"></hr>

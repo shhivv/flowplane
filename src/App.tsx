@@ -27,7 +27,7 @@ document!
   .addEventListener('click', () => appWindow.toggleMaximize());
 document!
   .getElementById('titlebar-close')!
-  .addEventListener('click', () => appWindow.close());
+  .addEventListener('click', () => appWindow.hide());
 
 function App() {
   const fetchPlanes = useLoadedPlanesStore((lp) => lp.fetch);

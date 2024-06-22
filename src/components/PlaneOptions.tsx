@@ -37,7 +37,7 @@ export default function PlaneOptions({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost">
+        <Button variant="ghost" className="shadow-none">
           <BsThreeDots />
         </Button>
       </DropdownMenuTrigger>
@@ -47,7 +47,7 @@ export default function PlaneOptions({
             <Button
               onClick={exportMarkdown}
               variant="ghost"
-              className="w-full justify-start space-x-2"
+              className="w-full justify-start space-x-2 shadow-none"
             >
               <CiExport />
               <span>Export</span>
@@ -58,7 +58,7 @@ export default function PlaneOptions({
           <DropdownMenuItem asChild>
             <Button
               variant="ghost"
-              className="w-full justify-start space-x-2"
+              className="w-full justify-start space-x-2 shadow-none"
               onClick={toggleHighlight}
             >
               <FaHighlighter />
