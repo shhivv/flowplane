@@ -2,7 +2,7 @@ use ollama_rs::{generation::completion::request::GenerationRequest, Ollama};
 use tauri::State;
 
 #[tauri::command]
-pub async fn prompt_ollama(prompt: String, ollama: State<'_, Ollama>) -> Result<String, ()> {
+pub async fn prompt_ollama(prompt: String, ollama: State<'_, Ollama>) -> Result<String, String> {
     let res = ollama
         .generate(GenerationRequest::new("phi3".to_string(), prompt))
         .await;
@@ -11,5 +11,5 @@ pub async fn prompt_ollama(prompt: String, ollama: State<'_, Ollama>) -> Result<
         return Ok(res.response);
     }
 
-    Err(())
+    Err("Failed to generate response".into())
 }

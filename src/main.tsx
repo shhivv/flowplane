@@ -43,7 +43,6 @@ export default function AppRoot() {
       intervalRef.current = setInterval(async () => {
         const clipboardText = await readText();
         if (clipboardText !== initial) {
-          console.log('updated');
           initial = clipboardText;
          await pushClipboard(clipboardText as string);
         }

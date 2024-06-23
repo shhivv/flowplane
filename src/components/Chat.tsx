@@ -15,12 +15,18 @@ export default function Chat() {
     }
     setEnabled(false);
     setOutput('Waiting for response...');
-    const resp = await invoke('prompt_ollama', {
-      prompt,
-    });
-    setOutput(resp as string);
-    setPrompt('');
-    setEnabled(true);
+    try{
+      const resp = await invoke('prompt_ollama', {
+        prompt,
+      });
+      setOutput(resp as string);
+      setPrompt('');
+      setEnabled(true);
+    } catch {
+      setOutput("Failed to generate response. Ensure Ollama is up and running!");
+      setPrompt('');
+      setEnabled(true);
+    }
   }
 
   return (

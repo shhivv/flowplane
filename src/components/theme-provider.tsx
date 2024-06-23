@@ -32,8 +32,10 @@ export function ThemeProvider({
 
   useEffect(() => {
     const root = window.document.documentElement;
+    const titlebar = window.document.getElementsByClassName('titlebar')[0];
 
     root.classList.remove('light', 'dark');
+    titlebar.classList.remove('light', 'dark');
 
     if (theme === 'system') {
       const systemTheme = window.matchMedia('(prefers-color-scheme: dark)')
@@ -42,6 +44,7 @@ export function ThemeProvider({
         : 'light';
 
       root.classList.add(systemTheme);
+      titlebar.classList.add(systemTheme);
       return;
     }
 

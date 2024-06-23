@@ -10,7 +10,7 @@ export default function ClosePortalAlert() {
       </p>
       <Button
         variant="link"
-        className="text-muted-foreground"
+        className="text-muted-foreground shadow-none"
         onClick={() => {
           localStorage.setItem('portalOpen', '');
           window.location.reload();

@@ -44,7 +44,7 @@ export default function Settings() {
     setEnableClipboard(enableClipboard === 'true' ? 'false' : 'true');
   }
   return (
-    <div className="flex w-5/6 justify-center bg-bgshade p-4 text-accent-foreground">
+    <div className="flex w-5/6 justify-center bg-bgshade px-4 py-7 text-accent-foreground">
       {loaded && (
         <div className="h-full w-full space-y-8 rounded-md border border-border/40 p-12">
           <div>

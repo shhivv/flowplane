@@ -40,7 +40,7 @@ export default function NewPlane() {
 
   return (
     <div className="grid-design flex w-10/12 items-center justify-center bg-bgshade text-sm text-muted-foreground">
-      <div className=" flex w-2/5 flex-col items-center  justify-center rounded-lg bg-gradient-to-b from-primary/40 to-primary/0 pt-14 drop-shadow-xl">
+      <div className=" flex w-2/5 flex-col items-center  justify-center rounded-lg bg-gradient-to-b from-primary/60 dark:from-primary/40 to-primary/0 pt-14 drop-shadow-xl">
         <div className="flex w-3/4 py-3">
           <h1 className="font-heading text-foreground">Create new Plane</h1>
         </div>
@@ -58,7 +58,7 @@ export default function NewPlane() {
           <div className="grid w-full grid-cols-2 gap-2 py-4">
             <button
               className={twMerge(
-                'flex flex-col items-center justify-center rounded-md border border-border bg-bgshade py-6 hover:bg-muted',
+                'flex flex-col items-center justify-center rounded-md border border-border bg-bgshade py-6 hover:bg-muted transition-colors ease-in',
                 selectedType === 'linear' && 'border-primary/50 bg-transparent'
               )}
               id="linear"
@@ -69,7 +69,7 @@ export default function NewPlane() {
             </button>
             <button
               className={twMerge(
-                'flex flex-col items-center justify-center rounded-md border border-border bg-bgshade py-6 hover:bg-muted',
+                'flex flex-col items-center justify-center rounded-md border border-border bg-bgshade py-6 hover:bg-muted transition-colors ease-in',
                 selectedType === 'slate' && 'border-primary/50 bg-transparent'
               )}
               id="slate"
@@ -80,7 +80,7 @@ export default function NewPlane() {
             </button>
             <button
               className={twMerge(
-                'flex flex-col items-center justify-center rounded-md border border-border bg-bgshade py-6 hover:bg-muted',
+                'flex flex-col items-center justify-center rounded-md border border-border bg-bgshade py-6 hover:bg-muted transition-colors ease-in',
                 selectedType === 'whiteboard' &&
                   'border-primary/50 bg-transparent'
               )}
@@ -93,7 +93,7 @@ export default function NewPlane() {
           </div>
           <button
             type="submit"
-            className="w-1/2 rounded-md border border-primary/80 bg-primary/70 py-2 px-4 text-foreground shadow-xl transition duration-300 ease-in-out hover:scale-105 hover:bg-primary/80"
+            className="w-1/2 rounded-md border border-primary/80 bg-primary/70 py-2 px-4 text-neutral-300 shadow-xl transition duration-300 ease-in-out hover:scale-105 hover:bg-primary/80"
           >
             Create
           </button>

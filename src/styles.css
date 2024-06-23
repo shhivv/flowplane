@@ -161,7 +161,7 @@ body {
     --subtle: 7 5% 45%;
   }
 
-  .bn-container {
+  /* .bn-container.light {
     --background: 0 0% 100%;
     --bgshade: 0 0% 98%;
     --foreground: 20 14.3% 4.1%;
@@ -209,16 +209,16 @@ body {
     --ring: 20.5 90.2% 48.2%;
     --editor: 0 0% 71%;
     --subtle: 7 5% 45%;
-  }
+  } */
 }
 
 @layer base {
   * {
-    --bn-colors-editor-background: 0 0% 9%;
-    --bn-colors-editor-text: hsl(0 0% 71%);
+    /* --bn-colors-editor-background: 0 0% 9%; */
+    /* --bn-colors-editor-text: hsl(0 0% 71%); */
     @apply border-border;
   }
-
+  
   body {
     @apply bg-background text-foreground;
     font-synthesis-weight: none;
