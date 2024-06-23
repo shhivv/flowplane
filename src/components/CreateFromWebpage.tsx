@@ -35,12 +35,13 @@ import {
 import { useViewStore } from '@/state/view';
 import { invoke } from '@tauri-apps/api';
 import { AlertDialogAction } from '@radix-ui/react-alert-dialog';
+import { useToast } from './ui/use-toast';
 
 function isJsonString(str: string) {
   try {
-      JSON.parse(str);
+    JSON.parse(str);
   } catch (e) {
-      return false;
+    return false;
   }
   return true;
 }
@@ -49,6 +50,7 @@ export function CreateFromWebpage() {
   const addLoadedPlane = useLoadedPlanesStore((lp) => lp.add);
   const changeToPlaneView = useViewStore((v) => v.setPlane);
   const changePlane = useMainDisplayedPlane((c) => c.setPlaneId);
+  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -59,11 +61,14 @@ export function CreateFromWebpage() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const url = values.url;
+    toast({
+      description: 'Retriving page. This may take a while. (10-200 seconds)',
+    });
     const res = await invoke('get_markdown', {
       url,
     });
     let md = (await res) as string;
-    if(isJsonString(md)) {
+    if (isJsonString(md)) {
       md = JSON.parse(md).readableMessage;
     }
     const newPlane = {
@@ -110,7 +115,7 @@ export function CreateFromWebpage() {
                 </FormItem>
               )}
             />
-            <div className="space-x-2 flex justify-end">
+            <div className="flex justify-end space-x-2">
               <AlertDialogCancel>Cancel</AlertDialogCancel>
               <AlertDialogAction asChild>
                 <Button type="submit">Submit</Button>

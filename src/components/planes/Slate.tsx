@@ -77,7 +77,9 @@ export default function Slate({ plane, floating }: ISlate) {
         {loaded && (
           <MDXEditor
             autoFocus={{ defaultSelection: 'rootEnd' }}
-            className={ document.getElementsByClassName("dark").length ? 'dark-theme' : ''}
+            className={
+              document.getElementsByClassName('dark').length ? 'dark-theme' : ''
+            }
             contentEditableClassName="twindprose"
             markdown={data as string}
             plugins={[

@@ -1,4 +1,3 @@
-#[allow(dead_code)]
 use crate::schema::{clipboard, linear, planes, slate, whiteboard};
 use diesel::prelude::*;
 

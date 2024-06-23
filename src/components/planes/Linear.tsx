@@ -66,7 +66,7 @@ export default function Linear({ plane, floating }: ILinear) {
       <div className={`px-7 ${highlights ? 'onlyHighlights' : ''}`}>
         {editor && (
           <BlockNoteView
-           data-color-scheme="light"
+            data-color-scheme="light"
             // @ts-expect-error fix type error
             editor={editor}
             onChange={() => {

@@ -40,7 +40,7 @@ pub async fn push_to_clipboard(new_data: String, db: State<'_, DBPool>) -> Resul
     let mut markdown = None;
     if is_url::is_url(&new_data) {
         let content = page_markdown::_get_markdown(new_data.clone()).await;
-        if let Some(_) = content {
+        if content.is_some() {
             markdown = content;
         }
     }

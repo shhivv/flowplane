@@ -34,7 +34,7 @@ enableAutoStart().then().catch(console.error);
 
 export default function AppRoot() {
   const intervalRef = useRef(null);
-  const pushClipboard = useClipboardStore(c => c.add);
+  const pushClipboard = useClipboardStore((c) => c.add);
   useEffect(() => {
     const checkClipboard = async () => {
       let initial = await readText();
@@ -44,7 +44,7 @@ export default function AppRoot() {
         const clipboardText = await readText();
         if (clipboardText !== initial) {
           initial = clipboardText;
-         await pushClipboard(clipboardText as string);
+          await pushClipboard(clipboardText as string);
         }
       }, 1000);
     };

@@ -8,6 +8,8 @@ mod models;
 mod schema;
 mod settings;
 
+use core::vdb;
+
 use crate::core::db::establish_connection;
 use ollama_rs::Ollama;
 use settings::get_settings;
@@ -39,10 +41,12 @@ fn main() {
     let settings = get_settings();
     let ollama = Ollama::default();
 
+    let vdb = tauri::async_runtime::block_on(vdb::establish_connection());
     let tray = SystemTray::new().with_menu(tray_menu);
     tauri::Builder::default()
         .manage(db)
         .manage(ollama)
+        .manage(vdb)
         .on_window_event(|event| {
             if let tauri::WindowEvent::CloseRequested { api, .. } = event.event() {
                 event.window().hide().unwrap();

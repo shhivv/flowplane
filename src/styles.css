@@ -218,7 +218,7 @@ body {
     /* --bn-colors-editor-text: hsl(0 0% 71%); */
     @apply border-border;
   }
-  
+
   body {
     @apply bg-background text-foreground;
     font-synthesis-weight: none;

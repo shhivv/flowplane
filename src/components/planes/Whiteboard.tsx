@@ -48,7 +48,7 @@ export default function Whiteboard({ plane, floating }: IWhiteboard) {
 
   const editorOnMount = (editor: Editor) => {
     editor.user.updateUserPreferences({
-      isDarkMode: Boolean(document.getElementsByClassName("dark").length),
+      isDarkMode: Boolean(document.getElementsByClassName('dark').length),
     });
     editor.store!.listen(
       () => {
