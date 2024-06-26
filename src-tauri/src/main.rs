@@ -9,13 +9,12 @@ mod schema;
 mod settings;
 
 use core::vdb;
-
 use crate::core::db::establish_connection;
 use ollama_rs::Ollama;
 use settings::get_settings;
 use tauri::{CustomMenuItem, PhysicalSize, SystemTrayMenu};
 use tauri::{GlobalShortcutManager, Manager, RunEvent, SystemTrayEvent};
-use tauri_plugin_autostart::MacosLauncher;
+use tauri_plugin_autostart::MacosLauncher; 
 
 use tauri::SystemTray;
 use window_shadows::set_shadow;
@@ -41,12 +40,13 @@ fn main() {
     let settings = get_settings();
     let ollama = Ollama::default();
 
+
     let vdb = tauri::async_runtime::block_on(vdb::establish_connection());
     let tray = SystemTray::new().with_menu(tray_menu);
     tauri::Builder::default()
         .manage(db)
         .manage(ollama)
-        .manage(vdb)
+        .manage(vdb) 
         .on_window_event(|event| {
             if let tauri::WindowEvent::CloseRequested { api, .. } = event.event() {
                 event.window().hide().unwrap();
@@ -85,8 +85,8 @@ fn main() {
             commands::whiteboard::update_whiteboard_data,
             commands::clipboard::get_clipboard_data,
             commands::clipboard::push_to_clipboard,
-            commands::page_markdown::get_markdown,
-            commands::ollama::prompt_ollama
+            commands::page_markdown::get_markdown, 
+            commands::ollama::prompt_ollama 
         ])
         .system_tray(tray)
         .on_system_tray_event(|app, event| match event {

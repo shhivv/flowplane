@@ -5,7 +5,7 @@ use reqwest::Url;
 pub async fn _get_markdown(url: String) -> Option<String> {
     let parsed = Url::parse(&url).unwrap();
     let hostname = parsed.host_str();
-    hostname?;
+    hostname?; 
     let body = match hostname.unwrap() {
         "www.youtube.com" => {
             let client = reqwest::Client::new();

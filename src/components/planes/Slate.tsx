@@ -1,9 +1,8 @@
 import { type IPlane } from '../../state/plane';
 import { FaMarkdown } from 'react-icons/fa';
 import '@mdxeditor/editor/style.css';
-// importing the editor and the plugin from their full paths
-import { MDXEditor } from '@mdxeditor/editor/MDXEditor';
 import {
+  MDXEditor,
   markdownShortcutPlugin,
   headingsPlugin,
   listsPlugin,
@@ -12,6 +11,8 @@ import {
   tablePlugin,
   linkPlugin,
   imagePlugin,
+  codeBlockPlugin,
+  codeMirrorPlugin
 } from '@mdxeditor/editor';
 
 import { invoke } from '@tauri-apps/api';
@@ -84,13 +85,15 @@ export default function Slate({ plane, floating }: ISlate) {
             markdown={data as string}
             plugins={[
               headingsPlugin(),
-              markdownShortcutPlugin(),
               listsPlugin(),
               quotePlugin(),
               thematicBreakPlugin(),
               tablePlugin(),
               linkPlugin(),
               imagePlugin(),
+              codeBlockPlugin({ defaultCodeBlockLanguage: 'js' }),
+              codeMirrorPlugin({ codeBlockLanguages: { js: 'JavaScript', css: 'CSS', bash: "Bash" } }),
+              markdownShortcutPlugin(),
             ]}
             onChange={(d) => setData(d)}
           />

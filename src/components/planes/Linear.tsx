@@ -3,11 +3,9 @@ import { MdBlurLinear } from 'react-icons/md';
 import React, { useEffect, useMemo, useState } from 'react';
 import { invoke } from '@tauri-apps/api';
 import { Block, BlockNoteEditor, PartialBlock } from '@blocknote/core';
-import { BlockNoteView } from '@blocknote/shadcn';
-import '@blocknote/shadcn/style.css';
-
+import { BlockNoteView } from '@blocknote/mantine';
+import "@blocknote/mantine/style.css";
 import PlaneOptions from '../PlaneOptions';
-
 interface ILinear {
   plane: IPlane;
   floating: boolean;
@@ -66,8 +64,6 @@ export default function Linear({ plane, floating }: ILinear) {
       <div className={`px-7 ${highlights ? 'onlyHighlights' : ''}`}>
         {editor && (
           <BlockNoteView
-            data-color-scheme="light"
-            // @ts-expect-error fix type error
             editor={editor}
             onChange={() => {
               saveToStorage(editor!.document);

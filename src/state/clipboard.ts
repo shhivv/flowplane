@@ -14,7 +14,7 @@ export const useClipboardStore = create<LoadedClipboardState>((set) => ({
       newData,
     });
 
-    set((state) => ({ clips: [...state.clips, newData] }));
+    set((state) => ({ clips: [newData, ...state.clips] }));
   },
   fetch: async () => {
     const clips: string[] = await invoke('get_clipboard_data');

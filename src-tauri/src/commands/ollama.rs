@@ -35,20 +35,23 @@ pub async fn prompt_ollama(
         .await;
 
     if let Ok(embres) = embres {
-        let data = (**embres[0].column(2))
+        let embs_r = (**embres[0].column(2)) 
             .as_any()
             .downcast_ref::<StringArray>()
-            .unwrap()
-            .value(0);
+            .unwrap();
+      
+        let data = embs_r
+            .iter()
+            .map(|f| f.unwrap().to_string())
+            .collect::<Vec<_>>()
+            .join("\n\n"); 
         let res = ollama
             .generate(GenerationRequest::new(
                 "phi3".to_string(),
                 format!("
-Your goal is to accurately answering the user's query and aligning with their user's intent, by collecting and neatly presenting the relevant information - use the following context as your previous knowledge of the user's notes, inside <context></context> XML tags.
+Your goal is to accurately answering the user's query and aligning with their user's intent, by collecting and neatly presenting the relevant information - use the following context as your previous knowledge of the user's notes:
 
-<context>
-    {data}
-</context>
+{data}
 
 When answering to user:
 - Make sure to provide any details in full/depth, going beyond the user's query/intent with any information you have

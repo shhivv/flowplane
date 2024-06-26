@@ -22,7 +22,7 @@ pub fn establish_connection() -> DBPool {
 
     let db = app_dir.join("data.sqlite");
     if !db.exists() {
-        fs::File::create(&db).unwrap();
+        fs::copy("./default.sqlite", &db).unwrap();
     }
 
     let database_url = db.into_os_string().into_string().unwrap();

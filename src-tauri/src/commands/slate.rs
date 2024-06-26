@@ -53,6 +53,14 @@ pub async fn update_slate_data(
         .execute(&mut conn)
         .unwrap();
 
+    if new_data.is_empty() {
+        vdb.delete(format!("id == {slate_plane_id}").as_str())
+            .await
+            .unwrap();
+        return Ok(());
+    }
+   
+
     let emb = ollama
         .generate_embeddings("mxbai-embed-large".to_string(), new_data.clone(), None)
         .await;

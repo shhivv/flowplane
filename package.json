@@ -12,10 +12,11 @@
   },
   "dependencies": {
     "@blocknote/core": "^0.14.1",
+    "@blocknote/mantine": "^0.14.2",
     "@blocknote/react": "^0.14.1",
     "@blocknote/shadcn": "^0.14.1",
     "@hookform/resolvers": "^3.6.0",
-    "@mdxeditor/editor": "^1.13.3",
+    "@mdxeditor/editor": "3.6.1",
     "@million/lint": "^1.0.0-rc.26",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-checkbox": "^1.0.4",
@@ -46,7 +47,7 @@
     "tailwind-merge": "^2.2.0",
     "tailwindcss-animate": "^1.0.7",
     "tauri-plugin-autostart-api": "https://github.com/tauri-apps/tauri-plugin-autostart",
-    "tldraw": "^2.2.0",
+    "tldraw": "2.2.0",
     "zod": "^3.23.8",
     "zustand": "^4.3.5"
   },
@@ -76,6 +77,5 @@
   },
   "resolutions": {
     "prosemirror-model": "1.21.1"
-  },
-  "packageManager": "yarn@1.22.19+sha1.4ba7fc5c6e704fce2066ecbfb0b0d8976fe62447"
+  }
 }
