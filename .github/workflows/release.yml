@@ -48,7 +48,7 @@ jobs:
         if: matrix.platform == 'macos-latest'
         run: |
           brew install protobuf
-          echo "PROTOC=/opt/homebrew/Cellar/protobuf/27.0/protoc" >> $GITHUB_ENV
+          echo "PROTOC=$(which protoc)" >> $GITHUB_ENV
 
       - name: install protobuf (windows)
         if: matrix.platform == 'windows-latest'
