@@ -35,6 +35,24 @@ jobs:
           sudo apt-get install -y libgtk-3-dev libwebkit2gtk-4.0-dev libappindicator3-dev librsvg2-dev patchelf
           sleep 30
 
+      - name: install protobuf (ubuntu)
+        if: matrix.platform == 'ubuntu-20.04'
+        run: |
+          sudo apt-get install -y protobuf-compiler
+          echo "PROTOC=/usr/bin/protoc" >> $GITHUB_ENV
+
+      - name: install protobuf (macos)
+        if: matrix.platform == 'macos-latest'
+        run: |
+          brew install protobuf
+          echo "PROTOC=/usr/local/bin/protoc" >> $GITHUB_ENV
+
+      - name: install protobuf (windows)
+        if: matrix.platform == 'windows-latest'
+        run: |
+          choco install protoc
+          echo "PROTOC=C:\ProgramData\chocolatey\bin\protoc.exe" >> $env:GITHUB_ENV
+
       - name: install frontend dependencies
         run: yarn install # change this to npm or pnpm depending on which one you use
 
