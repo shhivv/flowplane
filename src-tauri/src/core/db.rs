@@ -10,7 +10,7 @@ pub const MIGRATIONS: EmbeddedMigrations = embed_migrations!("../migrations");
 
 pub type DBPool = Pool<ConnectionManager<SqliteConnection>>;
 
-pub fn establish_connection() -> DBPool {
+pub fn establish_connection(default_path: PathBuf) -> DBPool {
     let binding = BaseDirs::new().unwrap();
     let mut app_dir = PathBuf::from(binding.data_dir());
 
@@ -22,7 +22,7 @@ pub fn establish_connection() -> DBPool {
 
     let db = app_dir.join("data.sqlite");
     if !db.exists() {
-        fs::copy("./default.sqlite", &db).unwrap();
+        fs::copy(&default_path, &db).unwrap();
     }
 
     let database_url = db.into_os_string().into_string().unwrap();

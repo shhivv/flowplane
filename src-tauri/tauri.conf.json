@@ -49,7 +49,10 @@
         "icons/icon.ico"
       ],
       "identifier": "com.flowplane.release",
-      "targets": "all"
+      "targets": "all",
+      "resources": [
+        "default.sqlite"
+      ]
     },
     "security": {
       "csp": null

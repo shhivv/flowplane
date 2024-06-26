@@ -34,7 +34,6 @@ fn main() {
         release: sentry::release_name!(),
         ..Default::default()
       }));
-    let db = establish_connection();
     let quit = CustomMenuItem::new("quit".to_string(), "Quit");
     let tray_menu = SystemTrayMenu::new().add_item(quit);
     let settings = get_settings();
@@ -44,9 +43,18 @@ fn main() {
     let vdb = tauri::async_runtime::block_on(vdb::establish_connection());
     let tray = SystemTray::new().with_menu(tray_menu);
     tauri::Builder::default()
-        .manage(db)
         .manage(ollama)
         .manage(vdb) 
+        .setup(|app| {
+            let resource_path = app.path_resolver()
+            .resolve_resource("default.sqlite")
+            .expect("failed to resolve resource");
+        
+            let db = establish_connection(resource_path);
+            app.manage(db);
+
+            Ok(())
+        })
         .on_window_event(|event| {
             if let tauri::WindowEvent::CloseRequested { api, .. } = event.event() {
                 event.window().hide().unwrap();
