@@ -51,7 +51,7 @@ export default function NewPlane() {
           <input
             type="text"
             placeholder="Title"
-            className="w-full rounded-md border border-border bg-bgshade py-3 px-4 outline-none focus:border-primary/50"
+            className="w-full rounded-md border border-border bg-bgshade px-4 py-3 outline-none focus:border-primary/50"
             onKeyUp={onTitleChange}
             autoFocus
           ></input>
@@ -93,7 +93,7 @@ export default function NewPlane() {
           </div>
           <button
             type="submit"
-            className="w-1/2 rounded-md border border-primary/80 bg-primary/70 py-2 px-4 text-neutral-300 shadow-xl transition duration-300 ease-in-out hover:scale-105 hover:bg-primary/80"
+            className="w-1/2 rounded-md border border-primary/80 bg-primary/70 px-4 py-2 text-neutral-300 shadow-xl transition duration-300 ease-in-out hover:scale-105 hover:bg-primary/80"
           >
             Create
           </button>

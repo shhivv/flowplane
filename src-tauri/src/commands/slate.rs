@@ -59,7 +59,6 @@ pub async fn update_slate_data(
             .unwrap();
         return Ok(());
     }
-   
 
     let emb = ollama
         .generate_embeddings("mxbai-embed-large".to_string(), new_data.clone(), None)

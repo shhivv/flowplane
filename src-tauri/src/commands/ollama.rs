@@ -35,16 +35,16 @@ pub async fn prompt_ollama(
         .await;
 
     if let Ok(embres) = embres {
-        let embs_r = (**embres[0].column(2)) 
+        let embs_r = (**embres[0].column(2))
             .as_any()
             .downcast_ref::<StringArray>()
             .unwrap();
-      
+
         let data = embs_r
             .iter()
             .map(|f| f.unwrap().to_string())
             .collect::<Vec<_>>()
-            .join("\n\n"); 
+            .join("\n\n");
         let res = ollama
             .generate(GenerationRequest::new(
                 "phi3".to_string(),

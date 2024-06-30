@@ -52,13 +52,15 @@ export default function Whiteboard({ plane, floating }: IWhiteboard) {
     });
     editor.store!.listen(
       () => {
-        const { document, session } = getSnapshot(editor.store!);
-
-        invoke('update_whiteboard_data', {
-          whiteboardPlaneId: plane.id,
-          docState: JSON.stringify(document),
-          seshState: JSON.stringify(session),
-        });
+        const timeout = setTimeout(() => {
+          const { document, session } = getSnapshot(editor.store!);
+          invoke('update_whiteboard_data', {
+            whiteboardPlaneId: plane.id,
+            docState: JSON.stringify(document),
+            seshState: JSON.stringify(session),
+          });
+        }, 200);
+        return () => clearTimeout(timeout);
       },
       { scope: 'document', source: 'user' }
     );

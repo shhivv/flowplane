@@ -4,7 +4,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { invoke } from '@tauri-apps/api';
 import { Block, BlockNoteEditor, PartialBlock } from '@blocknote/core';
 import { BlockNoteView } from '@blocknote/mantine';
-import "@blocknote/mantine/style.css";
+import '@blocknote/mantine/style.css';
 import PlaneOptions from '../PlaneOptions';
 interface ILinear {
   plane: IPlane;
@@ -31,8 +31,11 @@ export default function Linear({ plane, floating }: ILinear) {
         newData: JSON.stringify(jsonBlocks),
       });
     };
+    const timeout = setTimeout(() => {
+      action();
+    }, 200);
 
-    action();
+    return () => clearTimeout(timeout);
   };
 
   useEffect(() => {

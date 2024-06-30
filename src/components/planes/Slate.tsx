@@ -12,7 +12,7 @@ import {
   linkPlugin,
   imagePlugin,
   codeBlockPlugin,
-  codeMirrorPlugin
+  codeMirrorPlugin,
 } from '@mdxeditor/editor';
 
 import { invoke } from '@tauri-apps/api';
@@ -92,7 +92,13 @@ export default function Slate({ plane, floating }: ISlate) {
               linkPlugin(),
               imagePlugin(),
               codeBlockPlugin({ defaultCodeBlockLanguage: 'js' }),
-              codeMirrorPlugin({ codeBlockLanguages: { js: 'JavaScript', css: 'CSS', bash: "Bash" } }),
+              codeMirrorPlugin({
+                codeBlockLanguages: {
+                  js: 'JavaScript',
+                  css: 'CSS',
+                  bash: 'Bash',
+                },
+              }),
               markdownShortcutPlugin(),
             ]}
             onChange={(d) => setData(d)}

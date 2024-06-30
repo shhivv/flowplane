@@ -53,9 +53,7 @@
       ],
       "identifier": "com.flowplane.release",
       "targets": "all",
-      "resources": [
-        "default.sqlite"
-      ]
+      "resources": ["default.sqlite"]
     },
     "security": {
       "csp": null

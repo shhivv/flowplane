@@ -1,6 +1,7 @@
 use crate::core::db::DBPool;
 use crate::models::{NewPlane, PlaneModel};
 use diesel::prelude::*;
+use lancedb::Table;
 use serde::{Deserialize, Serialize};
 use tauri::State;
 
@@ -102,12 +103,19 @@ pub fn set_last_accessed(plane_id: i32, db: State<DBPool>) {
 }
 
 #[tauri::command]
-pub fn delete_plane(plane_id: i32, db: State<DBPool>) {
+pub async fn delete_plane(
+    plane_id: i32,
+    db: State<'_, DBPool>,
+    vdb: State<'_, Table>,
+) -> Result<(), ()> {
     use crate::schema::planes::dsl::*;
 
+    let _ = vdb.delete(format!("id == {plane_id}").as_str()).await;
     let mut conn = db.clone().get().unwrap();
 
     diesel::delete(planes.find(plane_id))
         .execute(&mut conn)
         .unwrap();
+
+    Ok(())
 }
