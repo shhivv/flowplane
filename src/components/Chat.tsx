@@ -3,6 +3,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { FormEvent, useState } from 'react';
 import { invoke } from '@tauri-apps/api';
+import { EmptyScreen } from './EmptyScreen';
 
 export default function Chat() {
   const [prompt, setPrompt] = useState('');
@@ -34,10 +35,13 @@ export default function Chat() {
   return (
     <div className="grid-design flex w-10/12 flex-col items-center justify-between space-y-6 bg-bgshade pb-12 pt-12 text-muted-foreground">
       <div className="flex w-2/3 flex-1 justify-end overflow-y-auto">
-        <div className="h-min w-full justify-end whitespace-pre-wrap rounded-lg border bg-background p-5 text-base text-foreground lg:w-5/6">
-          {output.trim()}
-        </div>
+        {output.trim() !== '' && (
+          <div className="h-min w-full justify-end whitespace-pre-wrap rounded-lg border bg-background p-5 text-base text-foreground lg:w-5/6">
+            {output.trim()}
+          </div>
+        )}
       </div>
+      {output.trim() === '' && <EmptyScreen />}
       <form
         className="w-2/3 flex-none overflow-hidden rounded-lg border bg-background"
         onSubmit={invokePrompt}
