@@ -88,9 +88,9 @@ export function CreateFromWebpage() {
   return (
     <AlertDialog>
       <AlertDialogTrigger className="flex space-x-2 px-3">
-        <Button variant="ghost" className="space-x-2 shadow-none">
+        <Button variant="ghost" className="space-x-2 shadow-none w-full flex items-center justify-center">
           <span className="rounded bg-primary/30 px-2">AI</span>
-          <span className="flex w-full justify-start">Create from Webpage</span>
+          <span className="flex justify-start">Create from Webpage</span>
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent className="border-border outline-none">

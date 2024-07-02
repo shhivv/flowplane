@@ -54,8 +54,9 @@ export default function SideBar() {
       <div className="flex flex-col space-y-4 px-5 py-6 font-heading text-lg font-bold text-foreground">
         <div className="flex items-center justify-between">
           <div>Flowplane</div>
-          <div>
+          <div className="flex items-center">
             <Button
+              size="icon"
               variant="ghost"
               onClick={clipboard}
               className="text-base text-muted-foreground/80 shadow-none"
@@ -63,6 +64,7 @@ export default function SideBar() {
               <FaRegClipboard />
             </Button>
             <Button
+              size="icon"
               variant="ghost"
               onClick={settings}
               className="text-xl text-muted-foreground shadow-none"
