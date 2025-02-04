@@ -1,5 +1,5 @@
 import { MdBlurLinear, MdOutlineDraw } from 'react-icons/md';
-import { FaMarkdown } from 'react-icons/fa';
+// import { FaMarkdown } from 'react-icons/fa';
 import { twMerge } from 'tailwind-merge';
 
 import React, { FormEvent, useState } from 'react';
@@ -56,7 +56,7 @@ export default function NewPlane() {
             autoFocus
           ></input>
           <div className="grid w-full grid-cols-2 gap-2 py-4">
-            <button
+            {/* <button
               className={twMerge(
                 'flex flex-col items-center justify-center rounded-md border border-border bg-bgshade py-6 transition-colors ease-in hover:bg-muted',
                 selectedType === 'linear' && 'border-primary/50 bg-transparent'
@@ -77,7 +77,7 @@ export default function NewPlane() {
               type="button"
             >
               <FaMarkdown className="mb-4" /> Slate
-            </button>
+            </button> */}
             <button
               className={twMerge(
                 'flex flex-col items-center justify-center rounded-md border border-border bg-bgshade py-6 transition-colors ease-in hover:bg-muted',

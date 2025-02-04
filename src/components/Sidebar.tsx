@@ -55,14 +55,14 @@ export default function SideBar() {
         <div className="flex items-center justify-between">
           <div>Flowplane</div>
           <div className="flex items-center">
-            <Button
+            {/* <Button
               size="icon"
               variant="ghost"
               onClick={clipboard}
               className="text-base text-muted-foreground/80 shadow-none"
             >
               <FaRegClipboard />
-            </Button>
+            </Button> */}
             <Button
               size="icon"
               variant="ghost"
@@ -118,7 +118,7 @@ export default function SideBar() {
             </a>
           </Button>
         </div>
-        <Button
+        {/* <Button
           className="w-full space-x-2 "
           onClick={chat}
           variant="secondary"
@@ -126,7 +126,7 @@ export default function SideBar() {
           <span className="rounded bg-primary/30 px-2">AI</span>
           <IoChatbox />
           <span className="lg:inline">Chat</span>
-        </Button>
+        </Button> */}
         <Button
           className="w-full space-x-2 "
           onClick={newPlane}

@@ -9,8 +9,8 @@ mod schema;
 mod settings;
 
 use crate::core::db::establish_connection;
-use core::vdb;
-use ollama_rs::Ollama;
+// use core::vdb;
+// use ollama_rs::Ollama;
 use settings::get_settings;
 use tauri::{CustomMenuItem, PhysicalSize, SystemTrayMenu};
 use tauri::{GlobalShortcutManager, Manager, RunEvent, SystemTrayEvent};
@@ -37,13 +37,13 @@ fn main() {
     let quit = CustomMenuItem::new("quit".to_string(), "Quit");
     let tray_menu = SystemTrayMenu::new().add_item(quit);
     let settings = get_settings();
-    let ollama = Ollama::default();
-
-    let vdb = tauri::async_runtime::block_on(vdb::establish_connection());
+    // let ollama = Ollama::default();
+// 
+    // let vdb = tauri::async_runtime::block_on(vdb::establish_connection());
     let tray = SystemTray::new().with_menu(tray_menu);
     tauri::Builder::default()
-        .manage(ollama)
-        .manage(vdb)
+        // .manage(ollama)
+        // .manage(vdb)
         .setup(|app| {
             let resource_path = app
                 .path_resolver()
@@ -82,19 +82,19 @@ fn main() {
             commands::plane::new_plane,
             commands::plane::set_last_accessed,
             commands::plane::delete_plane,
-            commands::linear::get_linear_data,
-            commands::linear::update_linear_data,
+            // commands::linear::get_linear_data,
+            // commands::linear::update_linear_data,
             commands::jsdebug::jsdebug,
-            commands::slate::get_slate_data,
-            commands::slate::update_slate_data,
+            // commands::slate::get_slate_data,
+            // commands::slate::update_slate_data,
             commands::settings::get_config,
             commands::settings::set_key,
             commands::whiteboard::get_whiteboard_data,
             commands::whiteboard::update_whiteboard_data,
-            commands::clipboard::get_clipboard_data,
-            commands::clipboard::push_to_clipboard,
-            commands::page_markdown::get_markdown,
-            commands::ollama::prompt_ollama
+            // commands::clipboard::get_clipboard_data,
+            // commands::clipboard::push_to_clipboard,
+            // commands::page_markdown::get_markdown,
+            // commands::ollama::prompt_ollama
         ])
         .system_tray(tray)
         .on_system_tray_event(|app, event| match event {
@@ -157,16 +157,16 @@ fn main() {
                     .unwrap();
 
                 let ah = app_handle.clone();
-                ah.global_shortcut_manager()
-                    .register("Esc", move || {
-                        let app_handle = ah.clone();
-                        let window = app_handle.get_window("portal").unwrap();
-                        if window.is_visible().unwrap() {
-                            ah.emit_all("portalSwitch", EmptyPayload {}).unwrap();
-                            window.hide().unwrap();
-                        }
-                    })
-                    .unwrap();
+                // ah.global_shortcut_manager()
+                //     .register("Esc", move || {
+                //         let app_handle = ah.clone();
+                //         let window = app_handle.get_window("portal").unwrap();
+                //         if window.is_visible().unwrap() {
+                //             ah.emit_all("portalSwitch", EmptyPayload {}).unwrap();
+                //             window.hide().unwrap();
+                //         }
+                //     })
+                //     .unwrap();
             }
         });
 }
